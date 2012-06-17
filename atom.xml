@@ -49,6 +49,9 @@
 
 <p>update: &#8211;no-rdoc &#8211;no-ri</p></blockquote>
 
+<!--more-->
+
+
 <h3>Rails安装：</h3>
 
 <pre><code>    gem install rails -v 3.2.5
@@ -543,6 +546,44 @@ $ git push heroku
     <updated>2012-06-17T06:43:00+08:00</updated>
     <id>http://xazaj.github.com/blog/2012/06/17/static-pages</id>
     <content type="html"><![CDATA[<h1>第二章 静态页面</h1>
+
+<p>ruby学习笔记</p>
+
+<pre><code>ruby -v
+</code></pre>
+
+<!--more-->
+
+
+<hr />
+
+<p>layout: post
+title: &#8220;static pages&#8221;
+date: 2012-06-17 06:43
+meta: true
+comments: true
+tags:</p>
+
+<h2>categories: [Ruby]</h2>
+
+<h1>第二章 静态页面</h1>
+
+<p>ruby学习笔记</p>
+
+<pre><code>ruby -v
+---
+</code></pre>
+
+<p>layout: post
+title: &#8220;static pages&#8221;
+date: 2012-06-17 06:43
+meta: true
+comments: true
+tags:</p>
+
+<h2>categories: [Ruby]</h2>
+
+<h1>第二章 静态页面</h1>
 
 <p>ruby学习笔记</p>
 

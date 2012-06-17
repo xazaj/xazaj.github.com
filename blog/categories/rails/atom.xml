@@ -49,6 +49,9 @@
 
 <p>update: --no-rdoc --no-ri</p></blockquote>
 
+<!--more-->
+
+
 <h3>Rails安装：</h3>
 
 <pre><code>    gem install rails -v 3.2.5
