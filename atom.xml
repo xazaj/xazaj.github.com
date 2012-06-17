@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[New Post]]></title>
-    <link href="http://xazaj.github.com/blog/new-post.html"/>
+    <link href="http://xazaj.github.com/blog/2012/06/17/new-post.html"/>
     <updated>2012-06-17T07:32:00+08:00</updated>
-    <id>http://xazaj.github.com/blog/new-post</id>
+    <id>http://xazaj.github.com/blog/2012/06/17/new-post</id>
     <content type="html"><![CDATA[<h1>第一章 Rails3.2 环境配置</h1>
 
 <h2>1、用rvm安装ruby&amp;rails</h2>
@@ -539,9 +539,9 @@ $ git push heroku
   
   <entry>
     <title type="html"><![CDATA[static pages]]></title>
-    <link href="http://xazaj.github.com/blog/static-pages.html"/>
+    <link href="http://xazaj.github.com/blog/2012/06/17/static-pages.html"/>
     <updated>2012-06-17T06:43:00+08:00</updated>
-    <id>http://xazaj.github.com/blog/static-pages</id>
+    <id>http://xazaj.github.com/blog/2012/06/17/static-pages</id>
     <content type="html"><![CDATA[<h1>第二章 静态页面</h1>
 ]]></content>
   </entry>
