@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Rails笔记 | xazaJ's blog]]></title>
-  <link href="http://xazaj.github.com/blog/categories/rails%E7%AC%94%E8%AE%B0/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Rails | xazaJ's blog]]></title>
+  <link href="http://xazaj.github.com/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://xazaj.github.com/"/>
   <updated>2012-01-20T00:00:00+08:00</updated>
   <id>http://xazaj.github.com/</id>
@@ -534,15 +534,6 @@ $ git push heroku
 <pre><code>    &amp;copy; 2012 [xazaj](http://www.zhuaijun.cn "测试人生") Corporation
 &lt;/div&gt;
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[static pages]]></title>
-    <link href="http://xazaj.github.com/blog/2012/06/17/static-pages.html"/>
-    <updated>2012-06-17T06:43:00+08:00</updated>
-    <id>http://xazaj.github.com/blog/2012/06/17/static-pages</id>
-    <content type="html"><![CDATA[<h1>第二章 静态页面</h1>
 ]]></content>
   </entry>
   
