@@ -106,18 +106,18 @@ Watir安装有个很重要的前提，要网络通畅，因为是在线安装，
 这一部比较诡秘，google上搜索了一大圈答案都是：在calss TextField中加一个方法，我在写自己的第一个脚本时，发现中文按钮无法点击，就猜测可能是自己的版本不支持中文，但是根据专家意见去找了watir.rb根本没有TextField类的存在，去官方查了一下资料发现1.5.2以后watir.rb文件做了拆分，这个类被分到input_elament.rb中，并且已经做了支持中文的修改。如果你发现自己的版本不支持中文可以到这个文件中做以下修改：
 在class TextField中加入一个新的method：<br></p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc413ae0248></p>
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc403a899a8></p>
 
 <br>
 
 
 <p>更改class TextField的doKeyPress( value )方法部分代码，将下面代码<br>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-<br></p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc413ae2868></p>
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc403a875b8></p>
 
 <p>替换为如下代码<br></p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc413aeb3f0></p>
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc403a85a60></p>
 
 <p>}<br>代码附上，不过我觉得如果是按照我上面讲的版本来安装就不需要这个了。
 第四步：安装IDE；
@@ -129,20 +129,20 @@ Watir安装有个很重要的前提，要网络通畅，因为是在线安装，
 
 <p>第五步：我目前搜到的所有教程写到这一步都会说可以运行google的demo了，现在我们先不运行google那么长的demo,先写个简单的打开本站的脚本：</p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc413af1340></p>
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc403a83da0></p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc413af0a58>
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc403a836c0>
 </code></p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc413aee870></p>
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc403a82068></p>
 
 <p>头大了吧，都说这个时候已经好了，为什么自己环境的就是不好用呢，仰天长叹，继续查吧，google，baidu了一大圈，都是报喜不报忧，最后终于在一个我从来不起的邮件组服务器里面查到了几个老外的邮件备份，真是不容易，那里解释到：</p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc413af3d98></p>
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc403a80510></p>
 
 <p>把他的原文贴出来了，因为这封邮件让我找了几个小时，发给他一封感谢信，按照这个配置修改原来的代码：</p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc41323f760></p>
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc403a7ea08></p>
 
 <p>运行，IE窗口弹出来了，OK，这才是完整的安装配置过程嘛，感叹一下：网络上资源丰富，但是也有很多懒人啊。
 一个星期的时间读了ruby的帮助文档对ruby语言基本用法有了些认识，一个字：快，加上watir基于html的识别，也是一个字：快，说他是匕首一点也不为过。如果是小型项目用watir比QTP的开发周期要短的多了，当然watir也有现存的弱点，对Frame和javascript支持不好，当我看完ruby语言，看完watir内置方法，配置好所有的环境准备开工之时，忽然发现项目的页面全是js调用出来的，从HTML根本看不到任何元素，额的神啊，当我了解这个真相以后，绝望了。。。
@@ -177,7 +177,7 @@ Watir安装有个很重要的前提，要网络通畅，因为是在线安装，
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/rubyonrails/'>RubyOnRails</a>, <a class='category' href='/blog/categories/软件测试/'>软件测试</a>
+    RubyOnRails软件测试
   
 </span>
 
@@ -208,75 +208,7 @@ Watir安装有个很重要的前提，要网络通畅，因为是在线安装，
 
 <aside class="sidebar">
   
-    <section class="googleplus">
-  
-
-  
-  
-  
-  <div class="clear:both"></div>
-</section><section>
-  <div class="googleplus odd" style="height:10px;padding-top:20px;">
-    <!-- AddThis Button BEGIN -->
-    <div class="addthis_toolbox addthis_default_style ">
-      <a class="addthis_counter addthis_pill_style"></a>
-    </div>
-    <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4f38a0297ac7eadf"></script>
-    <!-- AddThis Button END -->
-  </div>
-  <div class="clear:both"></div>
-</section><section>
-  <div class="googleplus odd" style="padding-bottom: 1px;">
-    <!-- JiaThis Button BEGIN -->
-    <div id="ckepop">
-      <a href="http://www.jiathis.com/share?uid=898844" class="jiathis jiathis_txt" target="_blank"><img src="http://v2.jiathis.com/code_mini/images/btn/v1/jiathis5.gif" border="0" /></a>
-      <a class="jiathis_counter_style_margin:3px 0 0 2px"></a>
-    </div>
-    <script type="text/javascript" >
-      var jiathis_config={
-        data_track_clickback:true,
-        summary:"",
-        hideMore:false
-      }
-    </script>
-    <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js?uid=898844" charset="utf-8"></script>
-    <!-- JiaThis Button END -->
-  </div>
-  <div class="clear:both"></div>
-</section>
-<section id="comment_sidebar">
-  <h1>Recent Comments</h1>
-  <div id="recentcomments" class="dsq-widget">
-    <script type="text/javascript" src="http://xazaj.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=32&excerpt_length=200"></script>
-  </div>
-  <a target="_blank" href="http://disqus.com/">Powered by Disqus</a>
-</section><section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2008/11/06/watir-zi-dong-hua-ce-shi-gong-ju-yi-zhou-ti-yan-bi-ji.html">Watir自动化测试工具安装全过程</a>
-      </li>
-    
-  </ul>
-</section>
-<section id="blogroll" class="odd">
-<h1>My Friends</h1>
-<ul style="padding-left:0">
-	<li><a href="http://www.zhuaijun.cn/" target="_blank">测试人生</a></li>
-	<li><a href="#" target="_blank">老田</a></li>
-	<li><a href="#" target="_blank">张松</a></li>
-	<li><a href="#" target="_blank">。。。</a></li>
-</ul>
-</section><section>
- <h1>Categories</h1>
- <ul id="categories">
- Liquid error: incompatible encoding regexp match (ASCII-8BIT regexp with UTF-8 string)
- </ul>
-</section>
-
-
-
+    Liquid syntax error: Unknown tag 'category_sidebar'
   
 </aside>
 
