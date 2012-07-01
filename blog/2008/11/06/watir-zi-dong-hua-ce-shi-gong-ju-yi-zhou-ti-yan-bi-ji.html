@@ -106,18 +106,18 @@ Watir安装有个很重要的前提，要网络通畅，因为是在线安装，
 这一部比较诡秘，google上搜索了一大圈答案都是：在calss TextField中加一个方法，我在写自己的第一个脚本时，发现中文按钮无法点击，就猜测可能是自己的版本不支持中文，但是根据专家意见去找了watir.rb根本没有TextField类的存在，去官方查了一下资料发现1.5.2以后watir.rb文件做了拆分，这个类被分到input_elament.rb中，并且已经做了支持中文的修改。如果你发现自己的版本不支持中文可以到这个文件中做以下修改：
 在class TextField中加入一个新的method：<br></p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007f93e0af3478></p>
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fcd5c392188></p>
 
 <br>
 
 
 <p>更改class TextField的doKeyPress( value )方法部分代码，将下面代码<br>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-<br></p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007f93e0af1718></p>
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fcd5c38eec0></p>
 
 <p>替换为如下代码<br></p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007f93e0aeec48></p>
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fcd5c38c148></p>
 
 <p>}<br>代码附上，不过我觉得如果是按照我上面讲的版本来安装就不需要这个了。
 第四步：安装IDE；
@@ -129,20 +129,20 @@ Watir安装有个很重要的前提，要网络通畅，因为是在线安装，
 
 <p>第五步：我目前搜到的所有教程写到这一步都会说可以运行google的demo了，现在我们先不运行google那么长的demo,先写个简单的打开本站的脚本：</p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007f93e0aeaf30></p>
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fcd5c3898a8></p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007f93e0ae9900>
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fcd5c3867e8>
 </code></p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007f93e0ae33c0></p>
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fcd5c3848a8></p>
 
 <p>头大了吧，都说这个时候已经好了，为什么自己环境的就是不好用呢，仰天长叹，继续查吧，google，baidu了一大圈，都是报喜不报忧，最后终于在一个我从来不起的邮件组服务器里面查到了几个老外的邮件备份，真是不容易，那里解释到：</p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007f93e0ad7840></p>
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fcd5c380c80></p>
 
 <p>把他的原文贴出来了，因为这封邮件让我找了几个小时，发给他一封感谢信，按照这个配置修改原来的代码：</p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007f93e0ad33a8></p>
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fcd5c37bcf8></p>
 
 <p>运行，IE窗口弹出来了，OK，这才是完整的安装配置过程嘛，感叹一下：网络上资源丰富，但是也有很多懒人啊。
 一个星期的时间读了ruby的帮助文档对ruby语言基本用法有了些认识，一个字：快，加上watir基于html的识别，也是一个字：快，说他是匕首一点也不为过。如果是小型项目用watir比QTP的开发周期要短的多了，当然watir也有现存的弱点，对Frame和javascript支持不好，当我看完ruby语言，看完watir内置方法，配置好所有的环境准备开工之时，忽然发现项目的页面全是js调用出来的，从HTML根本看不到任何元素，额的神啊，当我了解这个真相以后，绝望了。。。
@@ -208,24 +208,7 @@ Watir安装有个很重要的前提，要网络通畅，因为是在线安装，
 
 <aside class="sidebar">
   
-    <section class="googleplus">
-  
-
-  
-  
-  
-  <div class="clear:both"></div>
-</section><section>
-  <div class="googleplus odd" style="height:10px;padding-top:20px;">
-    <!-- AddThis Button BEGIN -->
-    <div class="addthis_toolbox addthis_default_style ">
-      <a class="addthis_counter addthis_pill_style"></a>
-    </div>
-    <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4f38a0297ac7eadf"></script>
-    <!-- AddThis Button END -->
-  </div>
-  <div class="clear:both"></div>
-</section><section>
+    <section>
   <div class="googleplus odd" style="padding-bottom: 1px;">
     <!-- JiaThis Button BEGIN -->
     <div id="ckepop">
