@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[xazaJ's blog]]></title>
-  <link href="http://xazaj.github.com/atom.xml" rel="self"/>
+  <title><![CDATA[Category: RubyOnRails | xazaJ's blog]]></title>
+  <link href="http://xazaj.github.com/blog/categories/rubyonrails/atom.xml" rel="self"/>
   <link href="http://xazaj.github.com/"/>
   <updated>2012-01-20T00:00:00+08:00</updated>
   <id>http://xazaj.github.com/</id>
@@ -27,49 +27,49 @@
 现在最新的版本是1.9 ，但是没有exe版本需要自己编译，和所有开源软件版本号规则一样，第二位单数表示不稳定，双数代表稳定版本，所以最终选择了1.8.6的编译版本。直接下一步安装到默认目录，如果这里改了安装目录后面的麻烦事就接连不断，安装完成命令行打：ruby -v 可以看到ruby版本号，说明安装成功。下载地址不附了，版本更新太快，估计这篇文被需要的人看到的时候版本已经2.0了，自己google吧。
 第二步：安装Watir；
 Watir安装有个很重要的前提，要网络通畅，因为是在线安装，具体操作，下载waitir-1.5.6到D盘根目录：
-1、在命令行运行命令：gem update &#8211;system，这个命令是用来自动更新ruby的gem包，以支持最新的Watir的gem，此过程也是在线进行，若公司网络需要设置代理或者其他限制，这个就做不了；
+1、在命令行运行命令：gem update --system，这个命令是用来自动更新ruby的gem包，以支持最新的Watir的gem，此过程也是在线进行，若公司网络需要设置代理或者其他限制，这个就做不了；
 2、提示符转向D盘，在命令行运行命令：gem install watir-1.5.6.gem，此命令自动安装对应版本的watir，也要能上网才可以完成，命令运行成功后在目录：C:Rubylibrubygems1.8gems下便会多出一个：watir-1.5.6文件夹，安装watir过程不会修改注册表和环境变量，如果公司网络有限制，可以不用需下载离线安装包，而是把已经安装好的c:/ruby 整个目录打包拷贝到公司电脑对应目录，不需要修改环境变量，watir照样可以正常运行（此方法目前还没在网上搜到过，但是可用），稍后找个网络硬盘放一个我安装好的：ruby-1.8.6+watir-1.5.6 集成版本。
 第三步：修改支持中文；
 这一部比较诡秘，google上搜索了一大圈答案都是：在calss TextField中加一个方法，我在写自己的第一个脚本时，发现中文按钮无法点击，就猜测可能是自己的版本不支持中文，但是根据专家意见去找了watir.rb根本没有TextField类的存在，去官方查了一下资料发现1.5.2以后watir.rb文件做了拆分，这个类被分到input_elament.rb中，并且已经做了支持中文的修改。如果你发现自己的版本不支持中文可以到这个文件中做以下修改：
 在class TextField中加入一个新的method：<br></p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc413ae0248></p>
+<p>Liquid error: undefined method `join' for #<String:0x007fc413732448></p>
 
 <br>
 
 
-<p>更改class TextField的doKeyPress( value )方法部分代码，将下面代码<br>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-<br></p>
+<p>更改class TextField的doKeyPress( value )方法部分代码，将下面代码<br>-------------------------------------------<br></p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc413ae2868></p>
+<p>Liquid error: undefined method `join' for #<String:0x007fc4137313b8></p>
 
 <p>替换为如下代码<br></p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc413aeb3f0></p>
+<p>Liquid error: undefined method `join' for #<String:0x007fc413730238></p>
 
 <p>}<br>代码附上，不过我觉得如果是按照我上面讲的版本来安装就不需要这个了。
 第四步：安装IDE；
-能用记事本编写百万行程序的天才估计也不会看到这篇文章，提高工作效率，将敏捷进行到底，IDE还是有必要的，我用的Eclipse+RDT+Radrails，其中Radrails是rails项目需要的，可能不需要安装也能满足watir需求，因为学习ruby肯定要研究一下rails所以都安装上吧。Eclipse安装不提了，给出RDT和Radrails更新方法：通过eclipse更新安装来远程安装插件。从eclipse的菜单Help->Software->Updates->Find and Install选择&#8221;Search for new features to install&#8221; 进行安装。
+能用记事本编写百万行程序的天才估计也不会看到这篇文章，提高工作效率，将敏捷进行到底，IDE还是有必要的，我用的Eclipse+RDT+Radrails，其中Radrails是rails项目需要的，可能不需要安装也能满足watir需求，因为学习ruby肯定要研究一下rails所以都安装上吧。Eclipse安装不提了，给出RDT和Radrails更新方法：通过eclipse更新安装来远程安装插件。从eclipse的菜单Help->Software->Updates->Find and Install选择"Search for new features to install" 进行安装。
 1、RDT<br><a href="http://updatesite.rubypeople.org/release">http://updatesite.rubypeople.org/release</a><br>2、RadRails<br><a href="http://radrails.sourceforge.net/update">http://radrails.sourceforge.net/update</a></p>
 
-<br>通过eclipse菜单 Windows > Preferences 打开Preferences对话框，在Ruby 标题下面的 Installed Interpreters 项中设置的ruby的位置。起个名称，然后将&#8221;Location&#8221;文本域指向您使用的 Ruby 版本的 bin 目录。我的机器ruby的bin目录在c:/ruby,这样，ruby+watir的环境这完成了。 在eclipse中建立一个ruby的工程，再建一个ruby文件，写上 puts &#8221; Hello,world&#8221; 就可以看到eclipse的控制台输出ok信息了。<br>
+<br>通过eclipse菜单 Windows > Preferences 打开Preferences对话框，在Ruby 标题下面的 Installed Interpreters 项中设置的ruby的位置。起个名称，然后将"Location"文本域指向您使用的 Ruby 版本的 bin 目录。我的机器ruby的bin目录在c:/ruby,这样，ruby+watir的环境这完成了。 在eclipse中建立一个ruby的工程，再建一个ruby文件，写上 puts " Hello,world" 就可以看到eclipse的控制台输出ok信息了。<br>
 
 
 <p>第五步：我目前搜到的所有教程写到这一步都会说可以运行google的demo了，现在我们先不运行google那么长的demo,先写个简单的打开本站的脚本：</p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc413af1340></p>
+<p>Liquid error: undefined method `join' for #<String:0x007fc41372f1a8></p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc413af0a58>
+<p>Liquid error: undefined method `join' for #<String:0x007fc41372eca8>
 </code></p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc413aee870></p>
+<p>Liquid error: undefined method `join' for #<String:0x007fc41372dba0></p>
 
 <p>头大了吧，都说这个时候已经好了，为什么自己环境的就是不好用呢，仰天长叹，继续查吧，google，baidu了一大圈，都是报喜不报忧，最后终于在一个我从来不起的邮件组服务器里面查到了几个老外的邮件备份，真是不容易，那里解释到：</p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc413af3d98></p>
+<p>Liquid error: undefined method `join' for #<String:0x007fc41372ca20></p>
 
 <p>把他的原文贴出来了，因为这封邮件让我找了几个小时，发给他一封感谢信，按照这个配置修改原来的代码：</p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc41323f760></p>
+<p>Liquid error: undefined method `join' for #<String:0x007fc41372b918></p>
 
 <p>运行，IE窗口弹出来了，OK，这才是完整的安装配置过程嘛，感叹一下：网络上资源丰富，但是也有很多懒人啊。
 一个星期的时间读了ruby的帮助文档对ruby语言基本用法有了些认识，一个字：快，加上watir基于html的识别，也是一个字：快，说他是匕首一点也不为过。如果是小型项目用watir比QTP的开发周期要短的多了，当然watir也有现存的弱点，对Frame和javascript支持不好，当我看完ruby语言，看完watir内置方法，配置好所有的环境准备开工之时，忽然发现项目的页面全是js调用出来的，从HTML根本看不到任何元素，额的神啊，当我了解这个真相以后，绝望了。。。

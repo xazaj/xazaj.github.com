@@ -1,0 +1,321 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Watir自动化测试工具安装全过程 - xazaJ's blog</title>
+  <meta name="author" content="xazaJ">
+
+  
+  <meta name="description" content="前几天在淘宝QA的博客上看到他们部署Watir自动化测试工具的过程，并对各种工具做了横向比较，如果说LoadRunner和QTP是测试工具之屠龙刀与倚天剑，那Watir便是一把锐利的匕首，虽然它没有录制功能，但是简单的脚本语言Ruby也使得工具非常容易上手， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://xazaj.github.com/blog/2008/11/06/watir-zi-dong-hua-ce-shi-gong-ju-yi-zhou-ti-yan-bi-ji.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="xazaJ's blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">xazaJ's blog</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:xazaj.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Watir自动化测试工具安装全过程</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-11-06T00:00:00+08:00" pubdate data-updated="true">2008-11-06 Thu</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>前几天在淘宝QA的博客上看到他们部署Watir自动化测试工具的过程，并对各种工具做了横向比较，如果说LoadRunner和QTP是测试工具之屠龙刀与倚天剑，那Watir便是一把锐利的匕首，虽然它没有录制功能，但是简单的脚本语言Ruby也使得工具非常容易上手，用Watir部署自动化测试一样集成了Ruby的敏捷开发的特点，不知道现在的项目是否适合，尝试一下先。以下记录安装过程中一些需要注意的东西。</p>
+
+<!--more-->
+
+
+<p>第一步：安装Ruby；
+现在最新的版本是1.9 ，但是没有exe版本需要自己编译，和所有开源软件版本号规则一样，第二位单数表示不稳定，双数代表稳定版本，所以最终选择了1.8.6的编译版本。直接下一步安装到默认目录，如果这里改了安装目录后面的麻烦事就接连不断，安装完成命令行打：ruby -v 可以看到ruby版本号，说明安装成功。下载地址不附了，版本更新太快，估计这篇文被需要的人看到的时候版本已经2.0了，自己google吧。
+第二步：安装Watir；
+Watir安装有个很重要的前提，要网络通畅，因为是在线安装，具体操作，下载waitir-1.5.6到D盘根目录：
+1、在命令行运行命令：gem update &#8211;system，这个命令是用来自动更新ruby的gem包，以支持最新的Watir的gem，此过程也是在线进行，若公司网络需要设置代理或者其他限制，这个就做不了；
+2、提示符转向D盘，在命令行运行命令：gem install watir-1.5.6.gem，此命令自动安装对应版本的watir，也要能上网才可以完成，命令运行成功后在目录：C:Rubylibrubygems1.8gems下便会多出一个：watir-1.5.6文件夹，安装watir过程不会修改注册表和环境变量，如果公司网络有限制，可以不用需下载离线安装包，而是把已经安装好的c:/ruby 整个目录打包拷贝到公司电脑对应目录，不需要修改环境变量，watir照样可以正常运行（此方法目前还没在网上搜到过，但是可用），稍后找个网络硬盘放一个我安装好的：ruby-1.8.6+watir-1.5.6 集成版本。
+第三步：修改支持中文；
+这一部比较诡秘，google上搜索了一大圈答案都是：在calss TextField中加一个方法，我在写自己的第一个脚本时，发现中文按钮无法点击，就猜测可能是自己的版本不支持中文，但是根据专家意见去找了watir.rb根本没有TextField类的存在，去官方查了一下资料发现1.5.2以后watir.rb文件做了拆分，这个类被分到input_elament.rb中，并且已经做了支持中文的修改。如果你发现自己的版本不支持中文可以到这个文件中做以下修改：
+在class TextField中加入一个新的method：<br></p>
+
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc413ae0248></p>
+
+<br>
+
+
+<p>更改class TextField的doKeyPress( value )方法部分代码，将下面代码<br>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-<br></p>
+
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc413ae2868></p>
+
+<p>替换为如下代码<br></p>
+
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc413aeb3f0></p>
+
+<p>}<br>代码附上，不过我觉得如果是按照我上面讲的版本来安装就不需要这个了。
+第四步：安装IDE；
+能用记事本编写百万行程序的天才估计也不会看到这篇文章，提高工作效率，将敏捷进行到底，IDE还是有必要的，我用的Eclipse+RDT+Radrails，其中Radrails是rails项目需要的，可能不需要安装也能满足watir需求，因为学习ruby肯定要研究一下rails所以都安装上吧。Eclipse安装不提了，给出RDT和Radrails更新方法：通过eclipse更新安装来远程安装插件。从eclipse的菜单Help->Software->Updates->Find and Install选择&#8221;Search for new features to install&#8221; 进行安装。
+1、RDT<br><a href="http://updatesite.rubypeople.org/release">http://updatesite.rubypeople.org/release</a><br>2、RadRails<br><a href="http://radrails.sourceforge.net/update">http://radrails.sourceforge.net/update</a></p>
+
+<br>通过eclipse菜单 Windows > Preferences 打开Preferences对话框，在Ruby 标题下面的 Installed Interpreters 项中设置的ruby的位置。起个名称，然后将&#8221;Location&#8221;文本域指向您使用的 Ruby 版本的 bin 目录。我的机器ruby的bin目录在c:/ruby,这样，ruby+watir的环境这完成了。 在eclipse中建立一个ruby的工程，再建一个ruby文件，写上 puts &#8221; Hello,world&#8221; 就可以看到eclipse的控制台输出ok信息了。<br>
+
+
+<p>第五步：我目前搜到的所有教程写到这一步都会说可以运行google的demo了，现在我们先不运行google那么长的demo,先写个简单的打开本站的脚本：</p>
+
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc413af1340></p>
+
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc413af0a58>
+</code></p>
+
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc413aee870></p>
+
+<p>头大了吧，都说这个时候已经好了，为什么自己环境的就是不好用呢，仰天长叹，继续查吧，google，baidu了一大圈，都是报喜不报忧，最后终于在一个我从来不起的邮件组服务器里面查到了几个老外的邮件备份，真是不容易，那里解释到：</p>
+
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc413af3d98></p>
+
+<p>把他的原文贴出来了，因为这封邮件让我找了几个小时，发给他一封感谢信，按照这个配置修改原来的代码：</p>
+
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc41323f760></p>
+
+<p>运行，IE窗口弹出来了，OK，这才是完整的安装配置过程嘛，感叹一下：网络上资源丰富，但是也有很多懒人啊。
+一个星期的时间读了ruby的帮助文档对ruby语言基本用法有了些认识，一个字：快，加上watir基于html的识别，也是一个字：快，说他是匕首一点也不为过。如果是小型项目用watir比QTP的开发周期要短的多了，当然watir也有现存的弱点，对Frame和javascript支持不好，当我看完ruby语言，看完watir内置方法，配置好所有的环境准备开工之时，忽然发现项目的页面全是js调用出来的，从HTML根本看不到任何元素，额的神啊，当我了解这个真相以后，绝望了。。。
+虽然现在的项目不适合，不代表用不到，很看好ruby语言，也很看好watir这个轻量级工具，等我从绝望中走出来以后，再做一套针对wordpress的自动化测试脚本，也许可以帮助主题制作者节省点验证主题基本功能的时间，自己PHP学的不怎么样，就从侧面为开源做点贡献吧。
+一周的成果居然才浓缩了这么巴掌大的文章，唏嘘~</p>
+
+<p>  <!-- Tag links generated by Zoundry Blog Writer. Do not manually edit. http://www.zoundry.com --><br><span class="ztags"><span class="ztagspace">Technorati</span> : <a href="http://technorati.com/tag/Ruby" class="ztag" rel="tag">Ruby</a>, <a href="http://technorati.com/tag/Watir" class="ztag" rel="tag">Watir</a>, <a href="http://technorati.com/tag/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95" class="ztag" rel="tag">自动化测试</a></span></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">xazaJ</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-11-06T00:00:00+08:00" pubdate data-updated="true">2008-11-06 Thu</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/rubyonrails/'>RubyOnRails</a>, <a class='category' href='/blog/categories/软件测试/'>软件测试</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section class="googleplus">
+  
+
+  
+  
+  
+  <div class="clear:both"></div>
+</section><section>
+  <div class="googleplus odd" style="height:10px;padding-top:20px;">
+    <!-- AddThis Button BEGIN -->
+    <div class="addthis_toolbox addthis_default_style ">
+      <a class="addthis_counter addthis_pill_style"></a>
+    </div>
+    <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4f38a0297ac7eadf"></script>
+    <!-- AddThis Button END -->
+  </div>
+  <div class="clear:both"></div>
+</section><section>
+  <div class="googleplus odd" style="padding-bottom: 1px;">
+    <!-- JiaThis Button BEGIN -->
+    <div id="ckepop">
+      <a href="http://www.jiathis.com/share?uid=898844" class="jiathis jiathis_txt" target="_blank"><img src="http://v2.jiathis.com/code_mini/images/btn/v1/jiathis5.gif" border="0" /></a>
+      <a class="jiathis_counter_style_margin:3px 0 0 2px"></a>
+    </div>
+    <script type="text/javascript" >
+      var jiathis_config={
+        data_track_clickback:true,
+        summary:"",
+        hideMore:false
+      }
+    </script>
+    <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js?uid=898844" charset="utf-8"></script>
+    <!-- JiaThis Button END -->
+  </div>
+  <div class="clear:both"></div>
+</section>
+<section id="comment_sidebar">
+  <h1>Recent Comments</h1>
+  <div id="recentcomments" class="dsq-widget">
+    <script type="text/javascript" src="http://xazaj.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=32&excerpt_length=200"></script>
+  </div>
+  <a target="_blank" href="http://disqus.com/">Powered by Disqus</a>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2008/11/06/watir-zi-dong-hua-ce-shi-gong-ju-yi-zhou-ti-yan-bi-ji.html">Watir自动化测试工具安装全过程</a>
+      </li>
+    
+  </ul>
+</section>
+<section id="blogroll" class="odd">
+<h1>My Friends</h1>
+<ul style="padding-left:0">
+	<li><a href="http://www.zhuaijun.cn/" target="_blank">测试人生</a></li>
+	<li><a href="#" target="_blank">老田</a></li>
+	<li><a href="#" target="_blank">张松</a></li>
+	<li><a href="#" target="_blank">。。。</a></li>
+</ul>
+</section><section>
+ <h1>Categories</h1>
+ <ul id="categories">
+ Liquid error: incompatible encoding regexp match (ASCII-8BIT regexp with UTF-8 string)
+ </ul>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - xazaJ -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'xazaj';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://xazaj.github.com/blog/2008/11/06/watir-zi-dong-hua-ce-shi-gong-ju-yi-zhou-ti-yan-bi-ji.html';
+        var disqus_url = 'http://xazaj.github.com/blog/2008/11/06/watir-zi-dong-hua-ce-shi-gong-ju-yi-zhou-ti-yan-bi-ji.html';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
