@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Tag: watir - xazaJ's blog</title>
+  <title>Watir如何连接oracle数据库 - xazaJ's blog</title>
   <meta name="author" content="xazaJ">
 
   
-  <meta name="description" content="Tag: Watir 2008 Watir自动化测试工具安装全过程 2008-11-06 Thu Tags: Ruby, watir, 自动化 var jiathis_config={ data_track_clickback:true, summary:"", hideMore:false &hellip;">
+  <meta name="description" content="感谢朱老师给我权限在这里写watir的东西,算是平常的学习笔记吧. 看了蛮多天的ruby教程(&lt;a href="http://wiki.seleniumhq.org/display/WTR/Tutorial"&gt;猛击我&lt;/a&gt;),今天开始自己试着写代码, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xazaj.github.comblog/tags/watir/index.html">
+  <link rel="canonical" href="http://xazaj.github.com/blog/2008/12/05/watir-ru-he-lian-jie-oracle-shu-ju-ku.html">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -62,23 +62,86 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Tag: Watir</h1>
+    
+      <h1 class="entry-title">Watir如何连接oracle数据库</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-12-05T00:00:00+08:00" pubdate data-updated="true">2008-12-05 Fri</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
+
+
+<div class="entry-content"><p>感谢朱老师给我权限在这里写watir的东西,算是平常的学习笔记吧.</p>
+
+<pre><code>     看了蛮多天的ruby教程(&lt;a href="http://wiki.seleniumhq.org/display/WTR/Tutorial"&gt;猛击我&lt;/a&gt;),今天开始自己试着写代码,写了一个比较简单的用户注册的过程,由于测试必须得有预期结果做比较,所以想到了注册完成后需要到oracle数据库中找到该用户的数据去比较,但是,ruby如何连接数据库呢?自己google了一下,找到了一个简单的方法,写出来给大家分享:
+</code></pre>
+
+<p>1).Ruby的安装详见google,这里我们需要一个ruby-oci8-1.0.0-mswin32.rb文件,在http://rubyforge.org/frs/?group_id=256 能找到这个文件.下载到本地后双击ruby-oci8-1.0.0-mswin32.rb进行安装,回答个Yes回车.<br><!--more--><br>
+2).开下&#8221;命令提示符&#8221;窗口测试一下先输入ruby -r oci8回车,然后输入Ctrl+D回车,如果ruby-oci8安装正确,ruby退出时不会报错误信息.否则Ruby会抱怨的:<br>
+ruby: no such file to load &#8211; oci8 (LoadError)</p>
+
+<pre><code>     3).oracle的客户端配置文件tnsnames.ora中&lt;br&gt;
+       dbxxxxx =&lt;br&gt;
+   (DESCRIPTION =&lt;br&gt;
+         (ADDRESS_LIST =&lt;br&gt;
+                 (ADDRESS = (PROTOCOL = TCP)(HOST = xxx.xxx.xxx.xx)(PORT = 1521))&lt;br&gt;
+           )&lt;br&gt;
+           (CONNECT_DATA =&lt;br&gt;
+                (SERVICE_NAME = db1)&lt;br&gt;
+         )&lt;br&gt;
+</code></pre>
+
+<p>)<br>
+是们想连接的数据库.<br>
+4).此时,我们就可以在CMD窗口连接数据库了.<br>
+5).运行CMD,输入<br></p>
+
+<pre><code>ruby -r oci8 -e "OCI8.new('logname','passwd','dbxxxxx').exec('select logname from members t where memberid=10624433') do |r| puts r.join(','); end" 
+</code></pre>
+
+<p>运行结果为:<br>
+xxxxx@163.com
+6).OK,我们能在CMD窗口连接我们的测试机并查询出相应的数据了,那么,我们如何在ruby的代码里查询呢?请看下面的代码</p>
+
+<pre><code>require "oci8"    #非常重要,必须要.否则报错&lt;br&gt;
+</code></pre>
+
+<p>OCI8.new(&#8216;logname&#8217;,&#8217;passwd&#8217;,&#8217;dbxxxxx&#8217;).exec(&#8216;select logname from members t where memberid=10624433&#8217;) do |r| puts r.join(&#8216;,&#8217;); end
+在SciTE中按F5运行后在右边的结果框中显示结果<br>
+xxxxx@163.com
+ruby这个自动化测试的工具还是挺强大的,大家在学习的时候有什么发现或者难点,可以一起发个邮件讨论讨论
+OK!下班回家~</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
   
-  <dl class="archives">
-  
-  
-  
-    
-    <dt>2008</dt>
-  
-  <dd><h1 class="entry-title"><a href="/blog/2008/11/06/watir-zi-dong-hua-ce-shi-gong-ju-yi-zhou-ti-yan-bi-ji.html">Watir自动化测试工具安装全过程</a></h1>
-<p class="meta">
-  
+
+<span class="byline author vcard">Posted by <span class="fn">xazaJ</span></span>
+
+      
 
 
 
@@ -90,35 +153,41 @@
   
 
 
-<time datetime="2008-11-06T00:00:00+08:00" pubdate data-updated="true">2008-11-06 Thu</time>
-  
+<time datetime="2008-12-05T00:00:00+08:00" pubdate data-updated="true">2008-12-05 Fri</time>
+      
 
-<span class="tags">
-  Tags:
+<span class="categories">
   
-    <a href='/blog/tags/ruby/'>Ruby</a>, <a href='/blog/tags/watir/'>watir</a>, <a href='/blog/tags/zi-dong-hua/'>自动化</a>
+    RubyOnRails软件测试
   
 </span>
 
-</p>
-</dd>
-  
-</dl>
 
-  
-    <footer>
-      
-      
-        <div class="sharing">
+    </p>
+    
+      <div class="sharing">
   
   
   
 </div>
 
+    
+    <p class="meta">
       
-    </footer>
-  
+        <a class="basic-alignment left" href="/blog/2008/12/05/rang-watir-ren-shi-bing-cao-zuo-wen-jian-shang-chuan.html" title="Previous Post: 让Watir认识并操作文件上传">&laquo; 让Watir认识并操作文件上传</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2008/12/18/bian-que-san-xiong-di-de-gu-shi.html" title="Next Post: 扁鹊三兄弟的故事">扁鹊三兄弟的故事 &raquo;</a>
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -197,7 +266,10 @@
       var disqus_shortname = 'xazaj';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://xazaj.github.com/blog/2008/12/05/watir-ru-he-lian-jie-oracle-shu-ju-ku.html';
+        var disqus_url = 'http://xazaj.github.com/blog/2008/12/05/watir-ru-he-lian-jie-oracle-shu-ju-ku.html';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

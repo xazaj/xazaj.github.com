@@ -1,0 +1,531 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>RubyOnRails教程第一章从头开始部署 - xazaJ's blog</title>
+  <meta name="author" content="xazaJ">
+
+  
+  <meta name="description" content="［Ruby on Rails tutorial 中文版］ 第一章 从头开始部署 欢迎阅读Ruby on Rails教程：《通过实践学习Rails》。这本书的目的就是回答这个问题：“如果我想学习Rails Web开发，我应该从哪里开始？”当你读完本书时，你就会拥有开发和部署你自己Web应用的所有知识 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://xazaj.github.com/blog/2012/04/16/%EF%BC%BBruby-on-rails-tutorial--zhong-wen-ban-%EF%BC%BD--di-yi-zhang---cong-tou-kai-shi-bu-shu.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="xazaJ's blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">xazaJ's blog</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:xazaj.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">RubyOnRails教程第一章从头开始部署</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-16T00:00:00+08:00" pubdate data-updated="true">2012-04-16 Mon</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><strong>［Ruby on Rails tutorial 中文版］ 第一章 从头开始部署</strong></p>
+
+<p>欢迎阅读Ruby on Rails教程：《通过实践学习Rails》。这本书的目的就是回答这个问题：“如果我想学习Rails Web开发，我应该从哪里开始？”当你读完本书时，你就会拥有开发和部署你自己Web应用的所有知识。你也将准备好在繁盛的Rails培训社区中寻找优秀书籍，博客和视频，并从中学习到更多的知识。最后，因为Ruby on Rails教程使用的是Rails3.0，你的知识也将追随最新版本的Rails而更新到最新（译者注：翻译本文时,最新版本为Rails3.1）。</p>
+
+<!--more-->
+
+
+<p>本教程在本质上也将遵循我之前Rails教程的风格，通过用Rails从零开始构建一个真实的简单应用来学习Web开发。就像Derek Sivers在序言中所说，这本书采用的是线性叙述的结构，需从前至后的读。如果你习惯跳着阅读技术书籍，可能需要做一些调整来适应这种线性阅读的方法，但还是建议做一个尝试。你可以把Ruby on Rails教程想象成一个游戏，而你就是主角，作为一个Rails开发者，你会在每章的学习过程中升级。（每章中的练习就是小BOSS。）</p>
+
+<p>在第1章中，我们将从安装所有必要的软件和配置我们的开发环境来开始Ruby on Rails的学习（1.2节）。然后我们将创建第一个Rails应用程序，名字叫（非常适合）first_app。本教程强调良好的实践，所以在我们创建了最新的Rails项目后，我们将马上使用Git（1.3节）进行版本控制。而且，在本章中我们还会通过部署产品（1.4节）将我们的first app发布到Internet上。</p>
+
+<p>在第2章，我们将进行第二个项目，其目的是要展示一个Rails应用程序的基本工作原理。为了更快的启动和运行，我们将用脚手架（Box 1.1）自动生成代码来完成这个演示应用程序（称为demo_app）；因为这段代码既难看又复杂，所以第2章的重点将放在讲述应用程序在Web浏览器中通过URL的交互过程上。</p>
+
+<p>在第3章中，我们将创建一个示例应用程序（称为sample_app），这次将从头编写所有代码。我们将使用测试驱动开发（TDD）的方法开发示例应用程序，在第3章以创建静态页面开始，然后增加一点动态内容。在第4章中我们将做一个快速的回顾，在Rails下学习一点Ruby语言的知识。在第5章到第10章，我们通过制作一个站点的布局，一个数据模型，和一个完整的注册和认证系统来完成示例应用程序的基础。最后，在第11章和12章我们将增加微博和SNS特征来建立一个可工作的网站。</p>
+
+<p>最终的示例应用程序将带来一个类似于最近很流行的社会化博客站点——巧合的是，这个站点最初也是用Rails写的。虽然我们要努力集中精力完成这个特定的示例应用程序，但Rails的基本原理知识将贯穿于整个Rails教程，这样你就有了坚实的基础来建立任何你想要建立的Web应用程序。</p>
+
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fa7389f2b30></p>
+
+<p>当编写一本Ruby on Rails教程时，很容易让人依赖于使用脚手架的方式——他很快、更容易，更诱人。但是复杂且庞大的脚手架代码量会完全压垮一个Rails开发入门者；你也许可以使用它，但你可能无法理解它。使用脚手架的方式也面临着将你变成一个只懂得少量（且肤浅）Rails知识的脚本生成器的风险。</p>
+
+<p>在本教程中，我们将使用（几乎）相反的方法：虽然第2章将使用脚手架开发一个小演示程序，但本教程的核心是第3章开始编写的示例应用程序。在开发示例应用程序的每一个阶段，我们将生成小、简单的代码块——简单到足够被理解，但也足够新颖且有挑战性。逐渐累积的学习将给你带来Rails更深入更灵活的知识，也将为你开发几乎所有的Web应用程序积累一个好的知识背景。</p>
+
+<p><strong>1.1 引言</strong></p>
+
+<p>自从Rails2004年首次亮相，Ruby on Rails很快的成为了强大且受欢迎的动态Web程序开发框架。Rails的使用者覆盖了从激进的新兴公司到大型公司：Posterous，UserVoice，37signals，Shopify，GitHub，Scribd，Hulu，YELLOW PAGES——使用Rails开发的站点越来越多。也有一些专注于用Rails的开发商，如ENTP,thoughtbot，Pivotal labs和Hashrocket，加上还有无数的独立高级顾问，培训师和承包商等。</p>
+
+<p>是什么让Rails如此强大？首先，Ruby on Rails100%是开源的，使用MIT许可证，它可以完全免费下载和使用。Rails的成功很大程度上还受益于它优雅和精巧的设计，利用底层可塑性的Ruby语言，Rails有效的创建了一个DSL语言来编写Web应用程序。因此，很多常用的Web编程任务——比如产生HTML,构造数据模型，路由URL等，这些用Rails实现都很简单，且程序代码简洁，可读性强。</p>
+
+<p>Rails也很适合开发新的Web应用程序和设计新的框架。Rails是第一批完全理解和履行REST设计风格的Web程序结构的框架之一。并且当其它框架成功开发出新技术时，Rails的创建者和和核心团队会毫无顾虑的吸收他们的创意。也许最生动的例子就是Rails和另一个Ruby Web框架Merb的合并，所以现在的Rails吸收了Merb的模块化设计，稳定的API和优秀的性能。</p>
+
+<p>最后，Rails也受益于有一个热情多样的社区。社区包含了数百个开源贡献者，精心策划的会议，很多的插件和gem（自给自足的解决方案，比如分页和图片上传），大量内容丰富的博客，内容丰富的论坛和IRC频道。大量的Rails程序员也使得解决程序错误变得更容易，“Google the error message”算法可以提供很多相关的博客和论坛主题。</p>
+
+<p><strong>1.1.1 针对不同读者的说明：</strong>
+Rails教程中不仅包含了Rails的知识，也会包含Ruby语言，HTML，CSS，一些Javascript，甚至还有SQL。也就是说，不管你当前的Web开发知识如何，通过学习完这本Rails教程，你就可以去学习更高级的Rails知识，也可以去系统地学习更多其它相关的知识。</p>
+
+<p>Rails的强大来源于它的“魔法”——也就是说，是框架的特征造就了奇迹，但是Rails的机制是很神秘的，但Ruby on Rails教程不准备去说明这些魔法，主要是因为Rails的开发者不需要知道这些底层的知识。（毕竟Ruby本身也是用C编写的，但是用Ruby的人也不会去研究C源码。）如果你是一个打破砂锅问到底的人，我建议你去读本教程的姐妹篇，Obie Fernandez的《Rails 3 Way》。</p>
+
+<p>虽然读这本书不需要特别的条件，但是你至少应该要有一些计算机经验。如果你之前从来没用过文本编辑器，学习起来将会非常艰难，但是如果你有足够的决心，你应该也能坚持到底。另一方面，.emacs文件是非常复杂的，它会让学习中的你泄气，还有很多问题会让你感到很有挑战性。本教程是为了让不同背景的人学习Rails编程，但是学习路径和阅读体验取决于你的具体情况。</p>
+
+<p>所有的读者：学习Rails时大家遇到的一个共同的问题就是是否要先学习Ruby。这个答案取决于你自己的学习风格。如果你习惯于系统的学习知识，那提前学习Ruby可以让你学习更顺利，并且本节中会给你介绍几本开始学习Ruby的书。另一方面，很多Rails初学者都兴奋于编写Web程序，他们不愿意在编写一个简单Web页面之前去艰难的读一本500页纯粹的Ruby语法书。而且一个Rails开发者需要的Ruby知识与纯粹的Ruby入门教程中介绍的不一样，并且Rails教程中也会集中介绍这些知识。如果你主要兴趣在于开发Web应用程序，建议先读Rails教程，然后在阅读纯粹的Ruby教程。这不是一个要么全有要么全无的命题，可是如果你开始阅读Rails教程时，若感觉到由于缺乏Ruby知识使得学习乏力时，你就应该回头看看纯粹Ruby的教程，看到你觉得Ruby的知识准备好了为止。你也可以考虑体验一个简短的在线Ruby教程，可以在http://www.ruby-lang.org/ 或 http://rubylearning.com/上搜索。</p>
+
+<p>另外一个常见的问题是是否从一开始就测试。正如前言中所介绍的，Rails使用测试驱动开发（也称为测试先行的开发），在我看来这是开发Rails应用程序最好的方式，但是这也确实引入了大量的开销和复杂性。如果你发现自己已陷入测试的沼泽，在首次的阅读中你可以自由的跳过它们。实际上有些读者可能会觉得教程中包含了很多可选的部分，比如测试，版本控制和部署——开始时有点难以完全接受，如果你发现在某一步骤花费了太多的精力，不要犹豫跳过它们。尽管我认为这些都是专业级的Rails应用程序的必要要素，但第一次阅读教程时只有核心的代码才是必要的。</p>
+
+<p>没有经验的程序员（非设计师）：Rails教程不包含其它的计算机基础知识，所以如果你有一定的编程经验，这本书是一个很好的开端。请记住这仅仅是一个漫长旅途中的第一步，Web开发技术有很多知识需要学习，包含HTML/CSS,JavaScript，数据库（包括SQL）,版本控制和部署。这本书简单介绍了这些知识，但仍有很多知识需要学习。</p>
+
+<p>没有经验的程序员（设计师）：你的设计经验可以让你有一定的优势，因为你已经知道HTML和CSS了。当你学完这本书时你将能在已存在的Rails项目中找到很好的位置，也可以开始做自己的项目。你可能会发现编程的挑战性，但是Ruby语言对初学者是非常友好的，尤其是那些有艺术细胞的人。</p>
+
+<p>当读完本教程，我建议新的Ruby程序员读一下Peter Cooper的《Beginning Ruby》，这本书也有着和Rails教程同样的教育哲学。再推荐读Hal Fulton的《Ruby Way》。最后，为了更深入的理解Rails，建议阅读Obie Fernandez的《Rails 3 Way》。</p>
+
+<p>由Web应用程序的性质决定，即使是一个相对简单的Web应用程序，也会比较复杂。如果你完全是一个Web开发新人，你会发现Rails教程会完全压垮你，那也许是因为你还没有准备好Web程序开发。在这种情况下，我建议你先去学习基础的HTML和CSS知识，然后再回来继续学习Rails教程。（不过这里我没有给出个人建议，但是《深入浅出HTML》可以一读，一个读者推荐的CSS教程，由David Sawyer McFarland编写的《The Missing Manual》。）你也可以考虑读一下《Beginning Ruby》的前几章，这本书从一些比成熟的Web程序更小的示例程序入手。</p>
+
+<p>没有开发过Web程序的程序员：你之前的经验意味着你可能已经明白类，方法，数据结构等，这是很有优势的。但要注意的是如果你的背景是C/C++或者Java，你可能会觉得Ruby有些奇怪，并且你可能需要时间来适应；不过只要你坚持下去就会感觉良好的。（如果你实在是太想念它们，Ruby甚至可以让你在每行后面加上分号。）Rails教程涵盖了你需要的所有web开发概念，所以你不需要担心不懂如何提交表单。</p>
+
+<p>没有开发过Rails的Web开发者：你有一个很好的开端，特别是如果你曾经用过PHP或者（最好是）Python这些动态语言。我们所包含的基础知识你可能会非常熟悉，但是测试驱动开发可能是新知识，可能Rails的REST风格同样受你青睐。Ruby有它自己的特性，这些对你来说可能也是新知识。</p>
+
+<p>有经验的Ruby程序员：不知道Rails的Ruby程序员现在已经很少了，但是如果你是精英团队成员，你可以很快的通读一遍这本书，然后去看Obie Fernandez的《Rails 3 Way》。</p>
+
+<p>没有经验的Rails程序员：你可能之前看过一些其它的教程并且自己开发了一些小的Rails应用。通过读者的反馈，我确信你仍然可以从这本书学到很多东西。除此之外，本教程中的技术也会比你之前看过教程中的技术更新。</p>
+
+<p>有经验的Rails程序员：这不是一本你必须要看的书，但是很多经验丰富的Rails程序员表示惊奇，因为他们从这本书中学习到了很多东西，而且你也许能从不同的角度来认识Rails。</p>
+
+<p>读完Ruby on Rails教程，我建议有经验的程序员（非Ruby）再去读一下David A. Black的《The Well-Grounded Rubyist》，这本书深入的讨论了Ruby的成长过程，或者读一下Hal Fulton的《The Ruby Way》，这本书也是高级教程但是有很多热门的方法。然后你可以读《Rails 3 Way》来加深你的Rails专业知识。</p>
+
+<p>在本节最后，不管你从哪里开始学习，你都要做好准备用Rails更高级的资源去学习。这里有一些推荐资源：</p>
+
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fa7389f2388></p>
+
+<p><strong>1.1.2 Rails的规模</strong>
+在介绍Rails其它特性之前，我想花一点时间来解决在初期困扰Rails框架的一个问题：Rails不能支持“规模”——即处理大数据流量。这个问题其实有一部分误解，你大规模部署的是一个网站而不是一个框架，Rails作为一个框架是非常优秀的，并且它仅仅是一个框架。所以真正的问题应该是：“是否可以用Rails规模创建一个网站？”在任何情况下，这个问题的答案都是肯定的：世界上有很多大流量的网站在使用Rails，其实大规模的部署网站已经超过了Rails的范畴，不过你也可以放心，如果你的应用程序需要处理的流量超过了HULU和Yellow Pages，Rails也不会阻止你接受其它技术。</p>
+
+<p><strong>1.1.3 书中的约定</strong>
+在本书中的约定大多是不言自明的，在本节中，我会提那些特殊的约定。</p>
+
+<p>无论是这本书的HTML和PDF版本都有很多内部或外部网站（如Ruby on Rails下载页面）的链接（如1.2节）。</p>
+
+<p>本书中有很多命令行的例子。为简单起见，所有的命令行示例都使用Unix风格的命令行提示符（美元符号），如下：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>Windows用户应该理解系统使用的符号>：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>在Unix系统中，有些命令行应该用sudo执行，它代表“代替用户执行”。当以管理员身份运行时默认用sudo执行，这可以让用户进入普通用户不能接触的文件和文件夹。为了标明sudo是依赖于系统的，在个别系统中如果你不知道sudo是不是必要的，可以把sodu放在方括号中，比如1.2.2节中的例子：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>绝大多数Unix/Linux/OS X系统默认需要sudo，除非你根据1.2.2.3节中的建议使用Ruby版本管理器。注意在这里你没必要输入方括号；你应该这样：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>或者</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>选择哪种用法依赖于你的系统。</p>
+
+<p>Rails提供了很多可在命令行运行的命令行方法。比如1.2.5节中，我们我们运行一个本地的web服务器，命令如下：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>在使用命令行模式时，Rails教程使用Unix约定来分割文件夹（即一个斜线/）。例如，Rails教程中的示例程序，都放在下面目录：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>在Windows下，类似的目录是：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>对于任何给定的应用的根目录被成为Rails 的根目录，之后所有目录都相对于这个目录。（特别注意Rails的根目录不是Rails本身的根目录。）例如，我的示例应用程序config目录：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>在Windows中，类似的目录是：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>Config前面的Rails根目录如下：：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>简单的提一下涉及的文件：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>下文中我将省略Rails的根目录并简单的写这个文件config/routes.rb。</p>
+
+<p>最后，Rails教程经常显示了各种不同程序的输出（shell命令，版本控制状态，Ruby程序等）。由于不同计算机系统的小差异，你看到的输出未必和书上的一致，不过这些不用太介意。此外，由于系统不同，某些命令可能会导致一些错误；不可能在本书中记录所有的错误，建议使用谷歌搜索，这也是软件开发中的一个好习惯。</p>
+
+<p><strong>1.2 启动和运行</strong>
+现在是时候来配置我们的Ruby on Rails环境和开发第一个程序了。如果你没有丰富的编程经验，将会花费很多时间在这里，如果你需要花一些时间才能开始也不要气馁，不只你是这样，所有的开发者都会经历这个阶段（可能还不止一次），但是你放心，付出总是有回报的。</p>
+
+<p><strong>1.2.1 开发环境</strong>
+考虑到不同的特性，Rails开发者可能有很多开发环境，但至少可以分为两类：文本编辑器/命令行环境，以及继承开发环境（IED）。让我们先考虑后者。</p>
+
+<p>IDE
+Rails的IDE都很好用，包括RadRails，RubyMine和3rd Rail。这些IDE都是跨平台的并且口碑都不错。建议你试试这些IDE看看是否适合你，但是我必须承认：目前为止还没有发现一个IDE能满足我所有的开发需要，甚至有些项目我不能完全用某个IDE来完成。</p>
+
+<p>文本编辑器和命令行
+如果没有功能完善的IDE,我们要怎么开发Rails应用呢？我想大部分的Rails程序员都会和我的选择一样：使用文本编辑器和命令行执行命令（图1.1）。具体你会选择哪个组合要取决于你的使用体验和平台：
+MAC OS X：和许多Rails开发者一样，我更喜欢TextMate。其它的选择有Emacs和Vim的优秀苹果版本MacVim（命令行下的mvim）。我用iTerm作为命令行终端，其他人可能会用系统自带的Terminal程序。
+Linux：除了TextMate之外，你的选择基本上和MAC OS X上是一样的。我推荐选择带界面的gVim，gedit（带Gmate插件），扩这Kate。至于命令行工具，都是已设置好的：每个Linux发行版本都会至少有一个命令行终端程序（通常是几个）。
+Windows：Windows下被看好的编辑器有Vim，E Text Editor，Komodo Edit和Sublime Text。命令行我建议使用Rails安装程序（1.2.2.1节）中的命令行模式。</p>
+
+<p>如果你对Vim情有独钟，一定要关注使用Vim的Rails hacker社区。尤其要关注Rails.Vim的增强和NERD项目列表。</p>
+
+<p>图1.1：文本编辑器/命令行开发环境（TextMate/iTerm）。</p>
+
+<p>浏览器
+虽然有很多浏览器供选择，不过大多数Rails程序员还是选择了Firefox，Safari或者Chrome做开发。Rails教程中的截图都是在Firefox中截的。如果你使用Firefox，建议使用Firebug add-on，它可以让你完成很多魔法，比如在任何页面动态检查（甚至编辑）HTML和CSS。若没用Firefox，可选择Firebug Lite，它可以运行在其它大多数的浏览器上，并且Safari和Chrome有一个内置的“检查元素”功能，可以让你在网页的任何部分点击右键使用。不管你使用什么浏览器，都很值得花时间去学习一个web检查工具。</p>
+
+<p>关于工具的说明
+在启动和运行开发环境的过程中，你可能需要花费大量的时间来调试。学习编辑器和IDE的时间也会很长；你会花费几周时间去学习TextMate或Vim教程。如果你是一个新人，我可以负责任的告诉你：花时间去学习工具是很正常的。每个人都要经历这个过程。有时也会很有挫败感，特别是在你已经有了一个很伟大的网站创意，但却必须要花一周时间来学习古老的UNIX编辑器才能开始的时候。但你应该相信磨刀不误砍柴工，付出一定会有收获。</p>
+
+<p><strong>1.1.2 Ruby，RubyGems，Rails和Git</strong>
+现在是时间来安装Ruby on Rails了。这一步用到的最新安装包都可以在Ruby on Rails的下载页面找到。接下来的内容是假设你可以登陆这个页面；本书的某些章节是可以离线阅读的，但是本章不行。在安装步骤中我只会写一些我自己的注释。</p>
+
+<p>RailsInstaller（Windows）
+在Windows上安装Rails的人伤不起，不过得感谢Engine Yard上的好人们，特别是Nic Williams博士和Wayne E. Seguin，他们使得在Windows上安装Rails和关联软件变得很简单。如果你用Windows，到Rails Installer（http://railsinstaller.org）下载一个可执行的Rails安装器。双击这个可执行文件并且跟着说明安装Git（这样你可以跳过1.2.2.2）,Ruby（可跳过1.2.2.3），RubyGems（可跳过1.2.2.4）,Rails（可跳过1.2.2.5）。如果你都安装成功了，你可以跳过以下章节，直接跳到1.2.3节去创建第一个应用程序。</p>
+
+<p>安装Git
+Rails生态圈中大多数人都使用Git（1.3节有详细说明）作为版本控制工具。因为很多地方都会用到它，所以你应该尽早安装；我建议你根据ProGit上查看相关Git安装的教程。</p>
+
+<p>安装Ruby
+下一步是安装Ruby。你的系统可能已经安装了Ruby，用下面的命令可以查看版本号。</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>Rails3需要Ruby版本是1.8.7以上，最好是1.9.2。本教程假定你使用的Ruby1.9.2，并且你知道1.9.2的特征，但是本教程中的例子在1.8.7中也能正常运行。</p>
+
+<p>Ruby1.9的分支版本非常多，所以安装最新版本的Ruby还有些难度。你可能需要按照网上最新的教程来安装。下面是在我的MAC OS X上正确安装Ruby的步骤，但你可能需要根据你的系统去搜索对应的步骤。</p>
+
+<p>如果你使用MAX OS X或者Linux，强烈建议你安装Ruby版本管理工具（RVM），它能让你在同一台机器上管理多个Ruby版本（Windows上有类似的项目叫Pik）。如果你想在同一台机器上运行Rails3和Rails2.3，这个功能就会非常重要。如果你想同时安装两个版本，建立使用RVM安装两个Ruby/Rails组合：Ruby1.8.7/Rails2.3.10和Ruby1.9.2/Rails 3.0.7。如果你在运行RVM时遇到问题，你可以去RVM 的IRC频道中找RVM的创造者Wayne E. Seguin求助。</p>
+
+<p>安装RVM以后，你可以按以下步骤安装Ruby：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>前两行命令是更新和重载RVM，这是一个很好的做法，因为RVM经常更新。后面两行代码是执行Ruby的实际安装过程；根据你所用系统的不同，下载和编译需要花费一定的时间，所以如果你看到安装没进度时也不用担心。（不过也要小心一点，因为很多小细节会出错，例如在我的系统安装Ruby1.8.7的最新版本时不能编译，经过多次的搜索和实践，我发现需要在版本后面加上补丁编号302：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>当这种事情发生在你身上时，你可能会泄气，但至少你知道了它会发生在每个人身上&#8230;）</p>
+
+<p>Ruby程序的特色是通过gem来发布，gem是Ruby代码独立的软件包。因为不同版本的gem会有冲突，所以创建分离的gems独立包——gemsets是很方便的。值得注意的是，Rails是作为一个gem来发布的，并且Rails2和Rails3是有冲突的，所以如果你要在一台机器上运行多个Rails版本，就需要创建一个分离的gemset，命令如下：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>第一行命令是创建gemset来关联rails2tutorial和Ruby1.8.7-p302，第二行命令是创建gemset关联rails3tutorial和Ruby1.9.2，使用这两条命令时，就会启用某一个版本的组合。RVM有很多操作gemsets的命令，具体请参考文档：http://rvm.beginrescueend.com/gemsets/。</p>
+
+<p>在本教程中，默认使用Ruby1.9.2和rails3.0，我们可以用下面的命令来配置：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>这条命令同时设置了Ruby的默认版本为1.9.2，也设置了默认的gemset为rails3tutorial。</p>
+
+<p>顺便提一下，如果你使用RVM的过程中遇到困难，用下面的命令也许可以帮到你：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>安装RubyGems
+RubyGems是一个Ruby项目的包管理器，它有大量Ruby包或gems的库（包括Rails）。如果你曾经安装过Ruby，安装RubyGems是非常简单的。事实上，如果你安装了RVM，你就已经安装了RubyGems，因为RVM已经包含它了：
+$ which gem
+/Users/mhartl/.rvm/rubies/ruby-head/bin/gem</p>
+
+<p>如果你还没有安装RubyGems，你需要下载它，并且解压，然后再到rubygems目录运行安装程序：
+$ [sudo] ruby setup.rb</p>
+
+<p>如果你已经安装了RubyGems，你可能需要把它升级到本教程使用的版本:
+$ [sudo] gem update &#8211;system 1.6.2</p>
+
+<p>最后，如果你使用的是Ubuntu Linux，你可能要到the Ubuntu/Rails 3.0 blog post by Toran Billups 去看一看完整的安装说明。</p>
+
+<p>安装Rails
+一旦你安装了RubyGems，安装Rails3.0应该很简单了：
+$ [sudo] gem install rails &#8211;version 3.0.7</p>
+
+<p>运行下面命令来验证它是否工作正常：
+$ rails -v
+Rails 3.0.7</p>
+
+<p>1.2.2 第一个应用程序
+几乎所有的Rails应用程序都是用同一种方式开始，那就是rails命令。这个方便的程序在你指定的目录里创建Rails程序的骨架。为了开始我们的程序，为你的Rails项目新建一个文件夹，然后运行rails命令生成第一个应用程序：</p>
+
+<p>Listing 1.1 运行railsscript生成一个新的应用程序。</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>注意rails命令创建了多少个文件和文件夹。标准的文件夹和文件结构（图1.2）是Rails众多的优点之一；它也可以马上让你从零创建一个有功能（虽然是最小的）的应用程序。并且所有的Rails程序结构都是共同的，所以当你看别人的程序时你能马上就找到方向。在表1.1中列出了主要的Rails文件的摘要信息；在本书的其它部分我们将学习大部分的文件和文件夹。</p>
+
+<p>图1.2 一个新建的Rails应用程序的目录结构</p>
+
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fa7389d49f0></p>
+
+<p>表1.1 Rails默认目录结构</p>
+
+<p><strong>1.2.3 Bundler</strong>
+创建一个心得Rails程序子后，下一步就是用Bundler来安装和加载程序需要的gem。用你喜欢的编辑器打开Gemfile文件：
+$ cd first_app/
+$ mate Gemfile
+结果应用如Listing 1.2所示：
+Listing 1.2 first_app目录中的默认Gemfile</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>很多行都已经用#注释掉了，这些被注释掉的行是向你展示一些常见的被需要的gem并给出Bundler语法的例子。现在我们不需要其它默认之外的gem：Rails本身就有支持SQLite database的Ruby接口gem。</p>
+
+<p>除非您为gem命令制定一个版本号，否则Bundler会自动安装最新版本。不幸的是，gem的更新往往会导致轻微，但却可能造成混乱的破坏，所以在本教程中，我们通过会列入已知工作中用到的明确版本号，如清单1.3所示：</p>
+
+<p>Listing 1.3. sqlite3-ruby gem 带有明确版本号的Gemfile</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>这改变了下面的行：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>从Listing 1.2 到
+gem &#8216;sqlite3-ruby&#8217;, &#8216;1.3.2&#8217;, :require => &#8216;sqlite3&#8217;
+它将强制Bunlder安装sqlite3-ruby 1.3.2版本的gem。（请注意，如果你使用的OS X Leopard，您将需要1.2.5版本的sqlote3-ruby gem，如果你使用Snow Leopard，则需要安装1.3.2版本）。</p>
+
+<p>如果你用的Ubuntu Linux，你应该安装下面一系列的软件包：
+$ sudo apt-get install libxslt-dev libxml2-dev libsqlite3-dev # Linux only</p>
+
+<p>如果你正确配置了Gemfile，用bundler install来安装对应的gem：
+$ bundle install
+Fetching source index for http://rubygems.org/
+.
+.
+.</p>
+
+<p>这可能需要花一些时间，但是当它完成时，我们的应用程序就可以运行了。</p>
+
+<p><strong>1.2.5 rails server</strong>
+因为在第1.2.3节我们已经运行了Rails的新建命令，在第1.2.4节中运行了Bunlder的安装，所以我们已经拥有了一个可以运行的程序——但如何运行呢？令人高兴的是，Rails附带了一个命令行程序来运行本地web服务器，但它只能从您的开发计算机上才可以看见效果：
+$ rails server
+=> Booting WEBrick
+=> Rails 3.0.7 application starting on http://0.0.0.0:3000
+=> Call with -d to detach
+=> Ctrl-C to shutdown server</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">xazaJ</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-16T00:00:00+08:00" pubdate data-updated="true">2012-04-16 Mon</time>
+      
+
+<span class="categories">
+  
+    【译】Rails on Rails tutorial
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/09/12/yong-kun-nan-de-fang-fa-xue-ruby-kun-nan-de-fang-fa-rang-xue-xi-geng-jian-dan.html" title="Previous Post: 用笨办法学Ruby:笨办法让学习更简单">&laquo; 用笨办法学Ruby:笨办法让学习更简单</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <div class="googleplus odd" style="padding-bottom: 1px;">
+    <!-- JiaThis Button BEGIN -->
+    <div id="ckepop">
+      <a href="http://www.jiathis.com/share?uid=898844" class="jiathis jiathis_txt" target="_blank"><img src="http://v2.jiathis.com/code_mini/images/btn/v1/jiathis5.gif" border="0" /></a>
+      <a class="jiathis_counter_style_margin:3px 0 0 2px"></a>
+    </div>
+    <script type="text/javascript" >
+      var jiathis_config={
+        data_track_clickback:true,
+        summary:"",
+        hideMore:false
+      }
+    </script>
+    <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js?uid=898844" charset="utf-8"></script>
+    <!-- JiaThis Button END -->
+  </div>
+  <div class="clear:both"></div>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/04/16/%EF%BC%BBruby-on-rails-tutorial--zhong-wen-ban-%EF%BC%BD--di-yi-zhang---cong-tou-kai-shi-bu-shu.html">RubyOnRails教程第一章从头开始部署</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/09/12/yong-kun-nan-de-fang-fa-xue-ruby-kun-nan-de-fang-fa-rang-xue-xi-geng-jian-dan.html">用笨办法学Ruby:笨办法让学习更简单</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/09/06/chuang-ye---rang-chuang-ye-zhe-liang-ya-de-19-ge-zhen-xiang.html">[创业] 让创业者惊讶的19个真相</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/08/29/centos-vsftpd-fu-wu-qi-de-jia-she-he-pei-zhi.html">centos vsftpd服务器的架设和配置</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/08/24/amazon-ec2--shang-an-zhuang--rails-passenger.html">Amazon EC2 上安装 Rails Passenger</a>
+      </li>
+    
+  </ul>
+</section>
+<section id="comment_sidebar">
+  <h1>Recent Comments</h1>
+  <div id="recentcomments" class="dsq-widget">
+    <script type="text/javascript" src="http://xazaj.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=32&excerpt_length=200"></script>
+  </div>
+  <a target="_blank" href="http://disqus.com/">Powered by Disqus</a>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - xazaJ -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'xazaj';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://xazaj.github.com/blog/2012/04/16/%EF%BC%BBruby-on-rails-tutorial--zhong-wen-ban-%EF%BC%BD--di-yi-zhang---cong-tou-kai-shi-bu-shu.html';
+        var disqus_url = 'http://xazaj.github.com/blog/2012/04/16/%EF%BC%BBruby-on-rails-tutorial--zhong-wen-ban-%EF%BC%BD--di-yi-zhang---cong-tou-kai-shi-bu-shu.html';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

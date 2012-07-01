@@ -1,0 +1,281 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>回归测试策略 - xazaJ's blog</title>
+  <meta name="author" content="xazaJ">
+
+  
+  <meta name="description" content="回归测试只是整个测试流程中的一部分，但是目前很多维护型项目却非常依赖这样的回归。维护性项目的回归测试跟软件工程中讲的回归意义并不完全相同，前者问题发现者为软件使用者，发现阶段为软件正式发布以后，由开发人员在生产环境中找出问题并做相应的修改，当程序修改好以后交给测试部门验证。 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://xazaj.github.com/blog/2009/01/07/hui-gui-ce-shi-fang-an-jie-xi.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="xazaJ's blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">xazaJ's blog</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:xazaj.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">回归测试策略</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-01-07T00:00:00+08:00" pubdate data-updated="true">2009-01-07 Wed</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><pre><code>回归测试只是整个测试流程中的一部分，但是目前很多维护型项目却非常依赖这样的回归。维护性项目的回归测试跟软件工程中讲的回归意义并不完全相同，前者问题发现者为软件使用者，发现阶段为软件正式发布以后，由开发人员在生产环境中找出问题并做相应的修改，当程序修改好以后交给测试部门验证。发现问题的人和最终决定这个问题是否测试通过的人是不同的人，在不同的组织里，这下好了，暂且不说整个组织是否够官僚，单单是两个不同的人之间沟通成本也够大的，前台人员分布全国各地，最高效的沟通方式也只是电话而已，就算沟通效率达到65%，但是剩下还是有35%的风险。这只是问题之一。以下看看这种模式下我们还有哪些问题需要考虑。&lt;br&gt;&lt;!--more--&gt;&lt;br&gt;
+</code></pre>
+
+<p>一、我们应该每天都修改生产环境的代码吗？<br></p>
+
+<pre><code>系统频繁发布对整个系统的质量影响是很大的，因为发布的频繁相对来说测试就不充分，为了让软件使用部门暂时性的满意，就每天对他们发现的问题进行修改，一方面开发人员的工作开始变得漫不经心，他们知道今天的工作如果不充分，明天就可以做修复，另一方面生产环境会无休止的提出需求变更，因为他知道今天提的需求明天就能在环境中实现，有时可能会是一个不成熟的需求，而测试部门更是无休止陷入麻烦了，任何今天开发完成的功能，明天太阳出来的时候，客户就要看到，那好了，今天上午全国的前台都可能提BUG，开发人员用了一上午去分析，用了一下午去解决，而测试部门一定要在第二天上班前将这些问题都测试通过。在发布周期的压力面前，在怎么认真的人可能都会犯错误，本来该用10个用例做完的，现在用5个用例吧；本来这个功能有很多关联测试的，这次可能也免了，日积月累下，可能问题就越来越多，这个是频繁发布的情况。&lt;br&gt;
+另一种情况就是不频繁发布，暂定一周发布一次。这样的周期，压力却转价到开发部门了，这周如果没赶上发布，或者修改的程序出现其他问题，就得再等一周才能修复，而测试部门从每天的应接不暇变成一天或者两天的集中测试，如果有计划的进行自动化测试，那主要功能由于某次修改而失效的情况还是可以避免的。&lt;br&gt;
+以上两种是我经历的两个主要阶段，希望能在质量与生产之间找到更好的流程。
+</code></pre>
+
+<p>二、测试点由开发人员提出吗？<br></p>
+
+<pre><code>由于这种回归测试的特殊性，测试人员总是最后一个知道需求的，于是开发人员在提交代码的同时便给出测试说明，描述本次要测试的项目，更有聪明的程序员把测试用例都写好。这种背景下，作为一个负责人的测试人员便会被这样的话折磨的很痛苦，“这个用例不在本次测试范围之内”，“这个问题不是本次代码引起的”，“这次不修改最后个问题，留着下次修改”，“生产环境没有提出这个问题，我们不能修改”。。。有时测试部门甚至不知道这个问题最初提出者是何人，生产上发现的问题到底是什么问题，只是按照开发人员写的测试方法执行一遍，这样做是不能让人放心的。&lt;br&gt;
+我们为软件使用者也建立一个缺陷管理工具来代替OA，所有发现的问题或需求变更都通过缺陷管理工具来提交，而开发人员在提交测试申请时要同时说明这个测试关联到哪个缺陷，甚至提供开发人员和提交问题者交流记录，只有让最终测试人员完全了解真正需求才能摆脱“不修改”的魔咒。
+</code></pre>
+
+<p>三、测试的功能覆盖率要100%吗？<br></p>
+
+<pre><code>时间有了，需求也明白了，剩下的质量风险大部分落在测试部门了，降低风险的一个有效措施就是提高测试覆盖率。一个主要功能修改可能是牵一发而动全身，一个细节问题修改可能与其他程序没半点关系，如何去取舍便成了测试部门内部的规范制度了。整个组织内部一定要有统一的思想才能做好质量控制，经常会接到开发人员的投诉，说某某太官僚，本来程序只修改了这个模块，测试的时候却测了另一个模块，就算有问题也不能把这个代码给退回去呀。真想给他讲讲什么叫责任心。&lt;br&gt;
+不过最终我们的解决办法还是和组织妥协了。只是根据经验去判断哪些模块之间有关联，对于修改的代码可能有联系的功能模块还是做到高覆盖，其他周边暂不做考虑。这种测试方法总还是会有问题的，不过趋于进度的压力也只能暂且如此了。
+</code></pre>
+
+<p>四、这种频繁发布的系统能做自动化吗?<br></p>
+
+<pre><code>经过不断的努力，自己觉得完美的一份方案经过阉割以后终于启动了，希望今年能有所收获。。。
+</code></pre>
+
+<p>   五、各阶段的评审如何做？
+由于同时参与项目的公司态度，大家很难统一脚步，所以作为CMMI中最重要的环节-评审，目前仍然无法实施，这个问题在今年也应该做为重点来解决，散兵游勇的时代应该早日过去。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">xazaJ</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-01-07T00:00:00+08:00" pubdate data-updated="true">2009-01-07 Wed</time>
+      
+
+<span class="categories">
+  
+    软件测试
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2008/12/18/bian-que-san-xiong-di-de-gu-shi.html" title="Previous Post: 扁鹊三兄弟的故事">&laquo; 扁鹊三兄弟的故事</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2009/02/24/ren-bu-hui-sui-sui-bian-bian-cheng-gong.html" title="Next Post: 人不会随随便便成功">人不会随随便便成功 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <div class="googleplus odd" style="padding-bottom: 1px;">
+    <!-- JiaThis Button BEGIN -->
+    <div id="ckepop">
+      <a href="http://www.jiathis.com/share?uid=898844" class="jiathis jiathis_txt" target="_blank"><img src="http://v2.jiathis.com/code_mini/images/btn/v1/jiathis5.gif" border="0" /></a>
+      <a class="jiathis_counter_style_margin:3px 0 0 2px"></a>
+    </div>
+    <script type="text/javascript" >
+      var jiathis_config={
+        data_track_clickback:true,
+        summary:"",
+        hideMore:false
+      }
+    </script>
+    <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js?uid=898844" charset="utf-8"></script>
+    <!-- JiaThis Button END -->
+  </div>
+  <div class="clear:both"></div>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/04/16/%EF%BC%BBruby-on-rails-tutorial--zhong-wen-ban-%EF%BC%BD--di-yi-zhang---cong-tou-kai-shi-bu-shu.html">RubyOnRails教程第一章从头开始部署</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/09/12/yong-kun-nan-de-fang-fa-xue-ruby-kun-nan-de-fang-fa-rang-xue-xi-geng-jian-dan.html">用笨办法学Ruby:笨办法让学习更简单</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/09/06/chuang-ye---rang-chuang-ye-zhe-liang-ya-de-19-ge-zhen-xiang.html">[创业] 让创业者惊讶的19个真相</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/08/29/centos-vsftpd-fu-wu-qi-de-jia-she-he-pei-zhi.html">centos vsftpd服务器的架设和配置</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/08/24/amazon-ec2--shang-an-zhuang--rails-passenger.html">Amazon EC2 上安装 Rails Passenger</a>
+      </li>
+    
+  </ul>
+</section>
+<section id="comment_sidebar">
+  <h1>Recent Comments</h1>
+  <div id="recentcomments" class="dsq-widget">
+    <script type="text/javascript" src="http://xazaj.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=32&excerpt_length=200"></script>
+  </div>
+  <a target="_blank" href="http://disqus.com/">Powered by Disqus</a>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - xazaJ -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'xazaj';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://xazaj.github.com/blog/2009/01/07/hui-gui-ce-shi-fang-an-jie-xi.html';
+        var disqus_url = 'http://xazaj.github.com/blog/2009/01/07/hui-gui-ce-shi-fang-an-jie-xi.html';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

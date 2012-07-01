@@ -14,69 +14,1732 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Watir自动化测试工具安装全过程]]></title>
-    <link href="http://xazaj.github.com/blog/2008/11/06/watir-zi-dong-hua-ce-shi-gong-ju-yi-zhou-ti-yan-bi-ji.html"/>
-    <updated>2008-11-06T00:00:00+08:00</updated>
-    <id>http://xazaj.github.com/blog/2008/11/06/watir-zi-dong-hua-ce-shi-gong-ju-yi-zhou-ti-yan-bi-ji</id>
-    <content type="html"><![CDATA[<p>前几天在淘宝QA的博客上看到他们部署Watir自动化测试工具的过程，并对各种工具做了横向比较，如果说LoadRunner和QTP是测试工具之屠龙刀与倚天剑，那Watir便是一把锐利的匕首，虽然它没有录制功能，但是简单的脚本语言Ruby也使得工具非常容易上手，用Watir部署自动化测试一样集成了Ruby的敏捷开发的特点，不知道现在的项目是否适合，尝试一下先。以下记录安装过程中一些需要注意的东西。</p>
+    <title type="html"><![CDATA[RubyOnRails教程第一章从头开始部署]]></title>
+    <link href="http://xazaj.github.com/blog/2012/04/16/%EF%BC%BBruby-on-rails-tutorial--zhong-wen-ban-%EF%BC%BD--di-yi-zhang---cong-tou-kai-shi-bu-shu.html"/>
+    <updated>2012-04-16T00:00:00+08:00</updated>
+    <id>http://xazaj.github.com/blog/2012/04/16/［ruby-on-rails-tutorial&#8211;zhong-wen-ban-］&#8211;di-yi-zhang&#8212;cong-tou-kai-shi-bu-shu</id>
+    <content type="html"><![CDATA[<p><strong>［Ruby on Rails tutorial 中文版］ 第一章 从头开始部署</strong></p>
+
+<p>欢迎阅读Ruby on Rails教程：《通过实践学习Rails》。这本书的目的就是回答这个问题：“如果我想学习Rails Web开发，我应该从哪里开始？”当你读完本书时，你就会拥有开发和部署你自己Web应用的所有知识。你也将准备好在繁盛的Rails培训社区中寻找优秀书籍，博客和视频，并从中学习到更多的知识。最后，因为Ruby on Rails教程使用的是Rails3.0，你的知识也将追随最新版本的Rails而更新到最新（译者注：翻译本文时,最新版本为Rails3.1）。</p>
 
 <!--more-->
 
 
-<p>第一步：安装Ruby；
-现在最新的版本是1.9 ，但是没有exe版本需要自己编译，和所有开源软件版本号规则一样，第二位单数表示不稳定，双数代表稳定版本，所以最终选择了1.8.6的编译版本。直接下一步安装到默认目录，如果这里改了安装目录后面的麻烦事就接连不断，安装完成命令行打：ruby -v 可以看到ruby版本号，说明安装成功。下载地址不附了，版本更新太快，估计这篇文被需要的人看到的时候版本已经2.0了，自己google吧。
-第二步：安装Watir；
-Watir安装有个很重要的前提，要网络通畅，因为是在线安装，具体操作，下载waitir-1.5.6到D盘根目录：
-1、在命令行运行命令：gem update &#8211;system，这个命令是用来自动更新ruby的gem包，以支持最新的Watir的gem，此过程也是在线进行，若公司网络需要设置代理或者其他限制，这个就做不了；
-2、提示符转向D盘，在命令行运行命令：gem install watir-1.5.6.gem，此命令自动安装对应版本的watir，也要能上网才可以完成，命令运行成功后在目录：C:Rubylibrubygems1.8gems下便会多出一个：watir-1.5.6文件夹，安装watir过程不会修改注册表和环境变量，如果公司网络有限制，可以不用需下载离线安装包，而是把已经安装好的c:/ruby 整个目录打包拷贝到公司电脑对应目录，不需要修改环境变量，watir照样可以正常运行（此方法目前还没在网上搜到过，但是可用），稍后找个网络硬盘放一个我安装好的：ruby-1.8.6+watir-1.5.6 集成版本。
-第三步：修改支持中文；
-这一部比较诡秘，google上搜索了一大圈答案都是：在calss TextField中加一个方法，我在写自己的第一个脚本时，发现中文按钮无法点击，就猜测可能是自己的版本不支持中文，但是根据专家意见去找了watir.rb根本没有TextField类的存在，去官方查了一下资料发现1.5.2以后watir.rb文件做了拆分，这个类被分到input_elament.rb中，并且已经做了支持中文的修改。如果你发现自己的版本不支持中文可以到这个文件中做以下修改：
-在class TextField中加入一个新的method：<br></p>
+<p>本教程在本质上也将遵循我之前Rails教程的风格，通过用Rails从零开始构建一个真实的简单应用来学习Web开发。就像Derek Sivers在序言中所说，这本书采用的是线性叙述的结构，需从前至后的读。如果你习惯跳着阅读技术书籍，可能需要做一些调整来适应这种线性阅读的方法，但还是建议做一个尝试。你可以把Ruby on Rails教程想象成一个游戏，而你就是主角，作为一个Rails开发者，你会在每章的学习过程中升级。（每章中的练习就是小BOSS。）</p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc922255df8></p>
+<p>在第1章中，我们将从安装所有必要的软件和配置我们的开发环境来开始Ruby on Rails的学习（1.2节）。然后我们将创建第一个Rails应用程序，名字叫（非常适合）first_app。本教程强调良好的实践，所以在我们创建了最新的Rails项目后，我们将马上使用Git（1.3节）进行版本控制。而且，在本章中我们还会通过部署产品（1.4节）将我们的first app发布到Internet上。</p>
 
-<br>
+<p>在第2章，我们将进行第二个项目，其目的是要展示一个Rails应用程序的基本工作原理。为了更快的启动和运行，我们将用脚手架（Box 1.1）自动生成代码来完成这个演示应用程序（称为demo_app）；因为这段代码既难看又复杂，所以第2章的重点将放在讲述应用程序在Web浏览器中通过URL的交互过程上。</p>
+
+<p>在第3章中，我们将创建一个示例应用程序（称为sample_app），这次将从头编写所有代码。我们将使用测试驱动开发（TDD）的方法开发示例应用程序，在第3章以创建静态页面开始，然后增加一点动态内容。在第4章中我们将做一个快速的回顾，在Rails下学习一点Ruby语言的知识。在第5章到第10章，我们通过制作一个站点的布局，一个数据模型，和一个完整的注册和认证系统来完成示例应用程序的基础。最后，在第11章和12章我们将增加微博和SNS特征来建立一个可工作的网站。</p>
+
+<p>最终的示例应用程序将带来一个类似于最近很流行的社会化博客站点——巧合的是，这个站点最初也是用Rails写的。虽然我们要努力集中精力完成这个特定的示例应用程序，但Rails的基本原理知识将贯穿于整个Rails教程，这样你就有了坚实的基础来建立任何你想要建立的Web应用程序。</p>
+
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fa7389f2b30></p>
+
+<p>当编写一本Ruby on Rails教程时，很容易让人依赖于使用脚手架的方式——他很快、更容易，更诱人。但是复杂且庞大的脚手架代码量会完全压垮一个Rails开发入门者；你也许可以使用它，但你可能无法理解它。使用脚手架的方式也面临着将你变成一个只懂得少量（且肤浅）Rails知识的脚本生成器的风险。</p>
+
+<p>在本教程中，我们将使用（几乎）相反的方法：虽然第2章将使用脚手架开发一个小演示程序，但本教程的核心是第3章开始编写的示例应用程序。在开发示例应用程序的每一个阶段，我们将生成小、简单的代码块——简单到足够被理解，但也足够新颖且有挑战性。逐渐累积的学习将给你带来Rails更深入更灵活的知识，也将为你开发几乎所有的Web应用程序积累一个好的知识背景。</p>
+
+<p><strong>1.1 引言</strong></p>
+
+<p>自从Rails2004年首次亮相，Ruby on Rails很快的成为了强大且受欢迎的动态Web程序开发框架。Rails的使用者覆盖了从激进的新兴公司到大型公司：Posterous，UserVoice，37signals，Shopify，GitHub，Scribd，Hulu，YELLOW PAGES——使用Rails开发的站点越来越多。也有一些专注于用Rails的开发商，如ENTP,thoughtbot，Pivotal labs和Hashrocket，加上还有无数的独立高级顾问，培训师和承包商等。</p>
+
+<p>是什么让Rails如此强大？首先，Ruby on Rails100%是开源的，使用MIT许可证，它可以完全免费下载和使用。Rails的成功很大程度上还受益于它优雅和精巧的设计，利用底层可塑性的Ruby语言，Rails有效的创建了一个DSL语言来编写Web应用程序。因此，很多常用的Web编程任务——比如产生HTML,构造数据模型，路由URL等，这些用Rails实现都很简单，且程序代码简洁，可读性强。</p>
+
+<p>Rails也很适合开发新的Web应用程序和设计新的框架。Rails是第一批完全理解和履行REST设计风格的Web程序结构的框架之一。并且当其它框架成功开发出新技术时，Rails的创建者和和核心团队会毫无顾虑的吸收他们的创意。也许最生动的例子就是Rails和另一个Ruby Web框架Merb的合并，所以现在的Rails吸收了Merb的模块化设计，稳定的API和优秀的性能。</p>
+
+<p>最后，Rails也受益于有一个热情多样的社区。社区包含了数百个开源贡献者，精心策划的会议，很多的插件和gem（自给自足的解决方案，比如分页和图片上传），大量内容丰富的博客，内容丰富的论坛和IRC频道。大量的Rails程序员也使得解决程序错误变得更容易，“Google the error message”算法可以提供很多相关的博客和论坛主题。</p>
+
+<p><strong>1.1.1 针对不同读者的说明：</strong>
+Rails教程中不仅包含了Rails的知识，也会包含Ruby语言，HTML，CSS，一些Javascript，甚至还有SQL。也就是说，不管你当前的Web开发知识如何，通过学习完这本Rails教程，你就可以去学习更高级的Rails知识，也可以去系统地学习更多其它相关的知识。</p>
+
+<p>Rails的强大来源于它的“魔法”——也就是说，是框架的特征造就了奇迹，但是Rails的机制是很神秘的，但Ruby on Rails教程不准备去说明这些魔法，主要是因为Rails的开发者不需要知道这些底层的知识。（毕竟Ruby本身也是用C编写的，但是用Ruby的人也不会去研究C源码。）如果你是一个打破砂锅问到底的人，我建议你去读本教程的姐妹篇，Obie Fernandez的《Rails 3 Way》。</p>
+
+<p>虽然读这本书不需要特别的条件，但是你至少应该要有一些计算机经验。如果你之前从来没用过文本编辑器，学习起来将会非常艰难，但是如果你有足够的决心，你应该也能坚持到底。另一方面，.emacs文件是非常复杂的，它会让学习中的你泄气，还有很多问题会让你感到很有挑战性。本教程是为了让不同背景的人学习Rails编程，但是学习路径和阅读体验取决于你的具体情况。</p>
+
+<p>所有的读者：学习Rails时大家遇到的一个共同的问题就是是否要先学习Ruby。这个答案取决于你自己的学习风格。如果你习惯于系统的学习知识，那提前学习Ruby可以让你学习更顺利，并且本节中会给你介绍几本开始学习Ruby的书。另一方面，很多Rails初学者都兴奋于编写Web程序，他们不愿意在编写一个简单Web页面之前去艰难的读一本500页纯粹的Ruby语法书。而且一个Rails开发者需要的Ruby知识与纯粹的Ruby入门教程中介绍的不一样，并且Rails教程中也会集中介绍这些知识。如果你主要兴趣在于开发Web应用程序，建议先读Rails教程，然后在阅读纯粹的Ruby教程。这不是一个要么全有要么全无的命题，可是如果你开始阅读Rails教程时，若感觉到由于缺乏Ruby知识使得学习乏力时，你就应该回头看看纯粹Ruby的教程，看到你觉得Ruby的知识准备好了为止。你也可以考虑体验一个简短的在线Ruby教程，可以在http://www.ruby-lang.org/ 或 http://rubylearning.com/上搜索。</p>
+
+<p>另外一个常见的问题是是否从一开始就测试。正如前言中所介绍的，Rails使用测试驱动开发（也称为测试先行的开发），在我看来这是开发Rails应用程序最好的方式，但是这也确实引入了大量的开销和复杂性。如果你发现自己已陷入测试的沼泽，在首次的阅读中你可以自由的跳过它们。实际上有些读者可能会觉得教程中包含了很多可选的部分，比如测试，版本控制和部署——开始时有点难以完全接受，如果你发现在某一步骤花费了太多的精力，不要犹豫跳过它们。尽管我认为这些都是专业级的Rails应用程序的必要要素，但第一次阅读教程时只有核心的代码才是必要的。</p>
+
+<p>没有经验的程序员（非设计师）：Rails教程不包含其它的计算机基础知识，所以如果你有一定的编程经验，这本书是一个很好的开端。请记住这仅仅是一个漫长旅途中的第一步，Web开发技术有很多知识需要学习，包含HTML/CSS,JavaScript，数据库（包括SQL）,版本控制和部署。这本书简单介绍了这些知识，但仍有很多知识需要学习。</p>
+
+<p>没有经验的程序员（设计师）：你的设计经验可以让你有一定的优势，因为你已经知道HTML和CSS了。当你学完这本书时你将能在已存在的Rails项目中找到很好的位置，也可以开始做自己的项目。你可能会发现编程的挑战性，但是Ruby语言对初学者是非常友好的，尤其是那些有艺术细胞的人。</p>
+
+<p>当读完本教程，我建议新的Ruby程序员读一下Peter Cooper的《Beginning Ruby》，这本书也有着和Rails教程同样的教育哲学。再推荐读Hal Fulton的《Ruby Way》。最后，为了更深入的理解Rails，建议阅读Obie Fernandez的《Rails 3 Way》。</p>
+
+<p>由Web应用程序的性质决定，即使是一个相对简单的Web应用程序，也会比较复杂。如果你完全是一个Web开发新人，你会发现Rails教程会完全压垮你，那也许是因为你还没有准备好Web程序开发。在这种情况下，我建议你先去学习基础的HTML和CSS知识，然后再回来继续学习Rails教程。（不过这里我没有给出个人建议，但是《深入浅出HTML》可以一读，一个读者推荐的CSS教程，由David Sawyer McFarland编写的《The Missing Manual》。）你也可以考虑读一下《Beginning Ruby》的前几章，这本书从一些比成熟的Web程序更小的示例程序入手。</p>
+
+<p>没有开发过Web程序的程序员：你之前的经验意味着你可能已经明白类，方法，数据结构等，这是很有优势的。但要注意的是如果你的背景是C/C++或者Java，你可能会觉得Ruby有些奇怪，并且你可能需要时间来适应；不过只要你坚持下去就会感觉良好的。（如果你实在是太想念它们，Ruby甚至可以让你在每行后面加上分号。）Rails教程涵盖了你需要的所有web开发概念，所以你不需要担心不懂如何提交表单。</p>
+
+<p>没有开发过Rails的Web开发者：你有一个很好的开端，特别是如果你曾经用过PHP或者（最好是）Python这些动态语言。我们所包含的基础知识你可能会非常熟悉，但是测试驱动开发可能是新知识，可能Rails的REST风格同样受你青睐。Ruby有它自己的特性，这些对你来说可能也是新知识。</p>
+
+<p>有经验的Ruby程序员：不知道Rails的Ruby程序员现在已经很少了，但是如果你是精英团队成员，你可以很快的通读一遍这本书，然后去看Obie Fernandez的《Rails 3 Way》。</p>
+
+<p>没有经验的Rails程序员：你可能之前看过一些其它的教程并且自己开发了一些小的Rails应用。通过读者的反馈，我确信你仍然可以从这本书学到很多东西。除此之外，本教程中的技术也会比你之前看过教程中的技术更新。</p>
+
+<p>有经验的Rails程序员：这不是一本你必须要看的书，但是很多经验丰富的Rails程序员表示惊奇，因为他们从这本书中学习到了很多东西，而且你也许能从不同的角度来认识Rails。</p>
+
+<p>读完Ruby on Rails教程，我建议有经验的程序员（非Ruby）再去读一下David A. Black的《The Well-Grounded Rubyist》，这本书深入的讨论了Ruby的成长过程，或者读一下Hal Fulton的《The Ruby Way》，这本书也是高级教程但是有很多热门的方法。然后你可以读《Rails 3 Way》来加深你的Rails专业知识。</p>
+
+<p>在本节最后，不管你从哪里开始学习，你都要做好准备用Rails更高级的资源去学习。这里有一些推荐资源：</p>
+
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fa7389f2388></p>
+
+<p><strong>1.1.2 Rails的规模</strong>
+在介绍Rails其它特性之前，我想花一点时间来解决在初期困扰Rails框架的一个问题：Rails不能支持“规模”——即处理大数据流量。这个问题其实有一部分误解，你大规模部署的是一个网站而不是一个框架，Rails作为一个框架是非常优秀的，并且它仅仅是一个框架。所以真正的问题应该是：“是否可以用Rails规模创建一个网站？”在任何情况下，这个问题的答案都是肯定的：世界上有很多大流量的网站在使用Rails，其实大规模的部署网站已经超过了Rails的范畴，不过你也可以放心，如果你的应用程序需要处理的流量超过了HULU和Yellow Pages，Rails也不会阻止你接受其它技术。</p>
+
+<p><strong>1.1.3 书中的约定</strong>
+在本书中的约定大多是不言自明的，在本节中，我会提那些特殊的约定。</p>
+
+<p>无论是这本书的HTML和PDF版本都有很多内部或外部网站（如Ruby on Rails下载页面）的链接（如1.2节）。</p>
+
+<p>本书中有很多命令行的例子。为简单起见，所有的命令行示例都使用Unix风格的命令行提示符（美元符号），如下：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>Windows用户应该理解系统使用的符号>：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>在Unix系统中，有些命令行应该用sudo执行，它代表“代替用户执行”。当以管理员身份运行时默认用sudo执行，这可以让用户进入普通用户不能接触的文件和文件夹。为了标明sudo是依赖于系统的，在个别系统中如果你不知道sudo是不是必要的，可以把sodu放在方括号中，比如1.2.2节中的例子：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>绝大多数Unix/Linux/OS X系统默认需要sudo，除非你根据1.2.2.3节中的建议使用Ruby版本管理器。注意在这里你没必要输入方括号；你应该这样：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>或者</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>选择哪种用法依赖于你的系统。</p>
+
+<p>Rails提供了很多可在命令行运行的命令行方法。比如1.2.5节中，我们我们运行一个本地的web服务器，命令如下：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>在使用命令行模式时，Rails教程使用Unix约定来分割文件夹（即一个斜线/）。例如，Rails教程中的示例程序，都放在下面目录：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>在Windows下，类似的目录是：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>对于任何给定的应用的根目录被成为Rails 的根目录，之后所有目录都相对于这个目录。（特别注意Rails的根目录不是Rails本身的根目录。）例如，我的示例应用程序config目录：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>在Windows中，类似的目录是：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>Config前面的Rails根目录如下：：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>简单的提一下涉及的文件：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>下文中我将省略Rails的根目录并简单的写这个文件config/routes.rb。</p>
+
+<p>最后，Rails教程经常显示了各种不同程序的输出（shell命令，版本控制状态，Ruby程序等）。由于不同计算机系统的小差异，你看到的输出未必和书上的一致，不过这些不用太介意。此外，由于系统不同，某些命令可能会导致一些错误；不可能在本书中记录所有的错误，建议使用谷歌搜索，这也是软件开发中的一个好习惯。</p>
+
+<p><strong>1.2 启动和运行</strong>
+现在是时候来配置我们的Ruby on Rails环境和开发第一个程序了。如果你没有丰富的编程经验，将会花费很多时间在这里，如果你需要花一些时间才能开始也不要气馁，不只你是这样，所有的开发者都会经历这个阶段（可能还不止一次），但是你放心，付出总是有回报的。</p>
+
+<p><strong>1.2.1 开发环境</strong>
+考虑到不同的特性，Rails开发者可能有很多开发环境，但至少可以分为两类：文本编辑器/命令行环境，以及继承开发环境（IED）。让我们先考虑后者。</p>
+
+<p>IDE
+Rails的IDE都很好用，包括RadRails，RubyMine和3rd Rail。这些IDE都是跨平台的并且口碑都不错。建议你试试这些IDE看看是否适合你，但是我必须承认：目前为止还没有发现一个IDE能满足我所有的开发需要，甚至有些项目我不能完全用某个IDE来完成。</p>
+
+<p>文本编辑器和命令行
+如果没有功能完善的IDE,我们要怎么开发Rails应用呢？我想大部分的Rails程序员都会和我的选择一样：使用文本编辑器和命令行执行命令（图1.1）。具体你会选择哪个组合要取决于你的使用体验和平台：
+MAC OS X：和许多Rails开发者一样，我更喜欢TextMate。其它的选择有Emacs和Vim的优秀苹果版本MacVim（命令行下的mvim）。我用iTerm作为命令行终端，其他人可能会用系统自带的Terminal程序。
+Linux：除了TextMate之外，你的选择基本上和MAC OS X上是一样的。我推荐选择带界面的gVim，gedit（带Gmate插件），扩这Kate。至于命令行工具，都是已设置好的：每个Linux发行版本都会至少有一个命令行终端程序（通常是几个）。
+Windows：Windows下被看好的编辑器有Vim，E Text Editor，Komodo Edit和Sublime Text。命令行我建议使用Rails安装程序（1.2.2.1节）中的命令行模式。</p>
+
+<p>如果你对Vim情有独钟，一定要关注使用Vim的Rails hacker社区。尤其要关注Rails.Vim的增强和NERD项目列表。</p>
+
+<p>图1.1：文本编辑器/命令行开发环境（TextMate/iTerm）。</p>
+
+<p>浏览器
+虽然有很多浏览器供选择，不过大多数Rails程序员还是选择了Firefox，Safari或者Chrome做开发。Rails教程中的截图都是在Firefox中截的。如果你使用Firefox，建议使用Firebug add-on，它可以让你完成很多魔法，比如在任何页面动态检查（甚至编辑）HTML和CSS。若没用Firefox，可选择Firebug Lite，它可以运行在其它大多数的浏览器上，并且Safari和Chrome有一个内置的“检查元素”功能，可以让你在网页的任何部分点击右键使用。不管你使用什么浏览器，都很值得花时间去学习一个web检查工具。</p>
+
+<p>关于工具的说明
+在启动和运行开发环境的过程中，你可能需要花费大量的时间来调试。学习编辑器和IDE的时间也会很长；你会花费几周时间去学习TextMate或Vim教程。如果你是一个新人，我可以负责任的告诉你：花时间去学习工具是很正常的。每个人都要经历这个过程。有时也会很有挫败感，特别是在你已经有了一个很伟大的网站创意，但却必须要花一周时间来学习古老的UNIX编辑器才能开始的时候。但你应该相信磨刀不误砍柴工，付出一定会有收获。</p>
+
+<p><strong>1.1.2 Ruby，RubyGems，Rails和Git</strong>
+现在是时间来安装Ruby on Rails了。这一步用到的最新安装包都可以在Ruby on Rails的下载页面找到。接下来的内容是假设你可以登陆这个页面；本书的某些章节是可以离线阅读的，但是本章不行。在安装步骤中我只会写一些我自己的注释。</p>
+
+<p>RailsInstaller（Windows）
+在Windows上安装Rails的人伤不起，不过得感谢Engine Yard上的好人们，特别是Nic Williams博士和Wayne E. Seguin，他们使得在Windows上安装Rails和关联软件变得很简单。如果你用Windows，到Rails Installer（http://railsinstaller.org）下载一个可执行的Rails安装器。双击这个可执行文件并且跟着说明安装Git（这样你可以跳过1.2.2.2）,Ruby（可跳过1.2.2.3），RubyGems（可跳过1.2.2.4）,Rails（可跳过1.2.2.5）。如果你都安装成功了，你可以跳过以下章节，直接跳到1.2.3节去创建第一个应用程序。</p>
+
+<p>安装Git
+Rails生态圈中大多数人都使用Git（1.3节有详细说明）作为版本控制工具。因为很多地方都会用到它，所以你应该尽早安装；我建议你根据ProGit上查看相关Git安装的教程。</p>
+
+<p>安装Ruby
+下一步是安装Ruby。你的系统可能已经安装了Ruby，用下面的命令可以查看版本号。</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>Rails3需要Ruby版本是1.8.7以上，最好是1.9.2。本教程假定你使用的Ruby1.9.2，并且你知道1.9.2的特征，但是本教程中的例子在1.8.7中也能正常运行。</p>
+
+<p>Ruby1.9的分支版本非常多，所以安装最新版本的Ruby还有些难度。你可能需要按照网上最新的教程来安装。下面是在我的MAC OS X上正确安装Ruby的步骤，但你可能需要根据你的系统去搜索对应的步骤。</p>
+
+<p>如果你使用MAX OS X或者Linux，强烈建议你安装Ruby版本管理工具（RVM），它能让你在同一台机器上管理多个Ruby版本（Windows上有类似的项目叫Pik）。如果你想在同一台机器上运行Rails3和Rails2.3，这个功能就会非常重要。如果你想同时安装两个版本，建立使用RVM安装两个Ruby/Rails组合：Ruby1.8.7/Rails2.3.10和Ruby1.9.2/Rails 3.0.7。如果你在运行RVM时遇到问题，你可以去RVM 的IRC频道中找RVM的创造者Wayne E. Seguin求助。</p>
+
+<p>安装RVM以后，你可以按以下步骤安装Ruby：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>前两行命令是更新和重载RVM，这是一个很好的做法，因为RVM经常更新。后面两行代码是执行Ruby的实际安装过程；根据你所用系统的不同，下载和编译需要花费一定的时间，所以如果你看到安装没进度时也不用担心。（不过也要小心一点，因为很多小细节会出错，例如在我的系统安装Ruby1.8.7的最新版本时不能编译，经过多次的搜索和实践，我发现需要在版本后面加上补丁编号302：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>当这种事情发生在你身上时，你可能会泄气，但至少你知道了它会发生在每个人身上&#8230;）</p>
+
+<p>Ruby程序的特色是通过gem来发布，gem是Ruby代码独立的软件包。因为不同版本的gem会有冲突，所以创建分离的gems独立包——gemsets是很方便的。值得注意的是，Rails是作为一个gem来发布的，并且Rails2和Rails3是有冲突的，所以如果你要在一台机器上运行多个Rails版本，就需要创建一个分离的gemset，命令如下：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>第一行命令是创建gemset来关联rails2tutorial和Ruby1.8.7-p302，第二行命令是创建gemset关联rails3tutorial和Ruby1.9.2，使用这两条命令时，就会启用某一个版本的组合。RVM有很多操作gemsets的命令，具体请参考文档：http://rvm.beginrescueend.com/gemsets/。</p>
+
+<p>在本教程中，默认使用Ruby1.9.2和rails3.0，我们可以用下面的命令来配置：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>这条命令同时设置了Ruby的默认版本为1.9.2，也设置了默认的gemset为rails3tutorial。</p>
+
+<p>顺便提一下，如果你使用RVM的过程中遇到困难，用下面的命令也许可以帮到你：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>安装RubyGems
+RubyGems是一个Ruby项目的包管理器，它有大量Ruby包或gems的库（包括Rails）。如果你曾经安装过Ruby，安装RubyGems是非常简单的。事实上，如果你安装了RVM，你就已经安装了RubyGems，因为RVM已经包含它了：
+$ which gem
+/Users/mhartl/.rvm/rubies/ruby-head/bin/gem</p>
+
+<p>如果你还没有安装RubyGems，你需要下载它，并且解压，然后再到rubygems目录运行安装程序：
+$ [sudo] ruby setup.rb</p>
+
+<p>如果你已经安装了RubyGems，你可能需要把它升级到本教程使用的版本:
+$ [sudo] gem update &#8211;system 1.6.2</p>
+
+<p>最后，如果你使用的是Ubuntu Linux，你可能要到the Ubuntu/Rails 3.0 blog post by Toran Billups 去看一看完整的安装说明。</p>
+
+<p>安装Rails
+一旦你安装了RubyGems，安装Rails3.0应该很简单了：
+$ [sudo] gem install rails &#8211;version 3.0.7</p>
+
+<p>运行下面命令来验证它是否工作正常：
+$ rails -v
+Rails 3.0.7</p>
+
+<p>1.2.2 第一个应用程序
+几乎所有的Rails应用程序都是用同一种方式开始，那就是rails命令。这个方便的程序在你指定的目录里创建Rails程序的骨架。为了开始我们的程序，为你的Rails项目新建一个文件夹，然后运行rails命令生成第一个应用程序：</p>
+
+<p>Listing 1.1 运行railsscript生成一个新的应用程序。</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>注意rails命令创建了多少个文件和文件夹。标准的文件夹和文件结构（图1.2）是Rails众多的优点之一；它也可以马上让你从零创建一个有功能（虽然是最小的）的应用程序。并且所有的Rails程序结构都是共同的，所以当你看别人的程序时你能马上就找到方向。在表1.1中列出了主要的Rails文件的摘要信息；在本书的其它部分我们将学习大部分的文件和文件夹。</p>
+
+<p>图1.2 一个新建的Rails应用程序的目录结构</p>
+
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fa7389d49f0></p>
+
+<p>表1.1 Rails默认目录结构</p>
+
+<p><strong>1.2.3 Bundler</strong>
+创建一个心得Rails程序子后，下一步就是用Bundler来安装和加载程序需要的gem。用你喜欢的编辑器打开Gemfile文件：
+$ cd first_app/
+$ mate Gemfile
+结果应用如Listing 1.2所示：
+Listing 1.2 first_app目录中的默认Gemfile</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>很多行都已经用#注释掉了，这些被注释掉的行是向你展示一些常见的被需要的gem并给出Bundler语法的例子。现在我们不需要其它默认之外的gem：Rails本身就有支持SQLite database的Ruby接口gem。</p>
+
+<p>除非您为gem命令制定一个版本号，否则Bundler会自动安装最新版本。不幸的是，gem的更新往往会导致轻微，但却可能造成混乱的破坏，所以在本教程中，我们通过会列入已知工作中用到的明确版本号，如清单1.3所示：</p>
+
+<p>Listing 1.3. sqlite3-ruby gem 带有明确版本号的Gemfile</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>这改变了下面的行：</p>
+
+<p>Liquid error: undefined method `join&#8217; for &#8220;\n\r\n$ echo &#34;hello, world&#34;\r\nhello, world\r\n\n&#8221;:String</p>
+
+<p>从Listing 1.2 到
+gem &#8216;sqlite3-ruby&#8217;, &#8216;1.3.2&#8217;, :require => &#8216;sqlite3&#8217;
+它将强制Bunlder安装sqlite3-ruby 1.3.2版本的gem。（请注意，如果你使用的OS X Leopard，您将需要1.2.5版本的sqlote3-ruby gem，如果你使用Snow Leopard，则需要安装1.3.2版本）。</p>
+
+<p>如果你用的Ubuntu Linux，你应该安装下面一系列的软件包：
+$ sudo apt-get install libxslt-dev libxml2-dev libsqlite3-dev # Linux only</p>
+
+<p>如果你正确配置了Gemfile，用bundler install来安装对应的gem：
+$ bundle install
+Fetching source index for http://rubygems.org/
+.
+.
+.</p>
+
+<p>这可能需要花一些时间，但是当它完成时，我们的应用程序就可以运行了。</p>
+
+<p><strong>1.2.5 rails server</strong>
+因为在第1.2.3节我们已经运行了Rails的新建命令，在第1.2.4节中运行了Bunlder的安装，所以我们已经拥有了一个可以运行的程序——但如何运行呢？令人高兴的是，Rails附带了一个命令行程序来运行本地web服务器，但它只能从您的开发计算机上才可以看见效果：
+$ rails server
+=> Booting WEBrick
+=> Rails 3.0.7 application starting on http://0.0.0.0:3000
+=> Call with -d to detach
+=> Ctrl-C to shutdown server</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[用笨办法学Ruby:笨办法让学习更简单]]></title>
+    <link href="http://xazaj.github.com/blog/2011/09/12/yong-kun-nan-de-fang-fa-xue-ruby-kun-nan-de-fang-fa-rang-xue-xi-geng-jian-dan.html"/>
+    <updated>2011-09-12T00:00:00+08:00</updated>
+    <id>http://xazaj.github.com/blog/2011/09/12/yong-kun-nan-de-fang-fa-xue-ruby-kun-nan-de-fang-fa-rang-xue-xi-geng-jian-dan</id>
+    <content type="html"><![CDATA[<p>这本简单的书是为了让你学会编程。标题说要用笨办法来学习编程，实际上不是这样 的。人们都是用这种方式来学习一些事情，所有说是“困难”的方法。在这本书的帮助下，你会做所有程序员学习一门新语言改做的事情，它们都是非常简单的：</p>
+
+<pre><code>1、完成每一个练习。
+2、准确的键入每一个例子。
+3、运行它。&lt;!--more--&gt;
+就是这样。开始时这样做时非常困难的，但是要坚持下去。如果你能看完这本书，并且每天用一到两个小时完成每一个练习，你就会获得良好的基础去看更深入的教程。从这本书里你可能没有真正学到“编程”，但是你可以学到开始真正学习这门语言的基础知识。
+这本书将会教你新程序员需要知道的三个最重要的技能：读写、注重细节和关注差异。
+</code></pre>
+
+<p><strong>读写</strong></p>
+
+<pre><code>这看起来似乎很愚蠢，但是，如果你输入都有问题，将来学习写代码肯定也有问题。特别是当你的源代码中要输入相当奇怪的字符时。没有这个简单的技能，你可能无法知道软件是如何工作的这些基本的知识。
+</code></pre>
+
+<p>键入示例代码并运行它们将帮助你学习这些符号名称，键入它们会让你更熟悉并且能让你阅读这门语言。
+<strong>关注细节</strong></p>
+
+<pre><code>区分好坏程序员的一个技能就是关注细节。事实上，这也是任何领域区分好坏的标准。如果你不关注工作中的小细节，你将错过你创造的关键元素。在编程中，它会让你制造出缺陷和难用的系统。
+</code></pre>
+
+<p>通过学习这本书，准确的复制每一段示例代码，你将训练你的大脑去关注你所做的事情的细节。
+<strong>关注差异</strong></p>
+
+<pre><code>随着时间的推移，大多数程序员都拥有一个非常重要的技能，是能够直观的发现事物之间的不同。一个有经验的程序员能用两段略有不同的代码并且能够立即指出它们的不同。程序员已经开发了工具把这个变简单，但是我们将不用这些工具。你首先必须用困难的方法来训练你的大脑，然后你就可以用这些工具了。
+当你做这些练习时，输入每一段代码，你可能会出错。这是不可避免的；甚至经验丰富的程序员同样会犯一些错误。你的工作是要比较你需要键入的和你键入的代码，修改所有的不同。通过这些，你将训练你自己关注错误，缺陷和其它的问题。
+</code></pre>
+
+<p><strong>不要复制粘贴</strong></p>
+
+<pre><code>你必须真正键入练习中的每一段代码。如果你复制粘贴，你可能跟没有做它们一样。这个练习的重点是训练你的手，你的大脑，读，写和看代码思维。如果你复制粘贴，课程的效果会大打折扣。
+</code></pre>
+
+<p><strong>实践和坚持的说明</strong></p>
+
+<pre><code>当你学习编程时，我正在学习吉它。我每天至少练习2小时。我至少练习一小时的音阶和和弦，然后学习音乐理论，耳朵练习和唱歌以及任何我可以做的事情。有时候我一天学习8小时的吉它和音乐，因为我很喜欢。对我来说重复练习是自然的，只是学习事物的一种方法。我知道为了能擅长做任何事都需要你每天去练习，即使那天你非常难受或者非常困难。保持不断的尝试，最终会让学习变得更容易和有趣。
+当你学习这本书，继续编程，记住任何你值得做的事情在开始时都是困难的。也许你是害怕失败的人，所以你会在遇到困难的时候放弃。也许你不能自律所以你不能做任何你觉得无聊的事情。也许你被认为是天才，所以你永远不会尝试任何可能让你看起来愚蠢的事情。也许你是对其他人来说竞争是不公平的就像我一样有着20年的编程经验。
+无论你因为什么原因想要退出，都要继续坚持。强迫自己。如果你碰到一些额外的必须要做的事情，或者碰到一个不能理解的课程，可以跳过它晚点再回来继续学习。坚持下去因为编程中总会出现非常奇怪的事情。
+
+起初，你可能什么都不懂。这将是怪异的，就像学习任何一门人类语言。你将和单词做斗争，不知道符号代表什么意思，并且所有的东西都会很混乱。然后有一天你的大脑忽然就开窍了并且就会觉得已经学会它了。如果你继续练习，并不断的尝试去理解，有就能学会它。你也许不会成为一个编程专家，但是你至少可以理解程序是如何工作的。
+
+如果你放弃，你将永远不会达到这个目标。你将遇到第一个令人困惑的事情（所有的事情都会遇到的），然后就停止。如果你不断的尝试，保持键入，视图理解，阅读它，你最终会学会编程。
+
+但是如果你学完了整本书，但仍然不理解如何写代码，至少你学习过了。你可以说你已经尽了自己最大的努力。你可以为之骄傲。
+</code></pre>
+
+<p><strong>版权</strong></p>
+
+<pre><code>本书版权 Copyright (C) 2011 by Zed A. Shaw。你可以免费将这本书分发给任何人，只要你不收取任何费用，并且它不会被改变。你必须分发整本书或者一点都不分发。这个意思是你可以用这本书来教一个课程，只要你不向学生收取这本书的费用并且要给学生们没有修改过的完整内容。
+</code></pre>
+
+<p><strong>特别感谢</strong></p>
+
+<pre><code>我要感谢所有帮助我编辑这本书的人。首先我要感谢Pretty Girl Editing Services帮助过我的编辑，她是非常可爱的。然后是Greg Newman，他设计了艺术的封面，加上校对这本书，他的作品使这本书看起来更像一本真正的书，并且他毫不介意我在第一版忘记为他署名。我还想感谢Brian Shumate，他做了网站登录页面和其它的网站设计以及我需要的很多帮助。
+
+最后，我要感谢成百上千的读第一版的人们，尤其是那些提交错误报告和改进建议的人。这真是让这个版本更完美，并且没有你们我做不到这些。谢谢你们。
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[创业] 让创业者惊讶的19个真相]]></title>
+    <link href="http://xazaj.github.com/blog/2011/09/06/chuang-ye---rang-chuang-ye-zhe-liang-ya-de-19-ge-zhen-xiang.html"/>
+    <updated>2011-09-06T00:00:00+08:00</updated>
+    <id>http://xazaj.github.com/blog/2011/09/06/chuang-ye&#8212;rang-chuang-ye-zhe-liang-ya-de-19-ge-zhen-xiang</id>
+    <content type="html"><![CDATA[<p>Y Combinator的Paul Graham最近的一篇关于startup的散文很有意思，对创业者很有启发性。我很喜欢Paul的文章。和很多投资人一样，Paul也是企业家出身。他早年的公司Viaweb成功的出售给了Yahoo。从05年开始他和当初的Partner一起尝试在投资领域“
+创业”，用一种全新的模式来做投资。《Founders at Work》里面有详细的关于Paul和YC的介绍。</p>
+
+<p>作为程序员出身的Paul对startup和投资都有着自己独到的，深刻的见解。在这篇名为“What Startups Are Really Like” 的散文中，Paul向YC投资的上百个公司的founder提出了一个很有趣的问题：在开始新公司的过程中，什么让他们最感到意外？</p>
+
+<p>下面是Paul整理的一些Biggest Surprise（Paul的原文很长，里面也包含了很多founder的具体回答，我只提炼一些重要的观点，也补充一些我自己的观点，建议对创业有兴趣或正在创业的朋友读读原文和Paul其他关于创业的文章，一定不会让你失望的:-)）：</p>
+
+<!--more-->
 
 
-<p>更改class TextField的doKeyPress( value )方法部分代码，将下面代码<br>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-<br></p>
+<ol>
+<li><p>Be Careful with Cofounders：这是绝大多数founder都提到的一个surprise。对不是很成功的startup来说，这更多意味着如何选择合伙人。很多人都希望自己在选择合伙人的时候看重的不是能力，而是性格和决心。另一方面，成功的startup的创始人更关注如何保持合伙人之间的关系。很多人都把合伙人之间的关系比喻成婚姻。有个人的回答更直接：It&#8217;s like we&#8217;re married, but we&#8217;re not fucking。公司的起步阶段，创始人就是公司的全部。而创始人之间健康稳固的关系就是公司的基石。</p></li>
+<li><p>Startups Take Over Your Life：就像创始人之间的关系和同事关系不同一样，创始人和自己的公司之间的关系与员工和公司之间的关系也大不一样。一旦开始经营自己的公司，几乎全部清醒的时间都会用来工作或思考和公司相关的事情。我自己的体会是有的时候甚至会入魔，把很多日常的事情和在思考的问题“奇怪”的混在一起，有时入睡也是不断思考一个问题而不知不觉进入了无意识的状态:-)</p></li>
+<li><p>It&#8217;s an Emotional Roller-coaster(心情过山车)：创业的时候，很可能事情看起来好的不得了，你甚至觉得自己是下一个Google并幻想买哪个小岛来度假，但没过多久，又会觉得很糟，绝望的想放弃。而这之间的间隔有时只是几个小时。当然，最大的surprise还是低潮有多低，尤其是相当长的时间没有值得庆祝的阶段性成果后。每个人都有一个能承受的底限。如果到了这个底限，不用觉得到了世界的尽头。无数成功企业家的例子证明了失败是成功路上难免的小插曲。或者如Tom Kelley建议的那样：Treat life as an experiment</p></li>
+<li><p>It Can Be Fun：对真正投入的适合创业的创业者来说，创业有时也是很有趣的一件事情。这也是为什么硅谷有那么多serial entrepreneur的原因。自由是很多人最喜欢的部分。这可能也是很多企业家（如Blogger&amp;Twitter的Evan Williams）在公司被收购后不愿意在收购公司（即使是Google）给人打工的原因吧。</p></li>
+<li><p>Persistence Is the Key：大家都知道坚持很重要，但对创业来说，它不仅重要，而且是公司存亡的关键。有的founder说坚持让他们克服了看似不可能解决超出他们控制的困难。这里我想到了一个例子是Juniper的CEO Scott Kriens讲过的一件事。他之前的一家公司在用VC的钱苦苦撑了5年后创始人实在看不到希望打算放弃，VC觉得反正钱也砸进去了，不好向LP交待，就鼓励他们再坚持坚持。结果同样的一拨人，做同样的产品，后面5年让公司起死回生，成为了成功的上市公司。原因是市场有了变化开始接受他们的产品。Scott 认为这是一个说明市场很重要的例子，我觉得这也说明了坚持的意义。坚持往往比创始人的智力和能力都要重要，这也回应了1中选择合伙人的时候应
+该更看重性格和决心的观点。</p></li>
+<li><p>Think Long-Term：很多founder都对公司进展的速度不如自己预计的快感到意外。他们认为自己应该像Youtube或Facebook那样快速的取得成功。即使Paul告诉他们100个成功的创业公司里面才能有一个Youtube这样的例子，他们还是会觉得自己是那个“1” 。对绝大部分的 startup来说，至少需要3年（也许是5年）时间来取得成功。考虑的长远一些，能够让自己摆正心态，在相对压力更小的状态下工作。正如David Allen在《Getting things done》里面说的，压力和效率是成反比的。</p></li>
+<li><p>Lots of Little Things：Paul强调了一件容易让很多创业的人产生错误幻想的事情：一个神奇的idea或一个killer feature会让你成功。可能有这种例子，但真的是太少了。Google的成功也不是靠PageRank，而是很多 infrastructure(GFS)，business(adwords)等方面的创新，还有和Yahoo!的deal（让它有了足够的数据来学习和改进算法）等合作运营方面的努力。不要把鸡蛋放到一个篮子里面，即使你知道哪个篮子是最“安全”的。何况对创业公司来说，往往是不知道那个篮子的。所谓的 Killer Feature，也是经过很多尝试后，事后才会发现的。所以最好的策略可能是用尽量低的成本尝试很多小的idea，运气好的化，没准哪个idea会成为你成功的那个magic idea。</p></li>
+<li><p>Start with Something Minimal：对互联网应用来说，小版本快速迭代已经成为了大家的共识。用最短的时间发布一个包含最少功能但仍然是完整的产品绝对是互联网创新的真理！很多人不愿意这样做的原因可能是“虚荣”。他们不愿意发布还能更好的产品，担心周围的人会如何评价。甚至对更广泛的开发来说也是这样的。比如Rube on Rails的founder David Heinemeier Hansson说他发布的第一个版本也只有几千行代码！</p></li>
+<li><p>Engage Users：尽快发布产品的一个重要的好处是可以尽快的得到真实用户的反馈。对那些用户喜欢的功能可以进一步完善。即使产品对用户来说是“无用”的，用户也很可能会告诉你他们真正需要什么。所以尽可以把第一个版本当作是一个开始和用户对话的工具。</p></li>
+<li><p>Change Your Idea：要想从和用户对话中获益，需要能够有接受改变的开放心态。包括对核心idea的改变。Paul建议founders把idea看做需要验证的假设而不是必须执行的规划。正如《Founders at Work》所揭示的大量成功的企业的核心产品（业务）都和他们最初的idea相去甚远。不管用户和市场的反馈，盲目的坚持自己的idea是很多公司失败的原因。不过，对创业经验不是很丰富的创始人来说，该改变还是该坚持真的是个很难抉择的问题。成功的关键和创业的智慧往往也就取决于此吧。</p></li>
+<li><p>Don&#8217;t Worry about Competitors：很多表面上看起来的竞争对手其实在做的事情并不很相关，即使他们做同样的事情，也可能抱有不用的目的。创始人过度关注竞争者的一个可能原因是他们太看重自己的idea。但真正重要的不是idea，而是执行力，把这个idea变成对用户有用的，能赚钱的产品。Joe on Software的Joe说他从来不关心竞争对手做什么。他只在乎自己的客户。所有你的竞争对手能让你知道的东西，你的客户都会告诉你:-)</p></li>
+<li><p>It&#8217;s Hard to Get Users：Paul承认YC没有强调如何获取用户。并不是所有产品都可以像Google一样靠Word of Mouth来推广的。百度最初的崛起就是靠著名的“新浪停机事件”。尤其在互联网这个大量产品同质化竞争的环境中，合作和市场对争取用户（尤其是早期的）还是很有必要的。</p></li>
+<li><p>Expect the Worst with Deals：对创业公司来说无论是和大公司合作还是融资都是异常困难的。创业公司看起来是弱小的，而他们的伟大的革命性的idea往往并不能被人所理解。不要假定自己能融到钱，即使已经融到了钱，也最好假定这是最后一笔融资（这样也让创始人不会盲目的扩展和做过多的marketing）。创始人对自己的能力自信和乐观是好的，但对其他自己不能控制的事情乐观往往会很容易失望甚至绝望。</p></li>
+<li><p>Investors Are Clueless：大量的创始人对他们打交道的VC对自己所投的公司和领域的无知感到惊讶。有个founder说，一个VC投了一家做硬件的公司，但这个哥们却不会开机。相对来说，天使要好一些。这可能和他们投资的领域往往也是自己从事过的领域有关。</p></li>
+<li><p>You May Have to Play Games：因为VC对要投的公司其实并不是很了解，这就给了创始人在一定程度上“伪装”自己的机会。他们为了能得到VC的钱，会让自己看起来更“专业” 更“自信”。往上走一步，VC也是通过让自己看起来很“专业”而赢得LP的青睐。</p></li>
+<li><p>Luck Is a Big Factor：这个就不解释了，有个关于Luck和Success的说法很有意思：Success is 50 percent luck and 50 percent preparedness for that luck</p></li>
+<li><p>The Value of Community：很多人都提到了YC营造的Community对他们的帮助。更大一些来看，硅谷的创业氛围和很多热心人无私的帮助也很让我向往和羡慕。创业是一个很艰辛的过程，其中的苦辣只有经历过和正在经历的人才能够体会。让自己处在一个良好氛围的创业社区里面会很有帮助。</p></li>
+<li><p>You Get No Respect：在创业的圈子外，创业者得不到什么尊重。“我在微软工作”要比“我在一个名为X的startup工作”为你赢得多很多的尊重。一方面原因是很多人对创业还不是很理解，另一方面，很多很好的创业想法看起来很糟。</p></li>
+<li><p>Things Change as You Grow</p></li>
+</ol>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc922251d70></p>
 
-<p>替换为如下代码<br></p>
+<p>最后Paul总结了一下这些surprise的共同点就是founders用一般job的期望来看待startup。所以，没有工作过的人（如当年的bill gates, steve jobs）可能会少一些surprise吧:-)</p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc92224ea80></p>
+<p>英文原版地址：http://www.paulgraham.com/really.html
+中文翻译， 转载自：http://scenery9.spaces.live.com/blog/cns!A4FC03173CC0DD71!1768.entry &#8212;</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[centos vsftpd服务器的架设和配置]]></title>
+    <link href="http://xazaj.github.com/blog/2011/08/29/centos-vsftpd-fu-wu-qi-de-jia-she-he-pei-zhi.html"/>
+    <updated>2011-08-29T00:00:00+08:00</updated>
+    <id>http://xazaj.github.com/blog/2011/08/29/centos-vsftpd-fu-wu-qi-de-jia-she-he-pei-zhi</id>
+    <content type="html"><![CDATA[<p>一、安装／配置
+1、yum install vsftpd</p>
 
-<p>}<br>代码附上，不过我觉得如果是按照我上面讲的版本来安装就不需要这个了。
-第四步：安装IDE；
-能用记事本编写百万行程序的天才估计也不会看到这篇文章，提高工作效率，将敏捷进行到底，IDE还是有必要的，我用的Eclipse+RDT+Radrails，其中Radrails是rails项目需要的，可能不需要安装也能满足watir需求，因为学习ruby肯定要研究一下rails所以都安装上吧。Eclipse安装不提了，给出RDT和Radrails更新方法：通过eclipse更新安装来远程安装插件。从eclipse的菜单Help->Software->Updates->Find and Install选择&#8221;Search for new features to install&#8221; 进行安装。
-1、RDT<br><a href="http://updatesite.rubypeople.org/release">http://updatesite.rubypeople.org/release</a><br>2、RadRails<br><a href="http://radrails.sourceforge.net/update">http://radrails.sourceforge.net/update</a></p>
+<p>2.启动/重启/关闭vsftpd服务器
+[root@localhost ftp]# /sbin/service vsftpd restart
+Shutting down vsftpd: [ OK ]
+Starting vsftpd for vsftpd: [ OK ]
+OK表示重启成功了.
+启动和关闭分别把restart改为start/stop即可.
+如果是源码安装的,到安装文件夹下找到start.sh和shutdown.sh文件,执行它们就可以了.</p>
 
-<br>通过eclipse菜单 Windows > Preferences 打开Preferences对话框，在Ruby 标题下面的 Installed Interpreters 项中设置的ruby的位置。起个名称，然后将&#8221;Location&#8221;文本域指向您使用的 Ruby 版本的 bin 目录。我的机器ruby的bin目录在c:/ruby,这样，ruby+watir的环境这完成了。 在eclipse中建立一个ruby的工程，再建一个ruby文件，写上 puts &#8221; Hello,world&#8221; 就可以看到eclipse的控制台输出ok信息了。<br>
+<!--more-->
 
 
-<p>第五步：我目前搜到的所有教程写到这一步都会说可以运行google的demo了，现在我们先不运行google那么长的demo,先写个简单的打开本站的脚本：</p>
+<p>3.与vsftpd服务器有关的文件和文件夹
+vsftpd服务器的配置文件的是: /etc/vsftpd/vsftpd.conf</p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc92224c230></p>
+<p>vsftpd服务器的根目录,即FTP服务器的主目录:
+在/var/ftp处pub处
+如果你想修改服务器目录的路径,那么你只要修改/var/ftp到别处就行了</p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc92224a548>
-</code></p>
+<p>4.添加FTP本地用户
+有的FTP服务器需要用户名和密码才能登录,就是因为设置了FTP用户和权限.
+FTP用户一般是不能登录系统的,只能进入FTP服务器自己的目录中,这是为了安全.这样的用户就叫做虚拟用户了.实际上并不是真正的虚拟用户,只是不能登录SHELL了而已,没能力登录系统.</p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc9222471b8></p>
+<p>/usr/sbin/adduser -d /opt/test_ftp -g ftp -s /sbin/nologin test
+这个命令的意思是:
+使用命令(adduser)添加test用户,不能登录系统(-s /sbin/nologin),自己的文件夹在(-d /opt/test_ftp)),属于组ftp(-g ftp)
+然后你需要为它设置密码 passwd test
+这样就添加了一个FTP用户了.下面的示例可以帮助你进入FTP服务器了.</p>
 
-<p>头大了吧，都说这个时候已经好了，为什么自己环境的就是不好用呢，仰天长叹，继续查吧，google，baidu了一大圈，都是报喜不报忧，最后终于在一个我从来不起的邮件组服务器里面查到了几个老外的邮件备份，真是不容易，那里解释到：</p>
+<p>[root@localhost ftp]# ftp
+ftp> open 192.168.0.33
+Connected to 192.168.0.33 (192.168.0.33).
+220 (vsFTPd 2.0.5)
+Name (192.168.0.33:gxl): test
+331 Please specify the password.
+Password:
+230 Login successful.
+Remote system type is UNIX.
+Using binary mode to transfer files.
+ftp> quit
+221 Goodbye.</p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc922243680></p>
+<p>在windows中,只要在浏览器中输入 ftp://192.168.0.33 进入FTP服务器,然后 右键 登录,输入用户名和密码就可以登录自己的目录了.
+当然你要保证自己能读写自己的目录,就要在配置文件vsftpd.conf里设置一下就可以读写了.
+local_enable=yes
+write_enable=yes
+local_umask=022</p>
 
-<p>把他的原文贴出来了，因为这封邮件让我找了几个小时，发给他一封感谢信，按照这个配置修改原来的代码：</p>
+<p>5.匿名上传下载
+修改配置文件即可vsftpd.conf,确定有以下几行,没有自己添加进去就可以了.
+anonymous_enable=yes
+anon_upload_enable=yes
+anon_mkdir_write_enable=yes
+anon_umask=022</p>
 
-<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fc92223ef90></p>
+<p>然后你可以新建一个文件夹,修改它的权限为完全开放,任何用户就可以登录这个文件夹,并上传下载文件:
+mkdir /var/ftp/guest
+chmod 777 /var/ftp/guest</p>
 
-<p>运行，IE窗口弹出来了，OK，这才是完整的安装配置过程嘛，感叹一下：网络上资源丰富，但是也有很多懒人啊。
-一个星期的时间读了ruby的帮助文档对ruby语言基本用法有了些认识，一个字：快，加上watir基于html的识别，也是一个字：快，说他是匕首一点也不为过。如果是小型项目用watir比QTP的开发周期要短的多了，当然watir也有现存的弱点，对Frame和javascript支持不好，当我看完ruby语言，看完watir内置方法，配置好所有的环境准备开工之时，忽然发现项目的页面全是js调用出来的，从HTML根本看不到任何元素，额的神啊，当我了解这个真相以后，绝望了。。。
-虽然现在的项目不适合，不代表用不到，很看好ruby语言，也很看好watir这个轻量级工具，等我从绝望中走出来以后，再做一套针对wordpress的自动化测试脚本，也许可以帮助主题制作者节省点验证主题基本功能的时间，自己PHP学的不怎么样，就从侧面为开源做点贡献吧。
-一周的成果居然才浓缩了这么巴掌大的文章，唏嘘~</p>
+<p>6.定制进入FTP服务器的欢迎信息
+在vsftpd.conf文件中设置:
+dirmessage_enable=yes
+然后进入用户目录建立一个.message文件,输入欢迎信息即可(我这里写入的是Welcome to gxlinux&#8217;s FTP!):
+[root@localhost test_ftp]# ftp 192.168.0.33
+Connected to 192.168.0.33 (192.168.0.33).
+220 (vsFTPd 2.0.5)
+Name (192.168.0.33:gxl): test
+331 Please specify the password.
+Password:
+230-Welcome to gxlinux&#8217;s FTP!
+230 Login successful.
+Remote system type is UNIX.
+Using binary mode to transfer files.</p>
 
-<p>  <!-- Tag links generated by Zoundry Blog Writer. Do not manually edit. http://www.zoundry.com --><br><span class="ztags"><span class="ztagspace">Technorati</span> : <a href="http://technorati.com/tag/Ruby" class="ztag" rel="tag">Ruby</a>, <a href="http://technorati.com/tag/Watir" class="ztag" rel="tag">Watir</a>, <a href="http://technorati.com/tag/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95" class="ztag" rel="tag">自动化测试</a></span></p>
+<p>7.实现虚拟路径
+将某个目录挂载到FTP服务器下供用户使用,这就叫做虚拟路径.
+比如将gxl用户的目录挂载到FTP服务器中,供FTP服务器的用户使用,使用如下命令即可:
+[root@localhost opt]# mount &#8211;bind /home/gxl /var/ftp/pub #使用挂载命令
+[root@localhost opt]# ls /var/ftp/pub
+LumaQQ Screenshot.png 桌面</p>
+
+<p>8.打开vsFTPd的日志功能
+添加下面一行到vsftpd.conf文件中,一般情况下该文件中有这一行,只要把前面的注释符号#去掉即可,没有的话就添加,或者修改:
+xferlog_file=/var/log/vsftpd.log</p>
+
+<p>9.限制链接数,以及每个IP最大的链接数
+修改配置文件中,例如vsftp最大支持链接数100个,每个IP能支持5个链接:
+max_client=100
+max_per=5</p>
+
+<p>10.限制传输速度
+修改配置文件中,例如让匿名用户和vsftd上的用户(即虚拟用户)都以80KB=1024*80=81920的速度下载
+anon_max_rate=81920
+local_max_rate=81920</p>
+
+<p>11.将用户(一般指虚拟用户)限制在自家目录
+修改配置文件中,这样用户就只能访问自己家的目录了:
+chroot_local_user=yes
+如果只想某些用户仅能访问自己的目录,其它用户不做这个限制,那么就需要在chroot_list文件(此文件一般是在/etc/vsftpd/中)中添加此用户.
+编辑此文件,比如将test用户添加到此文件中,那么将其写入即可.一般的话,一个用户占一行.
+[root@localhost vsftpd]# cat chroot_list
+test</p>
+
+<p>12.绑定某个IP到vsFTPd
+有时候要限制某些IP访问服务器,只允许某些IP访问,例如只允许192.168.0.33访问这个FTP,同样修改配置文件:
+listen_address=192.168.0.33</p>
+
+<p>配置vsftpd.conf</p>
+
+<pre><code>               anonymous_enable=NO            #禁止匿名
+               local_enable=YES                       #允许本地登录
+               write_enable=YES                       #允许写，如需上传，则必须
+               local_umask=027                        #将上传文件的权限设置为：777-local_umask
+               anon_upload_enable=YES          #允许虚拟用户和匿名用户上传
+               anon_other_write_enable=YES #允许虚拟用户和匿名用户修改文件名和删除文件
+               dirmessage_enable=YES           
+               xferlog_enable=YES                      #打开日志记录
+               connect_from_port_20=YES
+               xferlog_file=/var/log/vsftpd.log     #日志存放位置
+               xferlog_std_format=YES              #标准日志格式
+               idle_session_timeout=600        #空闲连接超时
+               data_connection_timeout=120
+               ftpd_banner=Welcome to ChinaRise FTP service       #欢迎信息
+               guest_enable=yes                       #允许虚拟用户
+               guest_username=vsftpdguest #虚拟用户使用的系统账号
+               virtual_use_local_privs=YES     #虚拟用户拥有本地系统权限
+
+               chroot_local_user=NO              
+               chroot_list_enable=YES
+                 #以上两行将虚拟用户限制在其目录下，不能访问其他目录，或者直接用                            
+               chroot_local_user=YES                               
+
+               listen=yes                #监听/被动模式
+               listen_port=21        #监听端口
+
+               chroot_list_file=/etc/vsftpd/vsftpd.chroot_list       #虚拟用户名单保存在文件/etc/vsftpd/vsftpd.chroot_list 中
+               user_config_dir=/etc/vsftpd/vsftpd_user_conf   #每个虚拟用户名的更加详细的培植保存在/etc/vsftpd/vsftpd_user_conf 中
+</code></pre>
+
+<p>虚拟用户其他设置</p>
+
+<pre><code>  在/etc/vsftpd/vsftpd.chroot_list 文件中写入允许登陆的虚拟用户名称，每行一个
+  在/etc/vsftpd/vsftpd_user_conf 文件夹中创建一个以虚拟用户用户名命名的文件，
+  写入：local_root = /var/FTP/子目录名
+  然后在/var/FTP下创建一个对应的目录即可
+</code></pre>
+
+<p>原文：http://blog.csdn.net/kofterry/article/details/4277267</p>
+
+<p>二、配置目录：
+首先确保vsftpd已经默认安装service vsftpd start可以正常且ftp://ip可以看到pub目录
+现在要实现更改默认访问的目录为其他目录例如/home/ftp我直接在/home目录下mkdir ftp
+注意改完配置后都service vsftpd restart
+测试步骤如下
+vi /etc/vsftpd/vsftpd.conf
+直接在配置文件中添加如下：
+anon_root=/home/ftp
+anon_upload_enable=NO
+服务重启
+通过ftp://ip访问到/home/ftp这个目录(证明已经将默认目录更改)。但是不运行上传文件，即使我将
+anon_upload_enable=设置为YES那么同样的ftp://ip仍然无法访问上传文件
+摘自原文：http://blog.sina.com.cn/s/blog_498719980100092k.html</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Amazon EC2 上安装 Rails Passenger]]></title>
+    <link href="http://xazaj.github.com/blog/2011/08/24/amazon-ec2--shang-an-zhuang--rails-passenger.html"/>
+    <updated>2011-08-24T00:00:00+08:00</updated>
+    <id>http://xazaj.github.com/blog/2011/08/24/amazon-ec2&#8211;shang-an-zhuang&#8211;rails-passenger</id>
+    <content type="html"><![CDATA[<p>第一步：Amazon Linux默认安装ruby，所以要移除原来的ruby。</p>
+
+<p>sudo yum remove -y ruby
+ <!--more-->
+第二步：安装编译环境和mysql。</p>
+
+<p>sudo yum install -y gcc make patch zlib-devel  openssl-devel  c++  gcc  gcc-c++   gcc-c++  readline-devel curl-devel mysql mysql-server curl mysql-devel</p>
+
+<p>第三步：下载最新版本REE，并编译安装。</p>
+
+<p>mkdir ~/src
+cd ~/src
+wget http://rubyenterpriseedition.googlecode.com/files/ruby-enterprise-1.8.7-2011.03.tar.gz
+tar xzvf ruby-enterprise-1.8.7-2011.03.tar.gz
+sudo ./ruby-enterprise-1.8.7-2011.03/installer</p>
+
+<p>sudo ln -s /opt/ruby-enterprise-1.8.7-2011.03/bin/ruby /usr/bin/ruby
+sudo ln -s /opt/ruby-enterprise-1.8.7-2011.03/bin/gem /usr/bin/gem
+sudo ln -s /opt/ruby-enterprise-1.8.7-2011.03/bin/rake /usr/bin/rake
+sudo ln -s /opt/ruby-enterprise-1.8.7-2011.03/bin/bundle /usr/bin/bundle</p>
+
+<p>如果你想卸载REE，仅仅是删除安装目录。</p>
+
+<p>rm /opt/ruby-enterprise-1.8.7-2011.03</p>
+
+<p>第四步：启动mysql，并设置root新密码。</p>
+
+<p>sudo service mysqld start
+/usr/bin/mysqladmin -u root password &#8216;new-password&#8217;</p>
+
+<p>第五步：设置mysql自启动</p>
+
+<p>sudo chkconfig mysqld on</p>
+
+<p>（上述命令不会出现任何提示，直接回车即可）</p>
+
+<p>第六步：安装Phusion Passenger (http://www.modrails.com)集成REE。</p>
+
+<p>sudo /opt/ruby-enterprise-1.8.7-2011.03/bin/passenger-install-nginx-module</p>
+
+<p>安装完成后会在/opt/nginx/conf/nginx.conf配置文件中添加以下语句：
+  http {</p>
+
+<pre><code>  ...
+  passenger_root /opt/ruby-enterprise-1.8.7-2011.03/lib/ruby/gems/1.8/gems/passenger-3.0.8;
+  passenger_ruby /opt/ruby-enterprise-1.8.7-2011.03/bin/ruby;
+  ...
+</code></pre>
+
+<p>  }</p>
+
+<p>第七步：配置Ruby on Rails程序，并启动nginx。</p>
+
+<p>sudo ln -s /opt/ruby-enterprise-1.8.7-2011.03/bin/rails /usr/bin/rails</p>
+
+<p>如果你的Rails程序在目录“/somewhere”中，你主机的域名为“www.yourhost.com”，nginx.conf文件就应该大概如下：</p>
+
+<p>   server {</p>
+
+<pre><code>  listen 80;
+  server_name www.yourhost.com;
+  root /somewhere/public;   # 
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby设计模式-简单工厂模式]]></title>
+    <link href="http://xazaj.github.com/blog/2011/06/01/ruby-she-ji-mo-shi---jian-dan-gong-chang-mo-shi.html"/>
+    <updated>2011-06-01T00:00:00+08:00</updated>
+    <id>http://xazaj.github.com/blog/2011/06/01/ruby-she-ji-mo-shi&#8212;jian-dan-gong-chang-mo-shi</id>
+    <content type="html"><![CDATA[<p>最近看了看大话设计模式，书中例子都是用C#写的，用Ruby改写一下，其它不写了，附代码吧：<!--more-->
+[code lang=&#8221;Ruby&#8221;]</p>
+
+<h1>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-</h1>
+
+<h1>简单工程模式实现商场收银功能，包括三种收费类型：</h1>
+
+<h1>1、正常现金收费</h1>
+
+<h1>2、打折现金收费</h1>
+
+<h1>3、现金返利</h1>
+
+<h1>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-</h1>
+
+<h1>&#8212;&#8211;现金收费超类&#8212;-</h1>
+
+<p>class PriceSuper
+  def initialize(price)</p>
+
+<pre><code>@price = price
+</code></pre>
+
+<p>  end
+  def price</p>
+
+<pre><code>@price
+</code></pre>
+
+<p>  end
+end</p>
+
+<h1>&#8212;&#8211;正常收费子类&#8212;&#8211;</h1>
+
+<p>class NormalPrice &lt; PriceSuper
+  def current_price</p>
+
+<pre><code>currentPrice = @price
+return currentPrice
+</code></pre>
+
+<p>  end
+end</p>
+
+<h1>&#8212;-打折现金收费子类&#8212;-</h1>
+
+<p>class RebateCurrentPrice &lt; PriceSuper
+  def initialize(price,rebateRate)</p>
+
+<pre><code>@price = price
+@rebateRate = rebateRate
+</code></pre>
+
+<p>  end
+  def current_price</p>
+
+<pre><code>currentPrice = @price * @rebateRate
+return currentPrice
+</code></pre>
+
+<p>  end
+end</p>
+
+<h1>&#8212;-返利现金收费子类&#8212;-</h1>
+
+<p>class BackCurrentPrice &lt; PriceSuper
+  def initialize(price,totleCash,backCash)</p>
+
+<pre><code>@price = price 
+@totleCash = totleCash 
+@backCash = backCash 
+</code></pre>
+
+<p>  end
+  def current_price</p>
+
+<pre><code>subCash = @price 
+totleBack = 0 
+while subCash &lt; @totleCash
+  subCash = subCash - @totleCash
+  totleBack = totleBack + @backCash
+end
+return price-totleBack
+</code></pre>
+
+<p>  end
+end</p>
+
+<h1>&#8212;-收费对象生成工厂&#8212;-</h1>
+
+<p>class CurrentPriceFactory
+  def initialize(price,rebateRate,agioType,totleCash,backCash)</p>
+
+<pre><code>@price = price
+@rebateRate = rebateRate
+@agioType = agioType
+@totleCash = totleCash
+@backCash = backCash
+</code></pre>
+
+<p>  end
+  def agioType</p>
+
+<pre><code>@agioType
+</code></pre>
+
+<p>  end
+  def create_price</p>
+
+<pre><code>case @agioType
+when "N"
+  totle = NormalPrice.new(@price)
+when "R"
+  totle = RebateCurrentPrice.new(@price,@rebateRate)
+when "B"
+  totle = BackCurrentPrice.new(@price,@totleCash,@backCash)
+end
+</code></pre>
+
+<p>  end
+end</p>
+
+<h1>&#8212;-界面逻辑&#8212;-</h1>
+
+<p>puts &#8220;*******************************&#8221;
+puts &#8220;Please input the price:&#8221;
+price = Integer(gets)
+puts &#8220;Choose the agio type: n1.(N)ormal 2.(R)ebate 3.(B)ack&#8221;
+agioType = gets.chomp
+case agioType
+  when &#8220;N&#8221;</p>
+
+<pre><code>rebateRate = 1
+totleCash = 0
+backCash = 0
+</code></pre>
+
+<p>  when &#8220;R&#8221;</p>
+
+<pre><code>totleCash = 0
+backCash = 0
+puts "Please input the rebate rate:"
+rebateRate = Float(gets)
+</code></pre>
+
+<p>  when &#8220;B&#8221;</p>
+
+<pre><code>rebateRate = 1
+puts "Please input the totleCash:"
+totleCash = Integer(gets)
+puts "Please input the backCash:"
+backCash = Integer(gets)
+</code></pre>
+
+<p>  end
+totle = CurrentPriceFactory.new(price,rebateRate,agioType,totleCash,backCash)
+puts &#8220;=====================&#8221;
+puts &#8220;Promary Price is:&#8221; + String(price)
+puts &#8220;Current agio type is:&#8221; + agioType
+puts &#8220;Current Price is:&#8221; + String(totle.create_price.current_price)
+puts &#8220;=====================&#8221;
+[/code]</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[用js实现‘用新浪微博登陆网站’功能]]></title>
+    <link href="http://xazaj.github.com/blog/2011/03/16/yong-js-shi-xian-yong-xin-lang-wei-bo-deng-lu-wang-zhan-gong-neng.html"/>
+    <updated>2011-03-16T00:00:00+08:00</updated>
+    <id>http://xazaj.github.com/blog/2011/03/16/yong-js-shi-xian-yong-xin-lang-wei-bo-deng-lu-wang-zhan-gong-neng</id>
+    <content type="html"><![CDATA[<p>用JS实现的登陆第三方网站的功能，暂无后台数据库支持。<br>
+Demo：<a href="http://www.zhuaijun.cn/demo/sina.htm">http://www.zhuaijun.cn/demo/sina.htm</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[一些职场做事的观念]]></title>
+    <link href="http://xazaj.github.com/blog/2011/01/18/yi-xie-zhi-chang-zuo-shi-de-guan-nian.html"/>
+    <updated>2011-01-18T00:00:00+08:00</updated>
+    <id>http://xazaj.github.com/blog/2011/01/18/yi-xie-zhi-chang-zuo-shi-de-guan-nian</id>
+    <content type="html"><![CDATA[<p>翻译一篇简单实用的做事观念，也算自己蛮深的体悟。
+1、做事要明确对方目的、意图以及有全局观（big picture）：<br></p>
+
+<pre><code>*不要只凭自己想象，或者是在自己想象之内技术可以解决，就直接冲下去做；&lt;br&gt;
+*做的不在roadmap 上，只是浪费公司资源和同事时间。
+</code></pre>
+
+<p>2、事情要按时完成<br><!--more--><br></p>
+
+<pre><code>*超过时间的满分考卷是完全没有用的东西&lt;br&gt;
+*做不完自己应该在做到30%或50%之前就知道了&lt;br&gt;
+*这时候要随时提出自己的疑问与求助，有些方案也许自己技术上做不到，但是同事可以帮你解决，甚至主管可以在行政上帮你解决&lt;br&gt;
+* 不要傻傻的自己做到最后一刻再双手一摊，无辜的说自己能力有限
+</code></pre>
+
+<ol>
+<li>做事之前，要先计划，计划完稍微找同事或主管讨论一下想法，再去做。<br>
+
+<ul>
+<li>做完之后必须检查，并总结<br></li>
+<li>不要丟出一个满是问题的东西，浪费主管以及同事的时间<br></li>
+<li>而且丟出这么多问题的东西，也只是害到自己要加班而已<br></li>
+<li>可以准时下班就准时下班。不要搞东搞西害到自己</li>
+</ul>
+</li>
+<li>做事之前与做事途中要切的简单干净，方便他人接手。<br>
+
+<ul>
+<li>高效率的做事情方式，是随时保持你的工作简单，別人好接手<br></li>
+<li>即使自己能力不及，同事也能迅速救援，大家一起很快把事情做好做对</li>
+</ul>
+</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[有趣的30个人生定律]]></title>
+    <link href="http://xazaj.github.com/blog/2011/01/05/you-qu-de-30-ge-ren-sheng-ding-lv.html"/>
+    <updated>2011-01-05T00:00:00+08:00</updated>
+    <id>http://xazaj.github.com/blog/2011/01/05/you-qu-de-30-ge-ren-sheng-ding-lv</id>
+    <content type="html"><![CDATA[<p>01：苹果定律</p>
+
+<p>如果一堆苹果，有好有坏，你就应该先吃好的，把坏的扔掉，如果你先吃坏的，好的也会变坏，你将永远吃不到好的，人生亦如此。</p>
+
+<p>02：快乐定律</p>
+
+<p>遇事只要你往好处想你就会快乐，就像你如果掉进沟里，你都可以设想说不定刚好有一条鱼钻进你的口袋。</p>
+
+<p>03：幸福定律</p>
+
+<p>如果你不是总是在想自己是否是幸福的时候，你就幸福了。<!--more--></p>
+
+<p>04：错误定律</p>
+
+<p>人人都会有过失，但只有在重复这些过失的时候，你才犯了错误。</p>
+
+<p>05：沉默定律</p>
+
+<p>在争辩的时候，最难辩倒的观点就是沉默。</p>
+
+<p>06：动力定律</p>
+
+<p>动力往往来源于两种原因，希望或绝望。</p>
+
+<p>07：受辱定律</p>
+
+<p>受辱时的唯一办法就是忽视它，不能忽视它，就藐视它，如果能藐视它也不能，你就只有受辱了。</p>
+
+<p>08：愚蠢定律</p>
+
+<p>愚蠢大多数是在手脚或嘴比大脑行动还快地时候产生的。</p>
+
+<p>09：价值定律</p>
+
+<p>当你拥有某一项东西的时候，你就会发现这种东西并不像你原来所想的那样有价值。</p>
+
+<p>10：化妆定律</p>
+
+<p>在化妆上所花的时间有多少，就表示你自认为要掩饰的缺点有多少。</p>
+
+<p>11：省时定律</p>
+
+<p>如果你一开始就想节省时间，结果是反而要多花数倍的时间。</p>
+
+<p>12：承诺定律</p>
+
+<p>承诺未必可以保证一定做到，但是如果你没有做出承诺，就算你做到了也没有价值。</p>
+
+<p>13：地位定律</p>
+
+<p>有人站在山脚下，而有人站在山顶上，虽然所处的位置不一样，在两人的眼里的对方却是同样大小。</p>
+
+<p>14：混乱定律</p>
+
+<p>如果你在遇上麻烦时，还是那样谨小慎微，那麻烦就会变成混乱。</p>
+
+<p>15：失败定律</p>
+
+<p>失败并不意味着浪费时间和生命，而往往意味着你可能更好地拥有时间和生命。</p>
+
+<p>16：谈话定律</p>
+
+<p>最使人厌烦的谈话有两种，一是从来不停下来想想，另一种是从来不想停下来。</p>
+
+<p>17：误解定律</p>
+
+<p>被某一个误解，麻烦并不大，被许多人误解了，麻烦就很大了。</p>
+
+<p>18：结局定律</p>
+
+<p>有一个可怕的结局，也比没有任何结局要好。</p>
+
+<p>19：升迁定律</p>
+
+<p>仕入官场，每升一级，人情味就减一份。</p>
+
+<p>20：升值定律</p>
+
+<p>出口转内销，就可以升值，连舆论都是这样。</p>
+
+<p>21：游戏定律</p>
+
+<p>无论你保龄球打得多“菜”，每次往都可能有一两次全中，令你满意，高兴的下次再来。</p>
+
+<p>22：人生定律</p>
+
+<p>拼命想得到的东西，都不是真正最需要的。</p>
+
+<p>23：旅游定律</p>
+
+<p>没有比记忆中更好的风景，所以最好不要故地重游。</p>
+
+<p>24：金钱定律</p>
+
+<p>它不是万能，但是没有它万万不能。</p>
+
+<p>25：财务定律</p>
+
+<p>支票总是姗姗来迟，而帐单总是提前来到。</p>
+
+<p>26：备份定律：</p>
+
+<p>学会用左手做一些事情，因为右手不是永远都管用。</p>
+
+<p>27：会议定律</p>
+
+<p>所有重要的决策都是在会议结束或午餐前最后五分钟完成。</p>
+
+<p>28：危难定律</p>
+
+<p>总是问题越复杂，期限就越短。</p>
+
+<p>29：合作定律</p>
+
+<p>一个人花一个小时可以做好的事情，两个人就要两个小时。</p>
+
+<p>30：结合定律</p>
+
+<p>不管干什么，总是有你希望的人和与你对立的人同你在一起。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[良言一句三冬暖，恶语伤人六月寒]]></title>
+    <link href="http://xazaj.github.com/blog/2011/01/01/liang-yan-yi-ju-san-dong-nuan--e-yu-shang-ren-liu-yue-han.html"/>
+    <updated>2011-01-01T00:00:00+08:00</updated>
+    <id>http://xazaj.github.com/blog/2011/01/01/liang-yan-yi-ju-san-dong-nuan&#8211;e-yu-shang-ren-liu-yue-han</id>
+    <content type="html"><![CDATA[<p>&#8220;天时&#8221;句出自于>,讲的是外界环境和人心因素对战争的作用,前一句是说好的天时比不上好的地理形势,后一句是说好的地理形势又比不上万众齐心的力量。孟子的思想我们要批判性地吸收,因为今天我们说物质决定意识,然而意识又能反作用于物质。实际上他是在从一个侧面告戒君主,只要对人民好一点,就算发生战争,我们也是有恃无恐。<!--more-->
+&#8220;良言&#8221;句中三东应该为&#8221;三冬&#8221;吧?&#8221;三冬&#8221;和&#8221;冬练三久夏练三伏&#8221;中的三久是一个意思,不是三个冬天的意思。善意的话语让人听了即使在寒冷的冬天都会心生暖意,而怀有恶意的话语让人听了即使在酷热的夏天都会心生寒意。</p>
+
+<p>如果你恰巧今天晚上不忙，恰巧心情很好或者心情不好，那么请看看下面的两个故事。</p>
+
+<p>有一个青年因贫困辍学，不得已去酒店当了服务生。一天，他给某富商清洗一辆超豪华的劳斯莱斯轿车，因打开车门摸了那晶亮的方向盘，便遭到酒店领班的恶毒训斥：“干什么？你这种人下辈子也休想坐上劳斯莱斯！”就是这句轻蔑的训斥，深深地刺伤了服务生的心，他暗暗发誓：这辈子我一定要拥有一辆劳斯莱斯！此后，经过若干年的奋斗，这位给人擦车的服务生成了香港影视界的头号明星，他竟一口气买下五辆轿车，其中一辆就是劳斯莱斯。他驾车来到当年那家酒店，见此，那个已被降为杂役的领班羞愧难当。因人家一句恶语的羞辱而拼搏终至功成名就的这位年轻人，就是大名鼎鼎的影视巨星周润发。</p>
+
+<p>有一个刑期中的囚犯，在服劳役修路时，捡到1000元钱，他立即把钱交给监管警察。意想不到的是，对方却满脸鄙夷地对他说：“拿自己的钱变着花样来讨好，企图找资本减刑，你另来这一套！”囚犯心灰意冷，心想这世上没人相信自己了。晚上，他越狱了。在逃途中，他大肆抢劫，并登上开往边境的火车。火车太挤，他只得站在厕所门口。此时，有位十分漂亮的姑娘如厕，关门时发现门扣坏了，她很有礼貌地对他说：“先生，你能为我把门吗？”他一愣，看到姑娘那纯洁无邪的脸，他庄重地点了点头。他像一位忠诚的卫士，把守着门。就因为姑娘这句话，他突然改变了主意。在下一站，他下车到派出所投案自首。
+一句粗暴的话语，差点让一颗良知尚存的心灵彻底毁灭；而一句充满信赖的话语，又使一个正在沉沦的灵魂得到拯救。
+良言一句三冬暖，恶语伤人六月寒。作为文明社会的文明人，我们当善放良言，力戒恶语，因为有时候，确是一句话影响了人的一生啊!</p>
+
+<p>写这行字的时候我还一直犹豫着，不知道这样的说法是否妥当，只是晚上闲来无事跑一些认识或者不认识的网友里面去看看帖和回帖，却徒生了这样的感伤，人与人之间的那种真诚在慢慢的减少，各种讽刺挖苦的语言却触目惊心，如果是黑色幽默，那么给人的感觉却是此默不幽。</p>
+
+<p>我是那种生性不喜欢多说话也不会象人家那样嘴甜甜的哥长姐短的人，我只知道无论别人怎么说我，关怀帮助过我的，我永远感激，攻击的，打击的，就一笑而过，随意说吧，反正我心里无愧，平时说的天花乱坠也不如在人家有困难的时候力所能及的帮一把强，我们需要的是雪中送炭不是落井下石。</p>
+
+<p>人的一生中关键的选择其实就那么几步，往往有时候一句话是可以改变我们许多最初的想法的。
+我以前最羡慕的职业就是图书馆的管理员，穿着漂亮干净的衣服，每天身边也没几个人借书，自己可以惬意的想看什么就看什么书是多么幸福的事情啊，大学毕业的时候，电视台和报社来学校要人，要在三百多个人中选六名做记者，想到那么多人竞争自己一定没戏，所以就躺在床上看电视也没有报名，这时候我的班主任老师来了，问我，你报名了吗？
+我摇摇头说我不行的，我的老师却说我相信你一定行，去试试去，考上了请我们吃饭，在过几年我退休了就啥也咬不动了，那天就是因为她的鼓动，我参加了考试，结果被录取，我的人生从此也改变了许多。其实那时候如果她说你不行，还是别去了，也许我不会有今天。</p>
+
+<p>再说网上，一个特喜欢骂人的网友，别人惹他一句，他就骂十句，弄的大家都讨厌他，有一次他问我你是不是特看不起我，我说没有啊，你挺好的，人聪明，心肠也不错，就是有个小缺点喜欢说脏话，要是你不暴粗就完美了，他说真的吗，我说是啊，别人都这样说。有一段时间我没上网，后来看见他，他对我说姐姐我自从那天你说我到现在我谁都没骂过，真的，我对他打了个笑脸说，你能再在坚持一年吗，他说能，我象毛主席保证我再也不骂人了我以前是看不惯他们那样才骂的，有的人不骂不行，我就说你错了，上帝给了你俩耳朵，俩眼睛，为什么给你一个嘴啊，就是让任命多听多看，少说~~~~。他骂了你，你一还嘴，你们就扯平了，而你不还，那么他的良心债便是永远的欠着你。</p>
+
+<p>又是有朋友找又是电话，写的断断絮絮的也不知道表达明白没有，总之，良言一句三冬暖，恶语伤人六月寒，在股市这样的时候也许我们的心里都不好过。所以想说，若有人有困难，请你温柔的对待，哪怕是违心的也请你多几分鼓励，若有人做错了什么或者伤害了你，也请你别放在心上，也许那是无心之过。
+无贪心，无私心，心纳海天真潇洒
+不寻事，不怕事，事留余地自逍遥</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[七个经典故事为你讲述目标管理的重要性]]></title>
+    <link href="http://xazaj.github.com/blog/2010/06/30/qi-ge-jing-dian-gu-shi-wei-ni-jiang-shu-mu-biao-guan-li-de-zhong-yao-xing.html"/>
+    <updated>2010-06-30T00:00:00+08:00</updated>
+    <id>http://xazaj.github.com/blog/2010/06/30/qi-ge-jing-dian-gu-shi-wei-ni-jiang-shu-mu-biao-guan-li-de-zhong-yao-xing</id>
+    <content type="html"><![CDATA[<p>第一个故事：爱丽丝的故事</p>
+
+<p>“请你告诉我，我该走哪条路？”
+“那要看你想去哪里？”猫说。
+“去哪儿无所谓。”爱丽丝说。
+“那么走哪条路也就无所谓了。”猫说。</p>
+
+<p>——摘自刘易斯·卡罗尔的《爱丽丝漫游奇境记》</p>
+
+<p>赵日磊点评：这个故事讲的是人要有明确的目标，当一个人没有明确的目标的时候，自己不知道该怎么做，别人也无法帮到你！天助先要自助，当自己没有清晰的目标方向的时候，别人说的再好也是别人的观点，不能转化自己的有效行动。</p>
+
+<!--more-->
+
+
+<p>第二个故事：游泳的故事</p>
+
+<p>1952年7月4日清晨，加利福尼亚海岸下起了浓雾。在海岸以西 21 英里的卡塔林纳岛上，一个43岁的女人准备从太平洋游向加州海岸。她叫费罗伦丝·查德威克。</p>
+
+<p>那天早晨，雾很大，海水冻得她身体发麻，她几乎看不到护送他的船。时间一个小时一个小时的过去，千千万万人在电视上看着。有几次，鲨鱼靠近她了，被人开枪吓跑了。</p>
+
+<p>15小时之后，她又累，又冻得发麻。她知道自己不能再游了，就叫人拉她上船。她的母亲和教练在另一条船上。他们都告诉她海岸很近了，叫她不要放弃。但她朝加州海岸望去，除了浓雾什么也没看不到……</p>
+
+<p>人们拉她上船的地点，离加州海岸只有半英里！后来她说，令她半途而废的不是疲劳，也不是寒冷，而是因为她在浓雾中看不到目标。查德威克小姐一生中就只有这一次没有坚持到底。</p>
+
+<p>赵日磊点评：这个故事讲的是目标要看的见，够得着，才能成为一个有效的目标，才会形成动力，帮助人们获得自己想要的结果。</p>
+
+<p>管理者在和下属制定目标的时候，经常会犯一个错误，就是认为目标定的越高越好，认为目标定的高了，即便员工只完成了80%也能超出自己的预期。实际上，这种思想是有问题的，持有这种思想的管理者过分依赖目标，认为只要目标制定了，员工就会去达成。</p>
+
+<p>实际上，制定目标是一回事，完成目标又是另外一回事，制定目标是明确做什么，完成目标是明确如何做。与其用一个高目标给员工压力，不如制定一个合适的目标，并帮助员工制定行动计划，共同探讨障碍，并排除，帮助员工形成动力。</p>
+
+<p>另外，目标不是唯一的激励手段，目标只有与激励机制相匹配，才会形成更有效的动力机制。所以，除了关注目标之外，管理者还要关注配套的激励措施。</p>
+
+<p>最后，合适的目标是员工可以跳一跳能够得着的目标，当员工经过努力之后可以达成目标，目标才会对员工有吸引力，否则，员工宁可不做，也不愿意费了很大力气而没有完成！</p>
+
+<p>第三个故事：石匠的故事</p>
+
+<p>有个人经过一个建筑工地，问那里的石匠们在干什么？三个石匠有三个不同的回答：</p>
+
+<p>第一个石匠回答：“我在做养家糊口的事，混口饭吃。”</p>
+
+<p>第二个石匠回答：“我在做整个国家最出色的石匠工作。”</p>
+
+<p>第三个石匠回答：“我正在建造一座大教堂。”</p>
+
+<p>赵日磊点评：三个石匠的回答给出了三种不同的目标，第一个石匠说自己做石匠是为了养家糊口，这是短期目标导向的人，只考虑自己的生理需求，没有大的抱负；第二个石匠说自己做石匠是为了成为全国最出色的匠人，这是职能思维导向的人，做工作时只考虑本职工作，只考虑自己要成为什么样的人，很少考虑组织的要求；而第三个石匠的回答说出了目标的真谛，这是经营思维导向的人，这些人思考目标的时候会把自己的工作和组织的目标关联，从组织价值的角度看待自己的发展，这样的员工才会获得更大的发展。</p>
+
+<p>德鲁克说，第三个石匠才是一个管理者，因为他用自己的工作影响着组织的绩效，它在做石匠工作的时候看到了自己的工作与建设大楼的关系，这种人的想法难能可贵！</p>
+
+<p>中松义郎的目标一致理论讲的就是这一点，当一个人的目标与组织的目标越一致，这个人潜能发挥就越大，就越有发展！</p>
+
+<p>第四个故事：保险销售员的故事</p>
+
+<p>有个同学举手问老师：”老师，我的目标是想在一年内赚100万！请问我应该如何计划我的目标呢？”</p>
+
+<p>老师便问他：“你相不相信你能达成？”他说：“我相信！”老师又问：“那你知不知到要通过哪行业来达成？”他说：“我现在从事保险行业。”老师接着又问他：”你认为保险业能不能帮你达成这个目标？”他说：”只要我努力，就一定能达成。”</p>
+
+<p>“我们来看看，你要为自己的目标做出多大的努力，根据我们的提成比例,100万的佣金大概要做300万的业绩。一年：300万业绩。一个月：25万业绩。每一天：8300元业绩。”老师说。“ 每一天：8300元业绩。大既要拜访多少客户？”</p>
+
+<p>老师接着问他，“大概要50个人。”，“那么一天要50人，一个月要1500人；一年呢？就需要拜访18000个客户。”</p>
+
+<p>这时老师又问他：“请问你现在有没有18000个A类客户？”他说没有。“如果没有的话，就要靠陌生拜访。你平均一个人要谈上多长时间呢？”他说：“至少20分钟。”老实说：“每个人要谈20分钟，一天要谈50个人，也就是说你每天要花16个多小时在与客户交谈上，还不算路途时间。请问你能不能做到？”他说：“不能。老师，我懂了。这个目标不是凭空想象的，是需要凭着一个能达成的计划而定的。”</p>
+
+<p>赵日磊点评：目标不是孤立存在的，目标是计划相辅相成的，目标指导计划，计划的有效性影响着目标的达成。所以在执行目标的时候，要考虑清楚自己的行动计划，怎么做才能更有效地完成目标，是每个人都要想清楚的问题，否则，目标定的越高，达成的效果越差！</p>
+
+<p>第五个故事：马拉松运动员的故事</p>
+
+<p>山田本一是日本著名的马拉松运动员。他曾在1984年和1987年的国际马拉松比赛中，两次夺得世界冠军。记者问他凭什么取得如此惊人的成绩，山田本一总是回答：“凭智慧战胜对手！”</p>
+
+<p>大家都知道，马拉松比赛主要是运动员体力和耐力的较量，爆发力、速度和技巧都还在其次。因此对山田本一的回答，许多人觉得他是在故弄玄虚。</p>
+
+<p>10年之后，这个谜底被揭开了。山田本一在自传中这样写到：“每次比赛之前，我都要乘车把比赛的路线仔细地看一遍，并把沿途比较醒目的标志画下来，比如第一标志是银行；第二标志是一个古怪的大树；第三标志是一座高楼……这样一直画到赛程的结束。比赛开始后，我就以百米的速度奋力地向第一个目标冲去，到达第一个目标后，我又以同样的速度向第二个目标冲去。40 多公里的赛程，被我分解成几个小目标，跑起来就轻松多了。开始我把我的目标定在终点线的旗帜上，结果当我跑到十几公里的时候就疲惫不堪了，因为我被前面那段遥远的路吓到了。”</p>
+
+<p>赵日磊点评：目标是需要分解的，一个人制定目标的时候，要有最终目标，比如成为世界冠军，更要有明确的绩效目标，比如在某个时间内成绩提高多少。</p>
+
+<p>最终目标是宏大的，引领方向的目标，而绩效目标就是一个具体的，有明确衡量标准的目标，比如在四个月把跑步成绩提高1秒，这就是目标分分解，绩效目标可以进一步分解，比如在第一个内提高0.03秒等。</p>
+
+<p>当目标被清晰地分解了，目标的激励作用就显现了，当我们实现了一个目标的时候，我们就及时地得到了一个正面激励，这对于培养我们挑战目标的信心的作用是非常巨大的!</p>
+
+<p>第六个故事：幸岛短尾猴的故事</p>
+
+<p>位于日本南部宫崎县的幸岛是短尾猴的故乡。日本科学家对幸岛短尾猴的研究已有半个世纪之久，研究过程中最著名的发现是猴子也会清洗红薯。科学家将这种行为看作是非人类种群表现出的一种文化现象。</p>
+
+<p>1952年，日本京都大学的一位教授带着几名学生对短尾猴进行了观察研究，在研究的过程中，他们在沙土里种植了一些红薯，走的时候就把这些红薯留下了。后来，猴子发现了红薯，就开始作为食物来吃。由于是在沙土里生长的，红薯上经常粘着一些沙子，比较磕牙。后来，有一个聪明的猴子发现，把红薯放到水里洗一下，然后再吃，就不会磕牙了，于是他高兴地把这个发现告诉了身边的小猴子，这些猴子也开始用水洗红薯吃，再后来，这些猴子又把这个秘密告诉了其他的猴子，甚至告诉了其他岛上的猴子。于是，一天，一个令人震撼的场景出现了，在皎洁的月光下，100多只猴子排着队在水里洗红薯，这就像预示着一个新纪元的出现。</p>
+
+<p>赵日磊点评：这个故事说明了一个道理，一个人在小范围内做正确的事情的时候，他的行为可以影响到身边的人，而这种影响可以产生一种聚合效应。在目标管理里，领导带头谈目标、定目标、回顾目标就是在做正确的事情，而领导的这种行为可以影响到经理层和员工，使大家逐渐培养一种目标管理行为，最终形成自我控制！</p>
+
+<p>目标管理如果没有高层领导的支持和推动，没有高层领导的以身作则和示范作用，很难推行，因为它一种思想和组织行为，领导必须起到带头作用！</p>
+
+<p>第七个故事：吴起不败</p>
+
+<p>吴起，战国初期著名的政治家，卓越的军事家、统帅、军事理论家、军事改革家。后世把他和孙子连称“孙吴”，著有《吴子》，《吴子》与《孙子》又合称《孙吴兵法》，在中国古代军事典籍中占有重要地位。改革</p>
+
+<p>吴起是一位军事和政治上的鬼才，吴起的一生中毫无败绩，可以说是不败的军神，在政治上提出的改革方案，令魏国和楚国成为当时战国的霸主，吴起在作战上号令严明，在寻常的出征途中愿意和普通士卒同甘共苦，赢得了士卒的爱戴，以至于士卒为其战死亦在所不惜。吴起在军制的改革抛弃了当时军事上士卒作战不积极的弊病，使所仕国家的军事强于其他国家，正因此才能抵御强国的入侵，侵占小国的领土。</p>
+
+<p>赵日磊：这个故事讲的是领导在目标管理中要拉下架子，平等对待部门或团队的每个成员，并提供顾问、教练、保姆服务，就会创造出惊人的团队的整体业绩。</p>
+
+<p>《高效能人士的七个习惯》的作者史蒂芬柯维曾提到了一个仆人式领导的概念，讲的也是这个道理：一个仆人式的领导会问员工五个问题：1、工作进展如何?2、你在学习什么?3、你的目标是什么?4、我能帮你做什么?5、我作为一个帮助者做得怎么样？</p>
+
+<p>七个故事很好地诠释了目标管理理论，首先，一个人要有明确清晰的目标，其次，目标要切合实际，看得见，摸得着，第三，目标不是孤立存在，一个人的目标要和组织相关联，第四，目标与计划密不可分，第五，目标要进行分解落实，第六，领导要在目标管理中起到率先垂范作用，第七，领导要关注目标的执行情况，为员工提供支持！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[不可能完成项目的SCRUM实践]]></title>
+    <link href="http://xazaj.github.com/blog/2010/06/30/bu-ke-neng-wan-cheng-xiang-mu-de-scrum-shi-jian.html"/>
+    <updated>2010-06-30T00:00:00+08:00</updated>
+    <id>http://xazaj.github.com/blog/2010/06/30/bu-ke-neng-wan-cheng-xiang-mu-de-scrum-shi-jian</id>
+    <content type="html"><![CDATA[<p>一天老板或者销售人员跑过来亲切和蔼地拍拍你说：有个战略性产品需要在一个月之内开发出来，对搞定几个重点大商户至关重要，时间没有商量的余地。党组织从众多的党员同志中选择了你，这是党对你的信任，也是考验你的时候了。在生活的压力和生命的尊严之间，你只好泪流满面地接了下来。</p>
+
+<!--more-->
+
+
+<p>1、不可能完成项目的典型特征
+对于互联网公司及做传统系统集成的公司的同志们而言，接到这样不可能完成的项目开发任务的情况已经司空见惯了。这些不可能完成项目的典型特征如下：
+老板说：项目对公司具有战略意义，必须搞定<br>
+项目突发：销售跑过来告诉你，一个月内必须搞定这个项目<br>
+需求不明确<br>
+对现有系统架构有较大冲击，改动风险很大<br>
+项目给的时间很短且交付时间固定(time boxing) ，只能够倒推<br>
+销售过度承诺，必须实现狂复杂、狂大的需求<br>
+资源有限<br>
+设计诸多部门协调，很难短期搞定
+2 、失败项目的典型症状
+项目组所有成员及利益相关者对项目愿景及目标没有达成一致<br>
+为了赶进度，压缩需求分析、系统设计时间，需求理解尚未统一就投入开发<br>
+每个人只关心自己负责的一小块业务，对系统整体需求、架构、设计没有达成一致<br>
+为了赶进度，只关注功能的完成而忽视了功能实现的质量，导致大规模的返工<br>
+为了赶进度，不进行统一设计，由各模块负责人自己设计，设计存在较大缺陷<br>
+公用问题没有专人负责，工作重复<br>
+项目组成员沟通不畅，出问题后才沟通，导致无谓的时间浪费<br>
+项目组没有形成团队文化，团队成员只是为了完成项目目标而加班赶工，没有归属感
+3、不可能完成项目的Scrum实践
+对于这样的不可能完成项目的管理使用Scrum这样的Time Boxing迭代开发过程很恰当，关于实践方法有兴趣的可以参考脑图。</p>
+
+<p>[caption id=&#8221;&#8221; align=&#8221;aligncenter&#8221; width=&#8221;1398&#8221; caption=&#8221;脑图&#8221;]<a href="http://www.zhuaijun.cn/images/uploads/2010/06/impossible20project20scrum20practice.png"><img alt="脑图" src="http://www.zhuaijun.cn/images/uploads/2010/06/impossible20project20scrum20practice.png" title="脑图" width="1398" height="2898"></a>[/caption]
+来源：草根网(www.20ju.com) - 互联网界的读者文摘</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[人之善恶，事之善恶]]></title>
+    <link href="http://xazaj.github.com/blog/2010/01/04/ji-xian-lin-de-shan-e-lun.html"/>
+    <updated>2010-01-04T00:00:00+08:00</updated>
+    <id>http://xazaj.github.com/blog/2010/01/04/ji-xian-lin-de-shan-e-lun</id>
+    <content type="html"><![CDATA[<p>自己生存，<br>
+也让别的人或动植物生存，<br>
+这就是善。<br>
+只考虑自己生存，<br>
+不考虑别人生存，<br>
+就是恶。<br>
+以此为标准，身边事事皆可以善恶论，人人亦可按善恶分。
+以善行事者，高山景行；
+以恶行事者，威严扫地。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[写给那些正奔三的80后【转】]]></title>
+    <link href="http://xazaj.github.com/blog/2009/12/03/xie-gei-na-xie-zheng-ben-san-de-80-hou-%E3%80%90-zhuan-%E3%80%91.html"/>
+    <updated>2009-12-03T00:00:00+08:00</updated>
+    <id>http://xazaj.github.com/blog/2009/12/03/xie-gei-na-xie-zheng-ben-san-de-80-hou-【-zhuan-】</id>
+    <content type="html"><![CDATA[<p>我还在想象着我的18岁，可我却马上30岁了！真的吗？不愿意去想，但不得不面对。　　 曾经的年少轻狂，早已荡然无存。曾经的花样年华，早已悄然而逝。80后的我们已经开始站在了20岁的尾巴上，面对三十而立，还有多少人可以昂着头，信誓旦旦地说，我们依然年轻？是的，年轻就是资本，面对着90后的异军突起，80后的我们是否还年轻？</p>
+
+<!--more-->
+
+
+<p>　　曾经，骄傲的我们都怀抱着崇高的理想，奔走在陌生的城市，只为寻找内心深处最真的梦想。曾经，生活得再艰难，都会想着只要自己努力，就一定可以取得成功。曾经，单纯的认为，就算很小很小的一个房间，都可以经营自己最美的爱情。当事业依然碌碌无为的时候，当爱情变得虚无缥缈的时候，80后的我们，是不是依然还会说，年轻不怕失败？</p>
+
+<p>　　终有一天，我才发现，原来，80后的我们，都早已经老去。我们不再轻狂，我们不再潇洒，我们不再坦荡，我们不再微笑，我们有的是对于生活的压力，我们有的是对于婚姻的恐惧，我们有的是对于未来的失望，我们有的是对于困难的却步.</p>
+
+<p>　　面对工作：我们已经没有了更多的激情，只希望能够有一份足够安稳的工作。有风险的工作都已经被排斥了，曾经一千个一万个不愿意走关系找工作的我们，面对着事业的平淡，连收入都无法给予自己温饱的时候，我们不得不选择屈服，放下原本最高傲的脸面，开始寻求人际关系的最大化。工作的艰辛，对于我们无所畏惧，重要的是可以一直将这份工作持续。</p>
+
+<p>　　面对感情：已经不把婚姻当成爱情的升华，而是把婚姻当作是亲情。我们不再渴望一份浪漫而刺激的爱情，而是奢望一段幸福而美满的婚姻。曾经固执的以为，相亲那只不过是70后，或者说更早一代的婚姻方式，然而等到现在才发现，相亲已经成为了80后婚姻的主流方式。一场场地相亲，一次次的绝望，已经对相亲产生了麻木和排斥，但依然奔波在相亲场上。难怪，一个朋友说：“我不是在相亲，就是在相亲的路上。”</p>
+
+<p>　　面对穿着：曾经过度讲究品牌感觉的我们，对于品牌已经变得陌生，橱柜里的昂贵的衣服，让工薪阶层的我们没有勇气再去试穿。赚钱之后，才知道，原来生活是多么的不容易。我们不再讲究品牌，而更注重衣服的质量以及用途，适合穿着的场合，不再会因为一时的冲动，去血拼那些打折的衣服，衣服不在于多，而在于体面。合适的，才是我们所需要的，品牌只不过是一个虚幻的东西。</p>
+
+<p>　　面对社交：当越来越多的朋友有了家庭之后，已经没有多大的勇气再和他们一起聊聊关于生活，因为在他们的口中，都是关于家庭的，而单身的80后更注重个人情感的书法。曾经极度热爱的酒吧、KTV都不再喜欢了，已经忍受不了那种嘈杂、疯狂的环境，更喜欢坐在咖啡厅里或者茶馆里，看看书，听听音乐，享受咖啡的苦涩，亦或者茶的清香。</p>
+
+<p>　　面对家庭：家庭超越了爱情和友情，一切都将家庭放在第一位。没有了原本的冲动，了解了父母的苦心，懂得去体谅他们的无可奈何。原本单纯的家庭之间的关系，在某一天突然变得清晰，了解了人与人之间的关系，原来一直都不那么单纯，最值得相信的，除了父母，还有自己。越来越讨厌，走亲访友，因为总是会有很多人问题，关于婚姻的某个问题。</p>
+
+<p>　　面对娱乐：突然发现，手机使用的频率越来越少了，短信也越来越少了，有的时候甚至不愿意发短信，宁可打个电话，匆匆挂掉。QQ也不像以前那样拼命地闪个不停，退出了许多的群，有些群碍于面子，一直处于屏蔽，只是偶尔选择几个群聊几句就隐身。再也不会为了游戏，废寝忘食地玩，更多的时候会捧着一本书，安静地看着。</p>
+
+<p>　　面对购物：总会想着买东西的时候，是不是有什么赠品，而不会看着哪个好看就买哪个。不再会像以前那样，为了得到某样赠品，去买某样自己不喜欢的东西。购物早已不是逛街了，而变成了有目的性的行为，买完自己想要的东西，就匆匆离开。一些漂亮，精致的小摆设，只是在柜台上欣赏完之后，放回去，再也不会带回家之后，塞进箱底。</p>
+
+<p>　　面对一切的一切，我们都已经会了深思熟虑，我们的心中，早已没有了童话。我们浪费掉了太多的青春，那是一段如此自以为是、又如此狼狈不堪的青春岁月。有欢笑，也有泪水；有朝气，也有颓废；有甜蜜，也有荒唐；有自信，也有迷茫。</p>
+
+<p>　　我们敏感，我们偏执，我们顽固到底地故作坚强；我们轻易的伤害别人，也轻易的被别人所伤。</p>
+
+<p>　　我们追逐于颓废的快乐，陶醉于寂寞的美丽；</p>
+
+<p>　　我们坚信自己与众不同，坚信世界会因我而改变；</p>
+
+<p>　　我们觉醒其实我们已经不再年轻，我们前途或许也不再是无限的，其实它又何曾是无限的？</p>
+
+<p>　　80后的我们，已经开始承认我们老了，没有了90后的青春，没有90后的激情，我们有的只是为了生活进行奔波着的疲惫的心。偶尔微笑着告诉自己：三十岁的男人，我的美好年华才刚刚开始。80后的我们，打一场酣畅淋漓球，也都心有余而力不足。很久没有运动，开始显露臃肿的啤酒肚。</p>
+
+<p>　　我不禁感叹：原来，80后的我们都早已老去，只是我们一直不愿意服老。</p>
+
+<p>　　“今天，之所以区别于昨天，恰恰是因为昨天的感受依然在我心中。”</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[领导者的性格]]></title>
+    <link href="http://xazaj.github.com/blog/2009/10/22/ling-dao-zhe-de-xing-ge.html"/>
+    <updated>2009-10-22T00:00:00+08:00</updated>
+    <id>http://xazaj.github.com/blog/2009/10/22/ling-dao-zhe-de-xing-ge</id>
+    <content type="html"><![CDATA[<p>一个领袖人物面对一盘迷局、一伙群体、一线机会或一场竞争，它基本上要操控得了。让那一伙人在他的引导下，抓紧稍纵即逝的商机，展开一场搏杀。其实，每个人在生活中都可能扮演着领袖的角色——企业领导、部门主管、车间主任、一家之长等。当好一位领袖，与大家都有关系。有很多对领袖人物的描述、期盼、观察或总结，最后都可以追溯到几个基本“根性”。而我们想成为领袖，就要注意培养这些重要，且一般人又比较欠缺的性格。
+能力就像一串粽子，用手一提就可以借着绑绳抓住每个粽子。<!--more--></p>
+
+<p>　　做一个领袖要具备一定的能力，而除此以外，领袖和一般人有什么不一样呢？什么人可能会成长为领袖？</p>
+
+<p>　　领袖有两把宝剑，一个是他的根性，一个是他的能力，这两者是有区别的。我们以后观察别人和对照自己像不像领袖，要看清楚。一个领袖有两条腿，他的左腿叫做根性，他的右腿叫做能力，两条腿都健康才能成为领袖。可是如果一条腿有问题，我们就比较难分清楚是能力有问题还是根性有问题。</p>
+
+<p>　　那么，我们来看看，对于根性我是怎么解释的。根性就是根本性格，一个人很小就要注意他的性格了。到了我这种年纪研究根性，已经有点晚了，我都60岁了，还来研究什么根性；坐在台下四五十岁的人要改变根性也晚了，因为要花很多力气才能改变；台下二三十岁的人要特别注意你的根性，如果你有个孩子才四五六岁，那正是开始培养的最好时候，根性是越早注意越好。人和人之间没有太大的区别，如果你想成为一个领袖，就要培养别人没有的性格——领袖根性。</p>
+
+<p>　　领袖根性讲起来就像一棵树。如果你在花园里种了一朵玫瑰，然后你对玫瑰说，长大吧！长大吧！像松树一样长大吧！这些话叫做废话。玫瑰花是不可能长成松树的，一棵树之所以能长成树，它的种子就要具备树的条件。</p>
+
+<p>　　我认为领袖根性大致有7种，沉稳、细心、胆识、积极、大度、诚信、担当，这7种领袖根性的大树让你的人生真正长成森林。我将拿古代的帝王来举例，穿插我国企业成功或失败的例子来描绘这7棵树。</p>
+
+<p>　　但是，领袖有两条腿，右腿——能力，我们多多少少解释一下，能力就是操控的本事。我把领袖的能力分为6个：我在浙江这个市场上发现什么机会，这个叫做洞察力；我具备什么条件，这个叫做思考力；我如何确定这个市场，这个是决策力；谁来帮我忙，是组织力；他们听我的话吗？这个是影响力；我的想法能落实吗？是执行力。</p>
+
+<p>　　刚才我用一棵树来代表一种性格，那我用什么来代表能力呢？能力就像一串粽子，用手一提就可以借着绑绳，抓住每个粽子，而组织力是绑着每个粽子的绳子，有了绳子，一些散兵游勇可以建成一支部队，一些流程作业可以优化重组，一些方案可以排列顺序，且条理分明，一些重要资源能调整整合，充分利用。</p>
+
+<p>　　我们来看看组织力的案例。马雪征女士，今年53岁，北京师范大学文学学士，没有IT背景，也没有学过财务，但她是联想电脑的首席财务官、副总裁和执行董事。马雪征说：“我不懂财务，但我知道两件事情，一个是方向，一个是团队。”她的组织力很好，能够把一些懂IT的组织起来，然后给一个方向，说：“冲啊，兄弟们！”叫冲的那个人虽然没有开过枪，但那些听她指挥的兄弟们都带着枪。</p>
+
+<p>　　一、领袖根性之——沉稳</p>
+
+<p>　　做皇帝都是要承受委屈的，因此你要学会沉稳。</p>
+
+<p>　　7种根性，就像7棵树，首先我们来看第一棵树——沉稳。领袖的第一个根性是沉稳，一个人如果沉稳，他给人的感觉一定是比较缜密、谨缜、专业、完美。</p>
+
+<p>　　我们拿古代的帝王看看。公元17世纪，满清有个康熙皇帝，在中国历史上，开疆辟土，版图特别大。康熙皇帝8岁就登基了，他的父亲顺治很早就离开了他，顺治的遗诏特别交代了4个亲王辅佐他：一个是索尼，年纪太大，苏克萨哈，年纪太小，遏必隆，个性太软弱，鳌拜，就是那个有名的鳌拜。</p>
+
+<p>　　康熙皇帝14岁开始亲政，那个时候，鳌拜要杀苏克萨哈，康熙皇帝不愿意，鳌拜上去，居然挥拳，我说杀就杀！非死不可！苏克萨哈就人头落地了。</p>
+
+<p>　　康熙皇帝一定非常难受，据说在花园里面发牢骚，妈的，我要干掉那个鳌拜！他的奶奶，就是孝庄皇太后，站在后面正好听到，她说，放肆！这个话如果鳌拜听到，有你当皇帝的份！康熙皇帝一直看着地上，发誓16岁干掉鳌拜。</p>
+
+<p>　　16岁，鳌拜有一天上朝，是一个人进去的，康熙皇帝就把他抓起来，关在牢里面。你认为，是康熙皇帝看到鳌拜一个人进来的时候，赶快叫人家准备吗？</p>
+
+<p>　　康熙皇帝每天都在等。8岁受鳌拜的气，一直等到16岁，把鳌拜抓起来。各位，做个皇帝况且要受这样的委屈，这叫做非常的沉稳。</p>
+
+<p>　　同样在17世纪，另一个皇帝就不太沉稳，崇祯皇帝朱由检。他把大将军袁崇焕害死了。因为袁崇焕打败了皇太极。结果，皇太极散布流言，说袁崇焕解决了金兵回北京做皇帝去了。袁崇焕就被召回北京，崇祯帝下命令让他回来述职，把他给搞死了。</p>
+
+<p>　　同样17世纪，一个沉稳的康熙皇帝，一个急躁的崇祯帝，真是一个巨大的反差。</p>
+
+<p>　　古代帝王讲完了。我要提醒在座的各位，面对中国这一场博弈，整个社会的开放、国计民生的商机，每个人都是心猿意马、摩拳擦掌，我给你个忠告：你最好沉稳点。</p>
+
+<p>　　沉稳的人碰到公司有危机，不会惊慌失措。</p>
+
+<p>　　沉稳的人面临有人叛变或窝里反的情况，不会坐困愁城，一筹莫展。</p>
+
+<p>　　各位，如果我现在问，你们公司有哪几员大将？我猜你马上讲得出来；但你们公司的大将走了呢？“我不知道。”</p>
+
+<p>　　杨元庆可不可能离开联想？杨元庆怎么可能离开联想？！照你这么讲，唐俊离开就是意外喽？所以，一样的道理。男人们，躺在你们身边的女人你以为她不会走吗？上海的离婚率是20％，每100对里面有20对要离婚。所以，各位你要想好，躺在旁边的这位随时可能离开。重要的是，你不要一筹莫展。</p>
+
+<p>　　沉稳的人碰到市场出现逆转的情况不会无计可施，失去斗志。</p>
+
+<p>　　我们来看一个案例。在世界第一的宝座上坐很多年的公司，美国通用公司在这个宝座上坐了多久？76年。但是今年春天，结束了，日本丰田在今年第一季度的销售量超过它88000辆车，把通用拉下宝座。这个事情对美国通用来说，一定是很难受的，有人采访了他们的总裁瓦格纳，瓦格纳先生说了句潇洒的话：暂时的超越又不是世界末日。</p>
+
+<p>　　沉稳的人面对重要的投资绝对不会草率行事。</p>
+
+<p>　　我国的企业家最近都比较浮躁，都想快速发展，这个中间就显现出不沉稳。这里，我给中国企业一个建议，主动找你，或者你一找他就马上点头答应的公司千万不能买，会来找你买的公司通常都有问题。你一开头他就马上答应的人通常也有问题，就好像一位没有结过婚的男士，爱上一个小女孩，小玉，嫁给我好吗？她说OK！什么时候？要不要明天？这个时候，我建议回去思考一下，怎么这么快？</p>
+
+<p>　　各位，那个愿意主动嫁给你的，不是说不好，有问题占七八成。你看，有个统计数据，全球购并，成功的只有1/4，3/4是失败的。会生很多蛋的鸡是不卖的，卖给你的都是不生蛋只吃饲料，你恨不得把它杀了的鸡。</p>
+
+<p>　　沉稳这棵树讲完了，我再给大家提提生活与工作中的建议。</p>
+
+<p>　　第一，不要随便显露你的情绪。</p>
+
+<p>　　有的时候我们遇见发脾气的人、生气的人、撒娇的人，我们会说：这个人很自然，很真情。这种说法其实是纵容。人和动物不一样，人应该有理智和知性，不会随便显露情绪。情绪不能解决问题。</p>
+
+<p>　　第二，不要随便逢人诉说你的困难与遭遇。</p>
+
+<p>　　第三，在征询别人的意见之前，自己要先做思考，不要先讲。</p>
+
+<p>　　第四，不要一有机会就唠叨你的不满。</p>
+
+<p>　　第五，重要决定或处分尽量与别人磋商，最少要隔一夜再发布。</p>
+
+<p>　　第六，走路与说话不要慌乱。</p>
+
+<p>　　二、领袖根性之——细心</p>
+
+<p>　　再精彩的思想 如果没有方法是做不出来的。</p>
+
+<p>　　领袖应具备的第二种根性是细心。心细的人，外在表现的就是谨慎、缜密、专业和完美。</p>
+
+<p>　　这个我们又要今古论证，先拿一个帝王来解释，再把这棵“细心树”展开。这次我们讲的是女皇帝武则天，她是一个做事情非常细心的人。</p>
+
+<p>　　武则天其实根本就不是后妃，在唐太宗的时代，她连做后妃的资格都没有，她是替唐太宗换衣服的。一般人在做这个工作时只会说，皇上，等会儿您穿哪一套衣服？武则天知道，唐太宗换来换去就是那几套重要的衣服，所以武则天自己做了个衣架，把唐太宗常常穿的几套衣服挂好，所以皇上一进寝宫，她就说，皇上，这几件衣服您打算穿哪一件？嗯，第五件。唐太宗很舒服。</p>
+
+<p>　　人如果非常细心，他提出的目标或者口号就不会没有方法，没有手段。我发现，我们有些人很喜欢讲目标和口号，都讲成了习惯。每年都讲相同的话，有什么意义呢？我们最主要是把目标做出来，讲口号有什么用呢？</p>
+
+<p>　　一个口号没有方法和手段，就是不细心。所以各位，做企业也是一样的，不要在公司讲太多口号目标。</p>
+
+<p>　　最近，于丹小姐讲论语心得，大家都非常有兴趣，这是件好事，表示大家对国学都有兴趣。我太太是文学硕士，经常和我讨论国学方面的问题。中国古代的孔子、孟子、老子、韩非子等都是非常伟大的思想家，但他们系统的方法论还没有形成，讲的都是想法、思想和道理，至于怎么做，这都不是他们注意的问题。</p>
+
+<p>　　我不认识于丹教授，哪天碰到她了，很想给她一个建议，以后讲《论语》，分成两部分，一个是论语心得，一个是论语操作。甲午战争的时候，拿论语去打，怎么打得赢？我这里就是要提醒，再精彩的思想，如果没有方法，是做不出来的。</p>
+
+<p>　　我们后代子孙应该提炼方法，德国、法国、英国之所以成为强国，是他们不断研究方法，这就是细心。反过来说，细心的人一定有方法手段，你的细心和方法结合起来就叫做专业。</p>
+
+<p>　　细心的人在各种竞争中总是先人一步，高人一分，高人一档，并且在执行任务的过程中不会有破绽和漏洞。</p>
+
+<p>　　听过新东方吗？老总俞敏洪是北大光华管理学院第一届MBA，新东方外语补习班是中国第一个在美国股票市场上市的教育产业，那么，你认为俞敏洪的成功在哪里？两点：一点是所有新东方的学生都是他的资源，俞敏洪在美国上市，替他做审计、做调查的，都是他的学生；第二，中国企业想在美国上市，财务报表要送去检验，第一次如果没有检验通过，第二次、第三次就很困难了。俞敏洪做了件很聪明的事情，很早就让审计师进入公司。他比别人细心，多走了一步。</p>
+
+<p>　　我们都没有想到，一个外语补习班能在美国上市，其实，什么事情都有可能，重要的是，想到了就要开始做准备，这就是细心。</p>
+
+<p>　　“细心树”讲完了，我再给大家提提生活与工作中的建议。</p>
+
+<p>　　关于细心，余世维给大家提建议</p>
+
+<p>　　第一，对身边所发生的事情，要常常思考它们的因果关系。</p>
+
+<p>　　听说现在有个新观念叫做农业学韩国。中国以农立国，是世界上数一数二的农业大国，很久以来，农业就很受别国关注，是被学习的。怎么要反过来向韩国学习呢？</p>
+
+<p>　　我请教你，这中间的症结在哪里？有很多问题其实根本不用到韩国去，想想问题的原因，我们自己就可以解决。</p>
+
+<p>　　在中国的社会里，老百姓种石榴、杨桃、芒果、桂圆等，那么我请教你一个问题，你的水果是被谁出口了？韩国规定，出口水果的必须是水果商，这个水果商就是水果的种植者。所以对比看来，我们就知道我们国家农民贫穷的原因，是他们只负责生产而不销售。</p>
+
+<p>　　第二，对于做不到位的执行问题，要挖掘它们的症结所在。</p>
+
+<p>　　第三，对于习以为常的做事方法，要有改进或优化的建议。</p>
+
+<p>　　第四，做什么事情都要养成有条不紊和井然有序的习惯。</p>
+
+<p>　　第五，经常去找几个别人看不出来的毛病或弊端。</p>
+
+<p>　　第六，自己要随时随地对不足的地方补位。</p>
+
+<p>　　一个老板总有做不到的事情，有看不到的时候，你作为一个细心、有潜质的中层、下属，你就要补位，为老板把事情办妥，培养自己的领袖气质。大家都在做的事情，你也做，这没有什么了不起，你就去补老板的位，为他解除后顾之忧，体现你的细心，老板一定会信任你。</p>
+
+<p>　　三、领袖根性之——胆识</p>
+
+<p>　　领袖的第三种根性叫胆识。一个人有胆识，外在表现就是强势、果断、冒险。有胆识的人在需要力排众议的时候，不会瞻前顾后。有胆识的人，发现百年难得一遇的机会，不会犹豫不决。</p>
+
+<p>　　我给各位提个建议，有儿子的，小学三年级以后，就不要常常牵他的手，很多妈妈喜欢牵儿子的手，这个儿子很快就没有胆子了。在外国，我看到小孩摔跤，父母都是不扶的。</p>
+
+<p>　　温州人很聪明，很勤劳，这个我们有目共睹，但是温州人生意做得成功，原因是他们第一批下海。他们是胆子大的中国人的代表，他们跳下去快，抢到的机会多，胆子也越来越大。温州人跳下去以后就没有机会了吗？一定还有。</p>
+
+<p>　　各位企业家，问你们一件事情，你们公司有哪几个人，你希望他们早点走人？有吗？全世界每个公司都有这种人，老板的小舅子、老板娘姐姐的儿子。大部分老板都有几件没有魄力去做的事情，这个就是胆识不够。已经不能再用的人，就不要一再容忍，徒添困扰。</p>
+
+<p>　　我们来讲个案例，TCL董事长李东升先生写过一篇文章《我为什么内疚》，TCL发展到今天，李东升先生发现它进入了瓶颈，公司有些干部违反了企业的规矩，但没有让他走，我装着没看见，公司里面有些不错的人要走，但是碍于情面、碍于老板的面子，居然没有挽留。</p>
+
+<p>　　李先生还写过另外一篇文章《老鹰的重生》。鹰是鸟类中寿命最长的鸟，但是老鹰的平均寿命有两种，40岁和70岁。老鹰到40岁的时候喙长得又长又弯，几乎碰到自己的胸部，脚爪上长了很多茧，连野兔都抓不住，毛变得又厚又重，扇动翅膀也很吃力。于是，40岁的老鹰有两种结果，一个是在那里慢慢等死，还有一个，飞到很高的悬崖上面，那里天敌比较少，用嘴敲打岩石，把整个嘴打烂，满嘴都是血，然后长出新的嘴，啄脚上的皮，把茧啄掉，脚上也都是血，啄自己身上的毛，全部啄掉，弄得两只翅膀像秃鸡一样，然后长出新的羽毛，配上新的鸟嘴、新的爪子，重新飞起来，老鹰能再活上30年。</p>
+
+<p>　　这是生物学上的故事，李东升用在TCL里面，说我为什么内疚，他意识到人事方面有不能决断的事，公司上有难以割舍的业务，所以他觉得内疚。果断处置，不畏首畏尾，这也是一种胆识。</p>
+
+<p>　　那么，在生活和工作中，如何培养胆识？</p>
+
+<p>　　第一，不要常常说缺乏自信的话。儒家思想对中国的影响真是非常深远，中国人很谦虚，谦虚到最后就变成虚伪。老板说，小叶，这个项目，我就交给你办了。小叶说，谢谢老板，希望我不会让你失望。这什么意思？莫非是指不太肯定能不能做好？以后这样模棱两可的话不要讲，如果是外国老板听到了，交给你的任务就取消了。你认为是谦虚，其实是不自信的表现。所以，能做就能做，不能做就不能做。</p>
+
+<p>　　第二，不要常常反悔，轻易推翻已经决定的事。有人打麻将有个毛病，手上拿张牌，看看外面没有条子，出三条可能会放铳。应该不会吧？犹犹豫豫。三条……碰！哎呀，不是三条，我弄错了。老板要看到下属这样打麻将，一定不会升他的职。为了一件小事就推翻自己，足见这个人负不了责任。所以，在生活和工作中也不要常常反悔，去勇敢承担责任。</p>
+
+<p>　　第三，在众人争执不休的时候，不要没有主见。开会的时候，把你的方法和建议放在口袋里，注意听别人的方法，如果没有好过于你的提议，你就把你的方法读出来，如果别人的比你的好，你的方法就放在口袋里。用不用你的方法不是关键，至少你要有方法，有主见。</p>
+
+<p>　　第四，遇到有不公、不正、不仁、不义的事情，不要一味沉默。有人说吃亏就是占便宜，吃亏就是吃亏了，能占什么便宜？面对不公正的问题，大家都沉默，都吃亏，所以造成很多社会问题。面对不公正发出声音，这是见义勇为，这是有胆识。</p>
+
+<p>　　第五，面对自视甚高的干部或员工，要注意他们逾越和犯规的举动，并且坚持自己的观点。公司里面有人凭着关系或者业绩,和老板勾肩搭背、说话没大没小，这就是逾越。</p>
+
+<p>　　第六，不要忘记谁是主管，处罚人不要不好意思。</p>
+
+<p>　　第七，对已经想好退路的尝试，可以鼓励自己探险。做生意不要牺牲家庭把所有财产都押上去，不要做生意做得房子没有了，没地方住，孩子的教育也成问题。有些大公司每年拿10％的利润放在银行或者律师那里，作为风险基金，以后即使现有的事业失败，还可以东山再起。准备好了退路，你就可以去探险。探险当然是一种胆识，但不要输得无法东山再起。</p>
+
+<p>　　四、领袖根性之——积极</p>
+
+<p>　　机会来了，发现的人很多抓住的人很少，为什么?</p>
+
+<p>　　积极的人将计划付诸实现的时候，不会半途而废，功亏一篑。积极的人通常都会坚持。有一天，我们都会躺在床上和儿女道别，你要和儿女说些什么话？最好现在就做好准备，免得到时候讲不出来。女儿啊，儿子啊，爸爸这一生尽力了，不管有没有功成名就，但已经非常努力。说完笑笑，咽气走了。人这一生可以不显赫，可以不飞黄腾达，但是不能不努力，努力了没有达到目的也不会遗憾。人可以平凡但不能平庸，不能庸碌过一辈子。我很自豪地告诉我两个女儿，你们爸爸很努力，星期六、星期天没有坐在院子里发呆。不要平庸，积极过好每一天，也是一种领袖性格。</p>
+
+<p>　　积极的人在被人赏识和试用的时候，不会表现平平，错失机会。我经常对我的下属讲，商场上朋友很多，伙伴很少；公司里面可爱的人很多，可靠的人很少；营销计划漂亮的很多，可行的很少；机会来了，发现的人很多，抓住的人很少。积极的人一碰到有人赏识他，就非常积极，非常用心，所以成功了。</p>
+
+<p>　　那么，如何在生活和工作中培养自己积极的心态？第一个建议我用鲁冠球的一句话来说，每天做一件实事。1969年，鲁冠球拿了4000元人民币带了几个农民工，就这样起来了，现在资产近百亿的万向集团有声有色。其实鲁冠球说了4句话，一天做件实事，一月做件新事，一年做件大事，一辈子做件有意义的事。你可以问问你自己，昨天你做了件什么实事？6月份你做了什么新鲜的事情？2007年已经过了大半，你做了什么大事？如果没有，下半年你打算做什么？按照这样的思路来要求自己，每天问问自己做了什么，就会变得积极起来。</p>
+
+<p>　　第二，找一两件无论如何都要坚持的小事。一般积极的人都比较有恒心，可以从生活小事当中来培养自己的恒心。你会每天写日记吗？能坚持下来的人非常少。每天写两页日记，养成习惯，过一年之后再拿出来看就非常有意义。还有，每天读书。大部分人读书最多的时候是在学校里，而有成就的人几乎都是终生学习的，所以希望各位坚持看书。买一本300页的书，放在床头柜上，每天看10页，一个月就把它看完了，一年读12本，十年读120本。回去把120本书在地上排排看，其实没有你想像的那么多。如果你每天坚持写两页日记，看10页书，你的性格很快就变得积极起来。</p>
+
+<p>　　第三，积极的人，通常不是一步到位的。因为没有一件事情是可以一步到位的。积极的人是每一天都要比上次做得更好。早晚有一天他会爬到金字塔的塔尖上。</p>
+
+<p>　　第四，积极的人很阳光，很乐观。杭州的老外很多，你经常在街上碰到就会发现，老外的表情和样子很少给人很郁闷的感觉。这是从小教育的缘故，外国的父母亲教育他们的子女，很少用阴暗面去教育他们，不断给他们阳光和正面。</p>
+
+<p>　　第五，积极的人做任何事情，都要表现出很用心的样子，因为有人在看你。迪斯尼乐园对自己的员工是这么讲的：每一天上班都要当作表演。人之所以没有机会，不是真的没有机会，而是别人在看你的时候，你表现得很糟糕，反正我无所谓，反正老板不在。你错了，做任何事情，都要假设有人在看你，监督自己，谨言慎行。</p>
+
+<p>　　第六，事情不顺的时候，吸口气，喝杯茶和咖啡，重新寻找一个突破口，就是结束，放弃，也要干净利落。面对失败，非常坦然地投入另外一件事情也是一种积极。</p>
+
+<p>　　五、领导根性之——大度</p>
+
+<p>　　我们没有办法把外面的敌人变成朋友那至少不要把家里面的朋友变成敌人。</p>
+
+<p>　　一个人如果大度，他就能够包容、忍耐、慷慨，有东西会跟别人分享。对不同的意见就不会刻意打压、故意漠视。</p>
+
+<p>　　我们如何听从别人的意见？我给各位几个建议：第一，不是职员有想法了，非要到你的面前来说，或者开会的时候让他站起来报告，你应该想出一些其他方法，探听他们的声音和意见。第二，一个公司对意见的采纳，不是只针对自己公司的员工，供应商、渠道商、经销商，甚至是客户都应该对你表达不同的意见。第三，对任何意见都要反馈给对方，你将采取什么做法，必须让他知道。这个才叫做真正采纳人家的意见。</p>
+
+<p>　　大度的人，为你卖命的同志和手下不会纷纷出走。我提醒各位，自己公司出去的员工，比外面真正的敌人还要厉害，因为自己公司出去的人通常对公司的弱点最了解。所以，我们要记住一句话，这是美国前总统尼克松讲的：我们没有办法把外面的敌人变成朋友，那至少不要把家里面的朋友变成敌人。</p>
+
+<p>　　大度的人，受过你恩惠的人不会见死不救。读《三国演义》，没有人不知道华容道那个精彩的故事，就是“捉放曹”。关羽把曹操捉住，然后又把他放掉。就是因为关羽曾经受到过曹操的恩惠。所以，给别人留下恩惠的时候，就是给自己留下退路。我给各位一个忠告：在商场上，除非这个人将来对你有很大伤害，否则不要把人家逼上绝路，不要把别人弄得非常凄惨，除非是战争，在商场上没有必要打到这种程度。</p>
+
+<p>　　大度的人，在竞争非常激烈的市场里，不会到处树敌。现在有个名词，叫“策略联盟”，与同行甚至竞争伙伴结成联盟，资源共享，联合起来抵抗危机。所以，在商场上尽量多交朋友，至少他不会联合其他人灭了你。</p>
+
+<p>　　那么，在生活和工作中，如何培养自己大度的性格呢？</p>
+
+<p>　　第一，还是不要刻意地把自己的伙伴变成对手。我来谈谈各位在工作中最容易犯的毛病，这种毛病会把你的伙伴变成对手。老周，不要以为你走了，我有什么关系。小梁，我们公司不是没有你就不行的。这样的话千万不要讲，不要说得太绝。自己的人离开了，到外面去打你就非常厉害。在里面，因为没有危机感，就表现平平。</p>
+
+<p>　　第二，对别人的小错误、小过失不要斤斤计较。有篇文章叫《打破的鸡蛋》，讲一户人家很穷，家里的老人们拼命往冰箱里塞吃的东西，怕饿肚子。小孩子粗手粗脚，用力把冰箱拽开，“啪”，一个蛋掉下来，破了。奶奶正好从外面进来，说，哈哈，今天晚上有鸡蛋糕吃了。其实奶奶也很心疼，但是这个孩子是无辜的。这个故事就是说对别人要宽容，自己换个想法，对双方都好。</p>
+
+<p>　　第三，不要有权力的傲慢和知识的偏见。如果人家叫你领导，你就会隐隐约约产生一点权力的傲慢。如果是法官、工程师、医生、老师，你多多少少会有点知识的偏见。人一有了学问就会有偏见，人一有了权力就会傲慢。努力克服这些，就会变得大度。</p>
+
+<p>　　第四，任何成果与成就，包括公司的利润，都应该与人分享。广东南方李锦记，连续三年当选我国最受尊敬的企业，李锦记有一百多年历史了，从清朝末年就开始了。李锦记有个文化，叫做“思利及人”。人有了利益，要想到别人，就是这个意思。李锦记的文化是高度信任的文化，员工与员工，主管与主管，上级与下属之间高度信任了，在利益分配上非常公平。我打工你赚钱，能高度信任吗？每年李锦记的税后净利润，一定要拿出10％－15％分给员工，这是他们一直延续的传统。所以，这个公司因为大度，获得“2005亚洲最佳雇主”和“2005中国最佳雇主”奖。</p>
+
+<p>　　第五，必须有人牺牲或奉献的时候，自己要走在前面。叫别人去牺牲，自己先牺牲；叫别人奉献，自己先奉献。</p>
+
+<p>　　六、领袖根性之——诚信</p>
+
+<p>　　公司里标语不要挂太多挂多了就是表示做不到。</p>
+
+<p>　　诚信是领袖的第六种根性。诚信的人，给人的感觉是正直、道德、务实。诚信的企业，不会永远缺少老客户，在商业社会中，不会随波逐流，毫不突出。</p>
+
+<p>　　什么叫随波逐流？我只想讲两个。第一个是定力不够，在中国搞电器的，不知道为什么都喜欢做汽车；在中国搞电子的，不知道为什么都喜欢做MP3和手机。第二个就是急功近利，先问眼前能够赚多少钱，先把钱圈进来再说。一个企业，如果急功近利而且定力不够，那么它的品牌就很难持久，永远丢掉了客户。这是我国品牌价值做得不够的原因，随波逐流，守不住我们的老客户。当大家都在随波逐流的时候，怎么可能有品牌呢？</p>
+
+<p>　　品牌价值是慢慢积累起来的，但是一夜之间也能崩塌。因为诚信，我们的品牌价值就不会突然崩塌。</p>
+
+<p>　　因为诚信，不管我们做什么，都不会给人靠不住、信不过的感觉。《三国演义》中有个故事叫做“先主托孤”，讲的是刘备在临死前，把儿子托给了诸葛亮。诸葛亮是刘备最信得过的人，是靠得住的。我想问你一件事情，如果你有个不明不白的一百万，不敢藏在家里，也不敢存在银行里，你会托给谁呢？跟他说我三年以后来拿？我猜你会从现在想到明天天亮。一百万你都找不到一个可信的人，你的儿子女儿你想托给谁呢？所以，诸葛亮这个就叫靠得住，信得过，一个人一生中如果能让别人有这种感觉，很不容易。</p>
+
+<p>　　那么，我们怎么培养诚信呢？</p>
+
+<p>　　第一，做不到的事情不要说，不管对谁。说了，就努力做到。很多时候，我们不经心的一句话，感觉做不做无所谓。习惯养成以后，做什么事情都不会诚信。其实很多妈妈们讲话也是很随便的。小玉，明年过生日的时候，妈妈给你买个很棒的泰迪熊。你把这个话小心地记在记事本上，要不压在玻璃板下，明年在她生日的时候，就一定给她买来。你大概忘记了，你女儿连做梦都梦到这个事情。说到就要做到，是一个人的习惯，习惯了，你就是个非常诚信的人。</p>
+
+<p>　　第二，虚的口号和标语不要常常挂在墙上或放在嘴边。不知道贵公司的墙上和工厂里有没有挂一些标语，我给你一个建议，标语不要挂太多，挂多了就是表示做不到。因为那些标语通常都是不容易做到的。对这些挂在墙上的东西，有两句话：真的做到了干吗要挂？做不到为什么要挂？其实这两句话，是宝钢的前董事长黎明讲的。黎明刚刚接管宝钢，就发现宝钢的墙上都是标语，他马上说，这些标语都是谁挂的？没有声音。做到了吗？没有声音。那做不到挂在上面干什么，不是告诉别人我们做不到吗？拆掉！你知道吗？这种事情做久了，人容易虚，这个社会就容易假。</p>
+
+<p>　　第三，针对客户对公司提起的“不诚信”问题，拿出改善的办法。每一个公司难免会做出一些不太诚信的举动，重要的是怎么改善。在这里我给各位一个建议，回去把你们公司最容易投诉的地方记录下来，然后写在纸上，贴起来。上面写上“本公司几件最不诚信的事情”，然后把你的干部和你的员工找过来，说，各位，这上面的几件事情，是我们公司常常被投诉的不诚信的事情，从今以后，就挂在这里，什么时候有一条被删除了，我们大家就去庆祝一下。如果老板无所谓，干部也不想管，员工也装迷糊，那整个公司就会一直不诚信了。</p>
+
+<p>　　第四，停止一切“不道德”的手段。公司生存的底线和商业的伦理如何平衡？很简单，一句话，在这个社会中，有一种最起码的商业道德，在这个商业道德之上赚你该赚的钱，在这个商业道德以下的事情不要做。其实在西班牙、意大利，搞假货是非常有名的，全世界哪个国家没有搞过假货，新加坡也搞过，日本也搞过，韩国也搞过。在意大利假手表、假皮带、假箱包、假皮鞋、假香水都有，虽然说造假的都不好，但是假烟、假酒、假药、假米、假奶粉，这个没有。这叫做伤天害理，无论如何都不能有。</p>
+
+<p>　　第五，耍弄小聪明是从诚信到不诚信的过渡。一个人要显露他的大智慧，不要卖弄小聪明。卖弄多了，一个人就会变得不诚信。</p>
+
+<p>　　第六，除了“劳动模范”，我们更应该推选“诚信模范”，形成诚信的风尚。</p>
+
+<p>　　第七，计算一下产品或服务的诚信代价，那就是品牌成本。任何品牌都是靠诚信积累起来的。上海有个荣庆物流公司，公司总经理张卓说过一句话，诚实和信誉比生命还重要。他在公司里定了这么个规定，货物延误一天，赔5％；延误两天，赔10％；延误三天，赔15％，延误二十天，就是免费了。张卓这句话讲完以后，听说赔了一百多万。但是从那以后，他的生意就越来越好，别人也对他的公司越来越信任</p>
+
+<p>　　七、领袖之根性——担当</p>
+
+<p>　　认错从上级开始 表功从下级开始 这才叫做担当！</p>
+
+<p>　　我女儿小时候，我和她说，一个女人要有三个独立，情感独立、人格独立和经济独立。我女儿长大后，反问我一个问题，一个女人要有三个独立，那一个男人呢？我嫁给一个男人，他应该有什么条件？我想了一下，回答她，一个男人要有三个条件，女人就可以嫁给他。第一个是有出息，第二个是有担当，第三个是有道德。有出息就是积极开创自己的人生，自己的事业，有道德就是不做让妻子、儿女害怕的事情，至于担当，我们仔细讲讲。</p>
+
+<p>　　一个人如果有担当，出现任何问题和状况，不会怕事，领导把困难的任务交给他，他不会找借口临阵脱逃。</p>
+
+<p>　　一个有担当的人，在应该提高警惕的时候，不会粉饰太平，不会推卸责任。坐在底下的企业，我给你们一个建议，开会的时候不要一直讲好消息，应该讲点坏消息；开会的时候不要常常歌功颂德，应该检讨自己的问题；开会的时候不要常常去蔑视自己的对手，应该要称赞自己的对手；开会的时候不要常常记功嘉奖，要找些应该记过处分的人。什么东西都应该先研究过错，再研究功劳，这个就叫做不要粉饰太平。因为大家都讲好听的话，那不好听的话就没有人讲，该追究的事情就没有人追究。</p>
+
+<p>　　戴尔公司的企业文化，就是不粉饰太平。当戴尔公司有人站起来，说，伙计们，我们今年的业绩又增长19％，净利润又增加2.3％，毛利润增加了5.6％……这时候，戴尔的老总会打断他，问：没有坏消息吗？都是好消息吗？以后戴尔养成了习惯，开会先讲坏消息，一开始就讲丢掉了哪个市场，研究谁应该记过、谁应该调下去。然后再开始研究，自己已经得到什么新的业绩，抢到什么新的市场。其实，坏消息讲完就差不多要散会了。因为没什么时间讲好消息，所以戴尔的好消息通通挂在网上。戴尔活到今天，就是靠这个，他们不粉饰太平，一直有危机意识，所以戴尔一直在世界上排名前三。</p>
+
+<p>　　那么，在生活和工作中如何担当呢？我首先建议，各位在检讨过失的时候，先从自己或自己人反省。法国爱可视的中国地区总裁张亚玲，被称为中国MP4第一人，张亚玲讲过两句话。第一句，我其实不是真正的老板，只是个职业经理人，要对股东负责，对事业负责。法国爱可视在远东地区做得不好，张亚玲先检讨自己，她从来没有说过，中国市场很难做。所以，法国爱可视很重视张亚玲，因为她每次检讨问题总是从自己开始检讨。第二句，在中国，一个领导以身作则、以德服人，就是一种担当的品质。所以我很喜欢她这句话，她做什么事情都是从自己开始。</p>
+
+<p>　　第二，事情或项目结案后，先审查过错，再列述功劳。开会的时候问题注意多，功劳讲得少，过错注意多，业绩讲得少，会让公司有危机感。韩国三星的老总说，要有永恒的危机感。</p>
+
+<p>　　第三，认错从上级开始，表功从下级开始。一个公司如果派人出国考察，谁去？当然是干部。一个公司发奖金，谁拿得最多？当然是干部。一个公司配车，谁先开？当然是干部。难道记过就不应该干部先记吗？所以，享受多的就应该承担责任，享福多的就应该承担过错，这样子才叫做有所担当。</p>
+
+<p>　　第四，着手一个计划，先将权责界定清楚，分配相当。如果得到的权力是18，责任是23，那责任就多了5；权力18，责任6，那权力就多了12，社会、企业最让人难受的就是权责不相等，有权力的人不用背责任，背责任的人往往是没有权力的。难怪我们有句话叫做，多做多错，少做少错。出现这种话，就是权责分配不清楚、不合理。</p>
+
+<p>　　第五，对“怕事”的人要挑明，说出他的弱点。不要耽误大家时间，把事情交给你不信任的人。</p>
+
+<p>　　第六，公司要勇于承担下属犯错所造成的损失。手下为了公司，常常做出一些超支的举动，这是有担当的作为，上级应该承担这个费用。美国纽约的希尔顿酒店，有一天门口冲进来一个人，说，我汽车上面的雨刷谁拔掉了？希尔顿酒店大堂副总管马上跑过来，问，那个雨刷大概多少钱？少说也要8元、10元吧，就算折旧，也应该是5块吧。大堂副总管二话不说，拿了5美元给了那个人。那个人就走了，大家都表示不解。大堂副总管说，这辆车是不是停在我们酒店门口？那个雨刷来的时候是好的，现在不好了，对不对？这先生以后会不会来？将来会不会来吃饭？女儿可不可能在这里结婚？一只雨刷赚不回来吗？这个故事说明的道理是，大堂副总管的上级肯承担这个5美元，他才乐意支付这5美元。如果你的手下不敢承担责任，对客户的要求不敢承担，不要责怪他们，应该怪你自己。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[当主管要过的五大关]]></title>
+    <link href="http://xazaj.github.com/blog/2009/09/27/dang-zhu-guan-yao-guo-de-wu-da-guan.html"/>
+    <updated>2009-09-27T00:00:00+08:00</updated>
+    <id>http://xazaj.github.com/blog/2009/09/27/dang-zhu-guan-yao-guo-de-wu-da-guan</id>
+    <content type="html"><![CDATA[<p>一名主管的成长是有几项难关要突破的，古代有“过五关斩六将”来突出战将的骁勇，职场上也有练好几项基本功才能胜任。讲到主管，一般理解为劳心而非劳力者，是人才而非人手，主管是既管又理的人，主管是负责单位业绩成败的人，主管是调和各方关系的人……主管的职业特点决定了要与人打交道，通过协调人际的关系以达到组织内目标的达成，主管要从几个方面主攻基本技能会有所收获。<!--more-->
+　　
+　　第一要沟通。很多主管有与人沟通的心理障碍，不会讲话，不敢表达自己的想法，不敢进行交流，这是一个大问题。沟通是做人的第一要素，人与人之间的交流，是人类社会本质的东西。几百年来，尤其是近代现代，社会的发展、个人的发展靠的都是交流沟通，所以我们一定要有这种强烈的行为意识和习惯，去强迫自己加强这项基本功锻炼。沟通有正向和反向，正向是对外直说，把自己的观点讲出去，把自己的感受讲出去，甚至把自己的委屈讲出去；反向是要听别人说，有的时候倾听更重要。
+　　
+　　第二要有影响力。扩大自己的影响力，用行动语言，包括自己的人生态度去影响你的团队，要主管一定要有这个意识。在人类发展的层面上，意识决定存在，这是必要条件，这是人类文明发展的必要条件，但不是充分条件。充分条件还要加一条，就是遵循客观规律，要有现实的态度和实证的精神，这时候你才能做到影响。光有梦想不行，只有梦想是建不成艾菲尔铁塔的。在这个操作层面上我们是唯心主义，在整个的大规律下，必须遵循客观规律。要符合强度，要符合稳定性，这个塔才能建成。
+　　
+　　第三是推动性和鼓动性。通用电气公司（GE）认为干部应该具备四个条件：Energy，活力；Energizer，鼓动力；Edge，锐力；Execution，实施力。这就是GE公司的4E理论，同时也是衡量集团高层领导干部的必备条件。鼓动性是挖掘他人的潜力，把他们紧紧围绕在目标的周围，形成目标的凝聚力和核心力；推动力是鼓动性的保障，是在大家围绕目标进行中的监控、指导和拉动。
+　　
+　　第四是开放和公平、公正、公开。开放有两条，一条是对内开放，一条是对外开放。对内，就是张开翅膀、敞开胸怀，接受各种各样的观念，但是自己得有一个最基本的价值观，不能全都接受。好的对你有益的你接受，不统一的、坏的要批判接受或把它遗弃；你现在拥有了更多的思想，接受了更多有用的东西，对外，要勇敢地开放，去影响别人，因为人只要储存了知识、观念的能量，就很容易地对外释放。另外，在这一过程中我们要公平公正公开。实际我们的工作生活中还有很多的不公平、不公开，有很多的封建残余，我们一些干部有了一种权利，受到了别人的尊重，不去开放，而是搞封建，搞封建特权。所以我们要公开评议干部，以民主的手段，公正地对待我们的团队。
+　　
+　　第五是情商关。情商第一个就是要认识自我，认识自己的感情和情绪，同时要控制激励自己。每当看不到希望的时候，一定要鼓励自己，激励自己前进，这是现在很多大学生、青年员工缺少的。反过来你当了干部，要认识别人，认识他人的情绪和感情，全面了解别人，用各种话语、各种行动去影响别人，激励别人。某种程度上管理叫控制论，这种控制并不是那种邪教或者专制，而是用公平公正公开的方式，来控制和影响别人。所以我们干部要做心理医生和人生导师，多看看心理学、行为学等方面的书，认识自我的同时也能启迪教导别人。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[人的差异在于业余时间]]></title>
+    <link href="http://xazaj.github.com/blog/2009/09/26/ren-de-cha-yi-zai-yu-ye-yu-shi-jian.html"/>
+    <updated>2009-09-26T00:00:00+08:00</updated>
+    <id>http://xazaj.github.com/blog/2009/09/26/ren-de-cha-yi-zai-yu-ye-yu-shi-jian</id>
+    <content type="html"><![CDATA[<p>科学大师爱因斯坦说过这样一句话：“人的差异在于业余时间”。我们总认为，人与人不同，这里面有环境、有机缘、有能力、也有性格的差异。怎么在于“业余时间”呢？业余时间对我们每个人意味着休息和充电。</p>
+
+<p>　　2000年8月20日《新华周末》报道，中国人民大学教授王琪延博士带领他的课题组对全国城市居民的生活时间进行抽样调查发现，我国城市居民一周平均每日工作时间为5小时1分，个人生活必需时间10小时42分，家务劳动时间2小时21分，闲暇时间6小时6分。四类活动时间分别占总时间的21％、44％、10％、25％。每一天，城市人就是这样度过。10年来，人的闲暇时间增加了69分钟，闲暇时间占人生命的1／3。而我国居民在电视机前每天是3小时38分，打发掉自己一半的闲暇时光。日本、美国人每天看电视的时间分别为1小时37分和2小时14分。<!--more--></p>
+
+<p>　　调查结果还显示，本科以上高学历者的终生工作时间是低学历者的4倍，收入是其7倍以上。学历越高，越重视终生学习，平均日学习时间为61分钟。</p>
+
+<p>　　每个人的业余时间有多少？业余时间如何用？这里大有讲究。当你业余时间比较多时，而且把如此多的业余时间用于打牌、跳舞、闲扯、看电视时，你的收入就像翘翘板，这一头就会低下去。反之收入就会高起来。收入是社会对你的报酬，也是一个人的价值物化形式。当你的收入渐渐趋于牛市或熊市时，你的生活方式和生活内容也就趋于变化，你的理想和追求与人就大大不同了，这时你自觉不自觉地与他人出现了差异。“人的差异在于业余时间”。这也许是爱因斯坦关于人与时间的又一种表述方式，也是一种深刻的耐人寻味的表述方式。</p>
+
+<p>　　列宁说过，不会休息，就不会工作。现在该是赋予它时代的新义了。步入信息化社会，拥抱知识经济时代，也必然地要求我们压缩以至挤占业余时间。市场竞争无孔不入。在业余时间，我们都能嗅到一股知识和金钱的气息。曾被美国《时代周刊》评为全球“数字英雄”的搜狐总裁张朝阳博士说：“我就是平凡人，我没有发现自己与别人有什么大的不同。如果说有不同，那就是我每天平均除了7个小时睡觉外，其他时间都在工作（思考）”。</p>
+
+<p>　　据说，成功地研究了第三种血细胞（现称血小板）及其他成就的加拿大医学教育家奥斯勒，为了从繁忙的工作中挤出时间读书，他为自己定下一个制度，睡觉之前必须读15分钟的书。不管忙碌到多晚进卧室，就是清晨两三点钟，他也一定要读15分钟的书才入睡。这个制度他整整坚持了半个世纪之久，共读了8235万字、1098本书，医学专家成了文学研究家。奥斯勒赋予业余时间以生命的神奇。</p>
+
+<p>　　你要显示存在的价值吗？你要与人有所差异吗？那么，用好你的业余时间吧！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[九种最重要的领导力--李开复]]></title>
+    <link href="http://xazaj.github.com/blog/2009/09/26/jiu-zhong-zui-zhong-yao-de-ling-dao-li---li-kai-fu.html"/>
+    <updated>2009-09-26T00:00:00+08:00</updated>
+    <id>http://xazaj.github.com/blog/2009/09/26/jiu-zhong-zui-zhong-yao-de-ling-dao-li&#8212;li-kai-fu</id>
+    <content type="html"><![CDATA[<p>1)        愿景比管控更重要
+在吉姆•柯林斯著名的《基业长青》一书中，作者指出，那些真正能够留名千古的宏伟基业都有一个共同点：有令人振奋、并可以帮助员工做重要决定的“愿景”。<br>
+愿景就是公司对自身长远发展和终极目标的规划和描述。缺乏理想与愿景指引的企业或团队会在风险和挑战面前畏缩不前，它们对自己所从事的事业不可能拥有坚定的、持久的信心，也不可能在复杂的情况下，从大局、从长远出发，果断决策，从容应对。<br><!--more-->
+一些人错误地认为，企业管理者的工作就是将100%的精力放在对企业组织结构、运营和人员的管理和控制上。这种依赖于自上而下的指挥、组织和监管的模 式虽然可以在某些时候起到一定效果，但它会极大地限制员工和企业的创造力，并容易使企业丧失前进的目标，使员工对企业未来的认同感大大降低。相比之下，为 企业制定一个明确的、振奋人心的、可实现的愿景，对于一家企业的长远发展来说，其重要性更为显著。处于成长和发展阶段的小企业可能会将更多精力放在求生 存、抓运营等方面，但即便如此，管理者也不能轻视愿景对于凝聚人心和指引方向的重要性；对于已经发展、壮大的成功企业而言，是否拥有一个美好的愿景，就成 为了该企业能否从优秀迈向卓越的重中之重。<br>
+优秀的领导者会与员工分享企业的愿景，如果可能，还会让员工参与愿景的规划。如果能让员工充分理解管理者对企业长期发展方向的思路，让与自己一同工作的所有人拥有相同的努力目标，那么，一家企业就会拥有无穷的源动力。<br>
+例如，以前我在苹果公司工作的时候，曾向公司领导建议，从不同部门调集多媒体及相关技术的精英，组成一个新的团队，研发一系列极有潜力的多媒体产品。 当时，公司的资深副总裁批准了我的请求，并要求我的主管副总裁帮助我抽调人员，组建这个团队。但主管副总裁担心新产品的风险较大，他一方面要求相关人员必 须亲自表达意愿才可以加入我的新团队，另一方面又告诫大家我要研发的新产品有不小的风险，希望大家慎重选择。照他的意思，我们只要做一个问卷调查，看看 60多位技术人员中有多少甘冒风险的就可以了。而当时在公司年年裁员的压力下，如果采用他的方法，这个新团队的计划就可能无法实现了。<br>
+在这样的情形下，我决定利用愿景来激励这些工程师与科学家。我找来这60多位技术人员开会。在会上，我描述了未来互联网与多媒体相结合后，相关新技术 和新应用的巨大发展空间，与他们分享了我关于新产品的规划和设计，以及我为新的产品部门制定的愿景。然后，我鼓励他们分成小组，讨论这个愿景的可行性，以 及自己的潜力将会如何因这样的愿景而得到更充分的发挥。最后，我给所有人念了美国诗人罗伯特•弗罗斯特的一首诗《未选择的路》（Robert Frost, The Road Not Taken）。全诗的最后几句深深打动了大家（这里使用的是顾子欣的译文）：<br>
+一片树林里分出两条路，<br>
+而我选了人迹更少的一条，<br>
+从此决定了我一生的道路。<br>
+我对他们说：&#8221;这条路没有人走过，但是我们恰恰应该为了这个理由踏上这条路，创立一个网络多媒体的美好未来。&#8221;会后，90%的人都决定冒这个风险，离开相对稳定的研究部门，随我加入全新的互动多媒体部门，而这个部门也正是苹果公司后来的许多著名网络多媒体产品（QuickTime, iTunes等等）的诞生地。<br>
+这表明，制定并与员工分享美好的愿景，可以充分激发员工的参与感和积极性，可以让整个团队保持激昂的斗志和坚定的方向，是领导艺术的重要组成部分。
+2)        信念比指标更重要
+就像每个人都离不开正确的价值观指引一样，每个企业也需要拥有正确的、符合公司的价值观。在这里，价值观其实就是企业长期坚守的，影响企业行为，判断是非对错的根本信念。拥有正确的价值观是成功的企业能够保持基业长青的秘诀。<br>
+每一个企业的领导者都应当把坚持正确的信念，恪守以诚信为本的价值观放在所有工作的第一位，不能只片面地追求某些数字上的指标或成绩，或一切决策都从 短期利益出发，而放弃了最基本的企业行为准则。相比之下，正确的信念可以带给企业可持续发展的机会；反之，如果把全部精力放在追求短期指标上，虽然有机会 获得一时的成绩，却可能导致企业发展方向的偏差，使企业很快丧失继续发展的动力。<br>
+成功的企业总是能坚持自己的核心价值观。例如，Google公司的核心价值观之一是&#8221;永不满足，力求最佳&#8221;。Google 创始人之一拉里•佩奇指出：&#8221;完美的搜索引擎需要做到确解用户之意，切返用户之需&#8221;。对于搜索技术，Google不断通过研究、开发和革新来实现长远的发 展，并致力于成为这一技术领域的开拓者。尽管已是全球公认、业界领先的搜索技术公司，Google仍然矢志不移地坚持&#8221;永不满足&#8221;的信念，不断实现对自己 的超越，奉献给用户越来越好的搜索产品。<br>
+同时，公司整体的信念或价值观也必须在员工身上体现出来。毕竟，任何一家企业都是由该企业的所有员工组成和推动的。<br>
+通用电气公司董事长兼CEO杰克•韦尔奇在论述员工评价标准的时候指出，对员工绩效的考察必须与对其价值观的考察结合起来，并着重看该员工的价值观与公司的价值观（尤其是坚持诚信的信念）是否吻合。这其中一共有四种可能：<br>
+绩效达标，价值观与公司吻合&#8211;很简单，公司将毫不犹豫地为他提供奖励和晋升的机会。<br>
+绩效没达标，价值观与公司不吻合&#8211;也很简单，马上请他走人。<br>
+绩效没达标，但与公司的价值观吻合&#8211;再给他一个机会，考虑为他重新分配工作。<br>
+绩效达标，但价值观与公司不吻合&#8211;这是那种足以杀死一家公司的人。现实证明，很多公司就是因为雇用了这些工作能力出色，但品格很差，或个人信念与公司背道而驰的人，才走向崩溃的。<br>
+因此，无论是公司还是个人，坚定的信念，正确的价值观在任何时候都是不可或缺的。
+3)        人才比战略更重要
+在21世纪，无论怎样渲染甚至夸大人才的重要性都不为过。21世纪是人才的世纪，21世纪的主流经济模式是人才密集型和智力密集型的经济。拥有杰出的人才可以改变一家企业、一种产品、一个市场甚至一个产业的面貌。例如在Google，公司最顶尖的编程高手Jeff Dean曾发明过一种先进的方法，该方法可以让一个程序员在几分钟内完成以前需要一个团队做几个月的项目。他还发明了一种神奇的计算机语言，可以让程序员同时在上万台机器上用最短的时间完成极为复杂的计算任务。毫无疑问，这样的人才对公司来说是有非常特殊的意义的。<br>
+对于21世纪的企业管理者而言，人才甚至比企业战略本身更为重要。因为有了杰出的人才，企业才能在市场上有所作为，管理者才能真正拥有一个管理者应有的价值。没有人才的支持，无论怎样宏伟的蓝图，无论怎样引人注目的企业战略，都无法得以真正实施，无法取得最终的成功。<br>
+因此，企业管理者应当把&#8221;以人为本&#8221;视作自己最重要的使命之一，不遗余力地发掘、发现人才，将适合企业特点的优秀人才吸引到自己身边。通常，一名经理 人如果不能将10~50%的工作时间投入到招聘人才的工作中，那么，他就无法让自己的团队获得持久的动力，他就不是一名合格的经理人。当然，这里所说的&#8221; 招聘&#8221;并不仅仅限于直接的面试和聘用行为，它也包括更多地结识业内的朋友，建立自己的人际关系网络，以便从中发现更多、更好的人才。<br>
+好的管理者重视员工的成长，给予人才最大的发展空间，为人才提供足够的培训和学习机会。例如，我开始创立微软中国研究院和Google中国工程研究院 时，雇用的人才中有很大一部分都是刚刚走出校门的毕业生。这些毕业生都非常聪明，拥有很好的发展潜力，都是来自中国各名校的顶尖人才。但是，他们普遍缺乏 工作经验。于是，我对他们采取的是&#8221;指导培养&#8221;的原则：记得在微软中国研究院时,每一位新员工加入后都会经历3个月的培训，我使用自己亲自为他们设计的课 程，一节课一节课地为他们讲解各种相关的知识、经验。而在Google中国工程研究院，培训的时间更长：包括各种课程、到总部3个月的培训、甚至公司还愿意出学费让员工到斯坦福大学读硕士。当然，公司安排的培训并不是纯粹的课程学习，同时也要求员工很快投入到具体的项目工作中。在员工刚加入的初期，优秀的领导者会尽量分配给新员工一些不是特别紧急的项目，并允许他们在项目中犯错误、积累经验。经过这种实践与学习紧密结合的培训，几乎每一位新员工都得到了长足的进步，很快就适应了实际工作的需要。<br>
+很不幸，今天有不少企业对人才的思维方式仍然保持在上个世纪的水平，他们认为员工只是企业这台&#8221;大机器&#8221;中的零件或劳动力，不愿意花大力气培训员工， 生怕他们接受培训后就&#8221;跳槽&#8221;、&#8221;走人&#8221;。这是非常短视的看法，这种不重视员工成长的做法只会让更多的员工选择&#8221;跳槽&#8221;、&#8221;走人&#8221;。<br>
+只要拥有人才，企业就可以实践任何宏伟的战略。反之，如果没有人才，再壮丽的企划也只能是一纸空文。
+4)        团队比个人更重要
+在任何一家成功的企业中，团队利益总要高过个人。企业中的任何一级管理者都应当将全公司的利益放在第一位，部门利益其次，个人利益放在最后。<br>
+这样的道理说起来非常明白，但放到实际工作中，就不那么好把握了。例如，许多部门管理者总是习惯性地把自己和自己的团队作为优先考虑的对象，而在不知 不觉中忽视了公司的整体战略方向和整体利益。这种做法是非常错误的，因为如果公司无法在整体战略方向上取得成功，公司内部的任何一个部门，任何一个团队就 无法获得真正的成功，而团队无法成功的话，团队中的任何个人也不可能取得哪怕是一丁点儿的成功。<br>
+好的管理者善于根据公司目标的优先级顺序决定自己和自己部门的工作目标以及目标的优先级。例如，出于部门利益的考虑，也许某个产品的研发无法在短期内 获得足够的市场收益，部门管理者似乎应该果断放弃对该产品研发的投入，否则，部门在该年度的绩效数据（如果仅以市场收益衡量的话）就有可能不是那么出色。 但是，如果从公司整体的角度出发，假设该产品是帮助公司在未来二到三年内赢得潜在市场的关键因素，或者该产品的推广对于提高公司的企业形象有重要的帮助， 那么，对于该产品的投入是符合公司整体利益的，部门对于该产品研发目标及其优先级的设定就应该符合公司的整体安排。<br>
+团队利益高于个人利益。作为管理者，还应该勇于做出一些有利于公司整体利益的抉择，就算对自己的部门甚至对自己来说是一种损失。<br>
+例如，我在苹果公司工作的时候，曾经管理着一个实际效果非常糟糕的项目。该项目的项目经理是我当时的老板的朋友，而这个项目也是我老板最为看好的一个 项目。当时，我清楚地知道这个项目有多么糟糕，该项目的项目经理也不是一名好经理，但因为我的老板重视该项目，我始终没有勇气来处理这个问题。此外，我也 担心，如果解散了这个项目团队，对我自己的工作其实也是一种否定，因为我已经管理这个团队一年多的时间了。<br>
+终于有一天，我决定在一段时间后离开公司。那时，我觉得公司多年来对我不错，我应该在离开前对公司负责，做一件对公司有益，但我一直为了自己而犹豫不 决的事情。于是，我决定把这个项目和该项目的项目经理裁掉&#8211;大不了，这种做法会让我的老板不满，但它的确对公司是有好处的。<br>
+当我真正裁掉这个项目后，出乎我意料的是，公司内部的绝大多数员工没有表示不满，反而告诉我，他们是多么认可这个决定，他们认为我有勇气，有魄力。公司领导也没有责备我，反而认为我勇于承认并改正错误的做法非常值得赞赏&#8211;连我的老板也觉得这是一个正确的决定。<br>
+也就是说，当公司利益和部门利益或个人利益发生矛盾的时候，管理者要有勇气做出有利于公司利益的决定，而不能患得患失。如果你的决定是正确、负责任的，你就一定会得到公司员工和领导者的赞许。<br>
+此外，管理者应该主动扮演&#8221;团队合作协调者&#8221;的角色，不能只顾突出自己或某个人的才干，而忽视了团队合作。<br>
+在工作中，如果遇到各部门不积极配合，互相推诿的情况，我就会给大家举打篮球的例子：&#8221;公司里的一个团队和篮球场上的一支篮球队其实是一样的。打篮球 时，后卫不能脱离整个团队独来独往，不同位置的队员需要按照战术安排紧密配合，互相支持，这样才能赢得比赛。在我们的工作中，市场人员需要帮助产品部门寻 找产品的合适定位，要为销售部门提供潜在的客户信息，而管理者会承担起教练的角色，为整个团队制定合适的战术。你们能够想象，篮球教练在布置战术时只是一 对一地与每个队员单独讨论吗？那样的话，后卫不知道前锋在想什么，前锋不知道后卫的助攻策略，球队不输球才怪！&#8221;<br>
+最后，公司的中层管理者要善于把握自己的角色定位，让自己成为老板和员工之间沟通、协调的桥梁，而不要让自己与老板或员工对立起来。例如，有一些管理者很容易陷入对自身角色的误解，他们要么把自己和&#8221;雇主&#8221;等同起来，与&#8221;雇员&#8221;做利益上的对抗，或者把自己视作普通员工，与老板对立。这两种极端的做法都是不可取的。其实，中层管理者既代表公司利益，也代表员工利益，他们应该：<br>
+认识到自己的中间角色，不要和员工一起盲目、片面地指责公司，也不要成为高高在上的监管者，对员工指手画脚。<br>
+以公司的整体利益为先，主动扮演协调人的角色，既考虑公司发展的需要，也为员工的个人需求着想，解决好二者之间可能存在的矛盾，让公司的整体协作效率达到最高点。<br>
+自己做了决定后，就要勇于承担相关的责任，不要把责任推到员工、老板或公司身上。
+5)        授权比命令更重要
+21世纪的管理需要给员工更多的空间，只有这样才能更加充分地调动员工本人的积极性，最大程度释放他们的潜力。21世纪是一个平坦的世纪，人人都拥有 足够的信息，人人都拥有决策和选择的权利。将选择权、行动权、决策权部分地甚至全部地下放给员工，这样的管理方式将逐渐成为21世纪企业管理的主流。<br>
+在21世纪，放权的管理会越来越接近于员工的期望，是最为聪明的管理方式。因为当企业聚集了一批足够聪明的人才之后，如果只是把这些聪明人当作齿轮来使用，让他们事事听领导指挥，那只会造成如下几个问题：<br>
+员工的工作满足感降低。<br>
+员工认为自己不受重视，工作的乐趣和意义不明显。<br>
+员工很难在工作中不断成长。<br>
+员工个人的才智和潜能没有得到充分利用。<br>
+为了给员工更多的空间，为了更好地发掘个人的潜力，许多成功的企业都推出了相应的举措。例如，Google公司允许工程师在20%的时间里从事自己喜 欢的项目或技术工作，这一制度一经实施，就收到了意想不到的出色效果。因为有了20%可以自由支配的时间，许多拥有出色创意，但没有时间付诸实施的工程师 可以花费自己20%的时间，或者说服两三个同事一起在这20%的时间内完成某个出色创意的产品原型，然后发布给公司内部的同事使用。如果这个产品创意确实 吸引人，它就有可能成为Google推向世界的下一个&#8221;震撼级&#8221;的产品或服务。事实上，像GMail和Google News等Google引以为豪的许多产品，都是最先由工程师在20%的时间内创造出来的。因为有了20%这样的管理模式，我们发现：<br>
+20%时间内完成的产品的成功率很高，因为员工更加投入。<br>
+20%的管理模式让员工意识到公司对他们的信任和放权，这营造出了非常好的管理氛围。在员工调查中，员工对公司的满意度总是高于我曾经工作过的其他公司。<br>
+很多管理者追求自己对权力的掌控，他们习惯于指挥部下，并总是将部下的努力换来的成绩大部分归功于自己。这种&#8221;大权在握&#8221;，&#8221;命令为主&#8221;的管理方式很容易造成：<br>
+管理者身上的压力过大，员工凡事都要请示领导，等待管理者的命令。<br>
+团队过分依赖于管理者，团队的成功也大半取决于管理者个人能否事无巨细地处理好所有问题&#8211;而通常说来，没有哪个领导可以事事通晓，也没有哪个领导可以时时正确。<br>
+整个团队对于外部变化的应对能力和应对效率大幅降低，因为所有决策和命令都需要由管理者做出，员工在感知到变化时只会习惯性地汇报给领导。<br>
+因此，&#8221;授权&#8221;比&#8221;命令&#8221;更重要也更有效。但是，管理者该如何做好授权呢？这其中最重要的就是权力和责任的统一。即，在向员工授权时，既定义好相关工 作的权限范围，给予员工足够的信息和支持，也定义好它的责任范围，让被授权的员工能够在拥有权限的同时，可以独立负责和彼此负责，这样才不会出现管理上的 混乱。也就是说，被授权的员工既有义务主动地、有创造性地处理好自己的工作，并为自己的工作结果负责，也有义务在看到其他团队或个人存在问题时主动指出，帮助对方改进工作。<br>
+为了做好授权，可以预先设定好工作的目标和框架，但不要做过于细致的限制，以免影响员工的发挥。在我以前的公司，有一位技术很出色的副总裁，他在授权 方面做得就很不好。例如，他设定了目标后，总是担心下属会因为经验不足而犯错误，于是他总会越过自己属下的经理，直接去找工程师，然后一步一步地告诉工程 师该怎么做。甚至有一次，一位工程师在洗手间遇到这位副总裁，竟然被副总裁在洗手间里念叨了20多分钟。后来，副总裁属下的经理实在受不了了，向总裁如实 反映了情况。经过多次警告却仍然没有改进之后，这位副总裁被解职了。从这个例子我们可以知道，领导的工作是设定目标，而不是事无巨细地控制、管理、指挥和 命令。<br>
+在授权时，设定的目标一定要清晰，并可以用客观的方法进行衡量，这样，每一位员工才能真正理解哪些属于自己的职责范围，是可以由自己决策、选择并实施 的，哪些不属于自己的职责范围，是不能随意决定的。有关目标设定，我推荐大家使用著名的SMART原则。所谓SMART原则就是：<br>
+S&#8211;明确（Specific）：目标的范围是明确的，而不是宽泛的。<br>
+M&#8211;可度量（Measurable）：制定目标是为了取得进步，必须把抽象的、无法实施的、不可衡量的大目标简化成实际的、可衡量的小目标。<br>
+A&#8211;可实现（Attainable）：目标应当是可实现的，而不是理想化的。<br>
+R&#8211;结果导向（Result-based）：目标应该基于结果而非基于行动或过程。<br>
+T&#8211;时效性（Time-based）：目标应当有时间限制。时效性的要求可以让你明确这个目标是短期、中期还是长期目标。<br>
+领导应该和员工一块儿拟定合适的SMART目标，衡量这些目标的方法，目标分工的模式，还有在适当的时候修改目标，但是领导不应该过度地去告诉员工如 何具体地执行。如果一个领导过分地控制在员工权限内执行，他就是在&#8221;micro-manage&#8221;，而且违背了&#8221;授权&#8221;最基本的要求。 授权非常重要，但是授权不仅仅代表分摊所有的职责，然后由领导做协调的工作。授权更应当是：<br>
+组织一个互信的团队。<br>
+制定团队的目标，并且大家都同意把团队的目标作为最重要的目标。<br>
+整个团队彼此互相帮助、监督，大家有话直说，看到问题直接提出。
+6)        平等比权威更重要
+在企业管理的过程中，尽管分工不同，但管理者和员工应该处于平等的地位，只有这样才能营造出积极向上、同心协力的工作氛围。<br>
+平等的第一个要求是重视和鼓励员工的参与，与员工共同制定团队的工作目标。这里所说的共同制定目标是指，在制定目标的过程中，让员工尽量多地参与进来，允许他们提出不同的意见和建议，但最终仍然由管理者做出选择和决定。<br>
+这种鼓励员工参与的做法可以让员工对公司的事务更加支持和投入，对管理者也更加信任。虽然不代表每一位员工的意见都会被采纳，但当他们亲身参与到决策 过程中，当他们的想法被聆听和讨论，那么，即使意见最终没有采纳，他们也会有强烈的参与感和认同感，会因为被尊重而拥有更多的责任心。<br>
+多年以前，我接管一个部门时，为了提高效率，我在一个星期内定下了团队的工作目标，并召开会议宣布了我的所有决定。但没想到，会议进行得很不顺利，有 的员工一片茫然，有的人没精打采，有的人则对我的计划百般挑剔。我一下子明白过来：自己选择目标时过于武断和草率了。于是我对他们说：&#8221;很显然，我对未来 太天真了。现在，让我们重新来过，一起制定出大多数人认可的团队目标。&#8221;<br>
+我当场把我的计划撕掉，然后宣布成立三个员工小组，分别解决部门面临的三大问题。一个月后，这三个小组各自呈上他们的报告，然后我和三个组长一起定下最后的目标。这次，全体员工欣然地接受了新的目标。<br>
+有趣的是，新的目标与旧的目标之间，除了存在措辞方面的差异外，几乎一模一样。我的助理向我抱怨说：&#8221;我们浪费了一个月的时间，又回到了原地。&#8221;但我 对他说：&#8221;不是的，此前我是靠直觉选择了目标，没有调查数据的支持，无法令员工信服；现在，经过一个月的工作，大家都有了信心。更重要的是，旧的目标因为 没有经过员工参与，即使实施起来，他们也很难全身心投入。&#8221;<br>
+平等的第二个要求是管理者要真心地聆听员工的意见。作为管理者，不要认为自己高人一等，事事都认为自己是对的。应该平等地听取员工的想法和意见。在复杂情况面前，管理者要在综合、权衡的基础上果断地做出正确的决定。<br>
+不善于聆听的领导无法获得员工的支持和信任。例如，我在苹果公司工作时，公司一度面临经营上的困难，需要调整方向。当时，董事会新请来了一位以有战略 眼光著称的首席执行官（CEO）。这位CEO刚来公司时，就告诉所有员工：&#8221;不必担心，这家公司的境况比我以前从鬼门关里救回的那些公司好多了。给我一百 天，我会告诉你们公司的出路在哪里。&#8221;<br>
+但是，这一百天里，他只和自己带来的核心团队一起设计公司的&#8221;战略计划&#8221;，而从不倾听广大员工的心声。一百天后，他果然推出了新的战略计划，但是，公 司员工对该计划既不理解也不支持，他自己的声望也开始走下坡路&#8211;因为员工觉得他虽然能干，但是很自大，不在乎员工的想法，所以员工们并不真正信服他，也 没有动力去执行他提出的战略计划。<br>
+半年后，公司业绩继续下滑，这位CEO召开了一次全体员工大会。他不但不从自身找原因，反而在台上指着所有员工说：&#8221;你们让我很失望，大家没有努力执 行我的计划，今后，我绝不允许你们再犯类似的错误。&#8221;结果，这次大会后，他失去了大多数员工的支持，不久就被董事会解雇了。后来，有人这样评价他：&#8221;他以 为他可以用智慧和经验改变公司的一切，他做了战略决定后就直接开始执行，却没有花时间寻求所有员工的支持。其实，他的战略方案不无道理，但他做事的方法是 完全错误的&#8211;他不是一位懂得倾听、懂得理解的好领导。&#8221;<br>
+平等也意味着管理者和员工在平等的环境里顺畅地沟通。例如，我在2000年被调回微软总部出任全球副总裁，管理一个拥有600多名员工的部门。当时， 作为一个从未在总部从事领导工作的人，我更需要倾听和理解员工的心声。为了达到这样的目标，我选择了独特的沟通方法&#8211;&#8221;午餐会&#8221;沟通法。<br>
+我每周选出十名员工，与他们共进午餐。在进餐时，我详细了解每一个人的姓名、履历、工作情况以及他们对部门工作的建议。为了让每位员工都能畅所欲言， 我尽量避免与一个小组或一间办公室里的两个员工同时进餐。另外，我会要求每个人说出他在工作中遇到的一件最让他兴奋的事情和一件最让他苦恼的事情。<br>
+进餐时，我一般会先跟对方谈一谈自己最兴奋和最苦恼的事，鼓励对方发言。然后，我还会引导大家探讨一下所有部门员工近来普遍感到苦恼或普遍比较关心的 事情是什么，一起寻找最好的解决方案。午餐会后，我一般会立即发一封电子邮件给大家，总结一下&#8221;我听到了什么&#8221;，&#8221;哪些是我现在就可以解决的问题&#8221;，&#8221;何 时可以看到成效&#8221;等等。<br>
+使用这样的方法，在不长的时间里，我就认识并了解了部门中的每一位员工。最重要的是，我可以在充分听取员工意见的基础上，尽量从员工的角度出发，合理地安排工作&#8211;只有这样才能使公司上下一心，才能更加顺利地开展工作。
+7)        均衡比魄力更重要
+很多人错误地认为，做领导就必须高调，有魄力，像一个精力充沛、一呼百应的将军一样。其实，这样的领导也许很适于一个19世纪的工厂，但他不是一个21世纪的好领导。<br>
+在著名企业管理学家吉姆•柯林斯的《从优秀到卓越》一书中，作者通过大量的案例调查和统计，讨论并分析了一家企业或一位企业的领导者是如何从优秀 （Good）上升到卓越（Great）的层次的。该书的重要结论之一就是：最好的领导不是那种最有魄力的领导，而是那种具备了很好的情商，能够在不同的个 性层面达到理想的均衡状态的&#8221;多元化&#8221;管理者。<br>
+柯林斯指出，优秀的公司和优秀的领导者很多，许多公司都可以在各自的行业里取得不俗的业绩。但如果以卓越的标准来衡量公司和个人的成绩，那么，能够保 持持续健康增长的企业和能够不断取得事业成功的领导者都非常少。一位企业的领导者在成功的基础上，要想进一步提高自己，使自己的企业保持持续增长，使自己 的个人能力从优秀向卓越迈进，就必须努力培养自己在&#8221;谦虚&#8221;、&#8221;执着&#8221;和&#8221;勇气&#8221;这三个方面的品质。<br>
+谦虚使人进步。许多领导者在工作中唯我独尊，不能听取他人的规谏，不能容忍他人和自己意见相左，这些不懂得谦虚谨慎的领导者也许可以取得暂时的成功，但却无法在事业上不断进步，达到卓越的境界。<br>
+执着是指我们坚持正确的方向，保持矢志不移的决心和意志。无论是公司也好，还是个人也好，一旦认明了工作的方向，就必须在该方向的指引下锲而不舍地努力工作。在工作中轻言放弃或者朝三暮四的做法都不能取得真正的成功。<br>
+成功者需要有足够的勇气来面对挑战。任何事业上的成就都不是轻易就可以取得的。一个人想要在工作中出类拔萃，就必须面对各种各样的艰难险阻，必须正视 事业上的挫折和失败。只有那些有勇气正视现实，有勇气迎接挑战的人才能真正实现超越自我的目标，达到卓越的境界。正如马克o吐温所说：&#8221;勇气不是缺少恐惧 心理，而是对恐惧心理的抵御和控制能力。&#8221;<br>
+此外，均衡的，多元化的管理者尤为重视对自己的情商培养。在领导力方面，情商远远比智商更重要。许多人可能认为领导力最重要的是战略、运营、技术等，其 实，这些&#8221;硬技能&#8221;固然重要，以情商为核心的&#8221;软技能&#8221;更加重要。在这里，我们可以把以&#8221;情商&#8221;为中心的&#8221;软技能&#8221;定义为一种艺术，它包括了与人相处、团 队合作、以诚待人、以身作则、同理心等等至关重要的组成元素。<br>
+均衡的、多元化的管理者善于用理智的、全方位的思维分析复杂的情景，并针对不同类型的团队，或团队的不同发展阶段灵活选择管理方式。例如，当员工表现 不佳或是新手时，企业碰到重大危机时，可以更多地亲身参与管理，更多地使用命令的方式；当企业改变方向时，或员工因不理解方向而士气不高时，可以多与员工 分享企业的愿景；当员工对工作能得心应手时，或发现部门协调有问题时，可以更多地强调和鼓励团队合作；当员工懂得较多，或没有危机时，可以更多地让员工以 民主讨论或投票方式来做出选择；当员工能力很高又是专家，且员工积极自主时，可以尽量授权给员工；当员工有动力但是能力和经验不足时，应当尽量考虑员工的 长期发展，安排有启发性的工作，慷慨地做员工的&#8221;教练&#8221;。
+8)        理智比激情更重要
+管理者应善于理解自己，能够在工作中自觉地、理智地进行自省、自控和自律。<br>
+管理者应该对自己的能力有充分的认识和理解，清醒地知道自己的长处和不足，明白哪些事情是自己擅长的，哪些事情是自己办不到的。只有充分地自省，才能在各种复杂情况面前做出正确的判断，才能在与同事或下属合作时，得到他人充分的信任。<br>
+在发生危机或面临挫折的时候，管理者要能够充分自控，并在理智、冷静的基础上做出审慎的选择。这里所说的自控包括：<br>
+在高压的环境中，能够控制自己的反应，并且让自己和自己的团队镇定下来，冷静处理问题。<br>
+理解自己的位置和影响力，懂得自己随时都在被他人（上级、下属、其他部门乃至客户）关注。<br>
+利用各种机会，通过自己的一言一行影响团队。<br>
+管理者在沟通时，必须明白，你的一举一动都在被他人关注。记得有一次，有一个员工向我抱怨说：&#8221;为什么你不喜欢我的部门？&#8221;我回答说：&#8221;没有啊，你为 什么这么说？&#8221;他说：&#8221;昨天开会，你表扬所有的部门，为什么提到我的部门时声音最小？&#8221;也就是说，领导的一言一行都会潜移默化地影响甚至改变员工。如果领 导努力工作，员工也会努力工作。如果领导在乎产品，员工也会在乎产品。<br>
+作为企业的管理者，如果不能及时自控，事情的结果就可能变得令人难堪。记得我在苹果公司工作的时候，曾经开过一次会。当时，有一位员工因为自己的妻子 和朋友被裁员，对公司的政策非常不满，就把怒气都发在我的身上。他当面说出了一连串很难听的话，其语言的粗俗程度即使在最鲁莽的美国人中也极为罕见。<br>
+当时，我的第一个感觉是气愤，因为他这种侮辱谩骂的做法非常恶劣。但我随即想到：&#8221;人难免会在亲人受到伤害时失去理智，难免会在被灾难惊吓时失去风 度。&#8221;接着我又想到，虽然他的表现异常粗鲁，但是，一定有不少员工持有同样的想法，只是不敢表达出来罢了。最后我想到，作为这个部门的总监，我代表的是公 司的利益，不能因为一时的愤怒而影响了正常工作的进展。<br>
+于是，我冷静地告诉他说：&#8221;现在这个时候，对你、对我、对公司来说都是非常困难的时期。我理解你的心情。等你冷静下来，如果有什么建议，请你告诉我你认为最合适的做法是什么样的，我们可以仔细聊一聊。&#8221;<br>
+后来，那个员工私下向我道歉，并感谢我没有在整个团队面前让他难堪。一段时间后，这位员工举家搬到了欧洲，他和他的妻子都找到了合适的工作。他每年都会寄贺卡给我，也常常表示希望能到我领导的部门工作。<br>
+除了自省和自控，管理者也应当时刻保持自律，无论在什么时候，都要以身作则，不能有特权阶级的作风。例如，Google聘请的CEO施密特刚刚加入公 司时，Google所有员工都没有自己独立的办公室，但员工们还是觉得有必要给他一个相对安静的办公场所，就给他安排了一个比较小的独立办公室。有一天， 一个工程师自己来到施密特的办公室说：&#8221;别人都是共享办公室，我那边太挤了，所以我想坐到你这儿来。&#8221;施密特很惊讶，问他：&#8221;你有没有问你的老板？&#8221;那位 员工去问了老板后回来说：&#8221;老板也觉得我该坐在这儿。&#8221;于是，他们就共享一个办公室，直到公司后来购买了更大的一栋楼。即便是在新的大楼，施密特还特别要 求&#8221;我的办公室应该尽量小&#8221;，以避免被误解&#8221;特权阶级&#8221;的出现。
+9)        真诚比体面更重要
+真诚是所有卓越的管理者共同的品质。管理者应当学会以诚待人，尊重员工，让员工知道你理解并且感谢他们的工作。一些领导为了&#8221;面子&#8221;，处处维护自己所谓的&#8221;权威&#8221;，不愿将自己的真实一面暴露给员工。殊不知，这种遮遮掩掩的领导是很难得到员工的真正信任和支持的。<br>
+真诚意味着管理者善于使用同理心，从他人的角度出发考虑问题。例如，管理者应该多给员工回馈，在人前多感谢，在私下（有建设性地）批评，并多和员工沟通。这并不是说在人前就不可以批评。如果是对事，还是应该坦诚地在人前讨论，但如果是对人，那就不要当众伤了他的自尊。<br>
+对管理者来说，体现同理心的最重要一点就是要体谅和重视员工的想法，要让员工们觉得你是一个非常在乎他们的领导。拿我自己来说，我在工作中不会盲目地褒奖下属，不会动不动就给员工一些&#8221;非常好&#8221;、&#8221;不错&#8221;、&#8221;棒极了&#8221;等泛泛的评价，但是我会在员工确实做出了成绩的时候及时并具体地指出他对公司的贡献，并将他的业绩公之于众。这种激励员工的方式能够真正赢得员工的信任和支持，能够对企业的凝聚力产生巨大的影响。<br>
+真诚意味着管理者需要对员工充分信任，不要对员工指手画脚，也不要任意干涉员工的行为方式。既要坦诚地面对自己，也要坦诚面对他人，努力赢得同事或下 属的信任。信任是一切合作、沟通的基础。如果一个团队缺乏合作，或者欠缺效率，那么，最重要的原因很可能就是团队成员之间缺乏信任。<br>
+有一次，当我发现我的团队彼此不够坦诚的时候，我把他们带到了郊区，开了两天的会议。我首先解释了信任和坦诚的重要，然后我希望每个人轮流谈谈自己对 团队最大的贡献和自己最大的不足，以及自己想从哪些地方弥补不足。为了打开僵局，我自己先坦率地讲出了自己的贡献与不足，而且暴露了我自认为最大的缺点。 然后，我要求我的团队对我提出他们的看法和补充。大家看到我的真诚，也就开诚布公地做了非常好的讨论。会后，不但大家都更愿意敞开心扉，也都愿意信任他 人，我们为团队互信建立起了非常好的基础。<br>
+在互相信任的基础上，团队也需要有建设性的冲突。中国人传统上喜欢避免冲突，息事宁人。但是，一个好的团队必须坦诚地面对各种问题。如果大家都能够对 事不对人，那么，公开的辩论会更有效率。只有把所有的信息放到桌面上，一个团队才能够更快、更有效地做出最好的决定。一个领导在带领团队的过程中，应该鼓 励每一个人开放地听取并接纳别人的正确意见，鼓励建设性的冲突和辩论，引导团队达到共识。当共识无法达成的时候，则引导团队做一个智慧的选择，而不是为了 安抚大家而做简单的折衷。<br>
+从本质上说，信任就是相信别人的出发点是好的。在充满信任的环境里，我们不必隐藏真面目，可以敞开自己的心扉，坦然承认自己的缺点和失败，或者声明自己需要帮助。一个领导者需要创立一个充满信任的环境，不但自己坦诚面对员工，也鼓励员工坦诚地面对其他人。<br>
+真诚意味着管理者和员工之间可以在平等的环境中，直接了当地沟通。21世纪的步伐非常快，如果犯了错还不知道，结果会非常严重。在企业内部沟通的过程中，如果什么事都要打太极拳、猜测别人的想法，不直接沟通的话，那么，整个公司就会丧失效率，并最终走向失败。<br>
+在直接沟通这方面，管理者不但要以身作则，而且必须反复向员工灌输直接沟通的优越性，用实际行动鼓励员工直接了当地表达自己的观点。例如，我在 Google提出，希望员工可以向我提出真实的意见，就算我不同意也没有关系。有一次，我在公司的博客上提出一个观点，但是有一位员工认为这个观点是有问 题的。他在一个会议上当着很多人的面说出了他的担心。我不但接受了他的意见，而且多次在不同场合表扬、感谢他。<br>
+领导对员工的直接反馈也一样重要。发生问题时，管理者要及时地给员工以清晰的反馈信息。对自己的员工，管理者应直接说出自己的想法，而不要通过第三者传话。当与下属沟通不顺畅时，应当多改进自己的沟通方式，使用不同的方法，在信任的基础上与下属交流。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[中国外包企业战略思考]]></title>
+    <link href="http://xazaj.github.com/blog/2009/09/08/zhong-guo-wai-bao-qi-ye-zhan-lve-si-kao.html"/>
+    <updated>2009-09-08T00:00:00+08:00</updated>
+    <id>http://xazaj.github.com/blog/2009/09/08/zhong-guo-wai-bao-qi-ye-zhan-lve-si-kao</id>
+    <content type="html"><![CDATA[<p>背景分析
+在过去的几年当中， 中国的软件外包企业经历了迅猛的发展。一些企业从销售额到员工总数每年都在成倍地增长。然而， 进入2008年下半年，特别是第三季度后，经济危机的阴霾笼罩全球，2009 年的经济走向至今仍然不明朗。在这种环境当中如何生存，如何发展是摆在中国外包企业面前的一个重要课题。</p>
+
+<!--more-->
+
+
+<p>在探讨这个问题之前，我们需要首先来回顾一下软件外包行业的本质是什么。我们习惯上将软件外包行业分为ITO、BPO两类主要业务。但是无论哪种业务，究其本质而言，实际上是一种增值的资产出租业务。
+软件外包是一种资产出租业务，无论是以人员外包还是以项目外包的形式，外包企业员工作为一种资产，在一个时间段内通常只能为一个企业客户提供服务， 它的能力、价值只能够为一家客户所使用。也就是说，在特定时间内外包企业提供的单位服务是具备排他性的，这一点和出租行业的特性是完全一样的。
+其他出租行业， 出租的资产随着时间的延续，资产需要进行折旧，资产价值在逐步降低。但是对于软件外包行业情况则恰恰相反，在绝大多数情况下，随着软件人员经验的不断增长，他的价值是在不断增加的。作为外包企业必须清楚地认识到这是一个本质问题，企业如何利用和管理这个问题直接影响到企业的利润空间和核心竞争力，它是外包企业发展的利基。
+但是中国的众多外包企业，往往忽略了这个根本性的问题。我们很多外包企业在针对国外大客户时是没有议价能力和议价权利的，通常同样的一个资源都在相当长的一段时间内对客户的租赁价格都是一样的。另一方面员工能力在不断地加强，价值在升值，必将要求更多的工资成本。这种现象的结果就是资产增值部分由客户来享有，而一旦资产成本增加，或者发生价值减值则由外包企业来承担。这种状况长期存在必将导致企业利润的逐步下滑。
+由此我们可以看到，软件外包行业的本质就是增值资产出租。其中资产增值和资产出租构成了这个行业的两大特性。外包企业一切的市场策略、销售策略、管理策略都应该以这两个根本的行业特性为出发点。
+资产增值是保证软件外包行业能够获得长期利润增长的基础，是企业实施管理的根本出发点。资产增值有很多的途径，软件行业的外包员工大多数都具备较好的教育背景，在实际工作当中、参与具体工作过程中，如果具备良好的学习方法和工作态度，经验自然就会得到积累。外包企业如果想让资产更加迅速的增值，就需要采用额外的方法和手段，例如通过技术交流、培训、报告会等方式。
+外包企业需要特别注意的是这些方法手段并不是企业提供给员工的福利，而是为提高资产价值企业要付出的必要投入。企业需要在这个观点上逐渐改变自己现在的思维方式；另外一种能够大幅度提高资产价值的方法就是提供基于某种模式的组合服务。
+人力资产的另外一个特征就是在组合的时候能够产生 1 + 1 >2 的效果。软件行业存在着很多组合的模式， 其中最为常见的模式就是开发项目。因此软件企业是否能够提供高价值的服务， 取决于软件项目管理的成熟能力。
+在资产出租方面特别需要提高两个方面的能力。一方面在对外包资产价值能够有合理评估的基础上，企业应该提高议价能力，确保在资产增值过程中资产报价不断地提高，以确保资产出租利润空间的稳步增长。我们常常说，在软件外包行业中，中国企业要提高产业价值，进行产业能力升值。这需要市场和销售两方面能力的提高，才能保证企业的利润增长，而不仅仅是实施方面。
+另一方面，可以在资源管控方面进一步提高管理能力。资产出租行业需要严格控制的一个数据就是资产的闲置率。对于软件行业资产闲置率的控制尤为重要。根据2008 年外包企业年报数据来看，大部分外包行业的净利率都在14%~19%之间，而财务结构上人力成本是构成企业成本的最主要部分。可想而知，一旦资源闲置率控制不住，会给企业带来巨大的影响和冲击。
+外包企业在管理当中需要时刻关注几个数据：人力资产增值状况，资产报价状况，资产闲置率，资产增值投入比例。在企业的不同管理时期可能关注点会有所不同，如何寻找到几个数字适合自身企业的平衡点，是每个外包企业都需要重新审视的问题。
+行业分析
+从中国软件外包的长期发展来看，软件外包企业面对三个根本性的问题。如何对待和解决这三个问题，将会影响软件外包企业的最终发展的结果。这三个问题是：
+•外包资源与企业共存问题<br>
+•能力模型问题<br>
+•企业目标与发展路径问题<br>
+外包企业首先要解决的是外包资源与企业共存的问题。
+通过分析我们知道，外包资源是企业的资产，是基础的生存之道。印度软件外包和中国软件外包在这几年当中迅速成长，并且在世界范围内迅速占领较大的市场，其最主要的原因是我们都是人口大国，并且随着高等教育的普及，每年都有大量的高校毕业生加入软件行业，为产业提供了大量的资源。
+我们软件外包的主要业务还是以代码开发为主，基本上在整个软件价值链上还处于低端部分，利润较薄，工作又十分辛苦，但是却能让中国软件企业迅速扩大外包业务。
+各大外包公司基本上都是在这个部分切入到产业链当中，但是议价能力低，利润较薄，并且由于业务同质化非常严重，造成对于软件产业资源的恶性争夺。而由于资源管理不高，外包企业对于资源不是主动地进行增值管理，而是被动地接受业务周期变更对于资源利用的影响，其中经常采取的方法就是在非业务周期中对员工进行变相降薪或者辞退。这些做法都极大地伤害了外包企业的劳资关系。从一些行业调查中可以发现，软件外包企业在软件行业当中的口碑都非常不理想。
+其实在这些表面现象下面存在的是在外包企业当中，外包资源与企业如何共存的问题。我们在前文曾经分析过，软件外包行业本质是增值资产出租，而我们所提到的增值资产中最为基础的部分就是在外包业务当中的工程师。
+在外包企业对待工程师的关系方面大多都停留在简单的雇佣关系中，在人力资源方面缺少其他的联系纽带。特别是在客户现场工作的工程师对公司普遍缺乏认同感和归属感，只要条件合适就会转到其他公司为别人创造利润。
+外包行业跳槽显现之所以如此严重，是由于企业没有从根本上解决与工程师之间的合作关系所造成的。外包企业需要认真考虑，并在这个基础上解决行业资源迅速挖掘整合、防止优质资源流失，以及资产增值的问题。
+所以，外包企业与软件工程师之间应该是一种新型的共生关系，而我们所提到的行业资源挖掘整合、资源流程，资产增值这些问题都取决于外包企业建立的这种共生关系的密切、牢固、响应等相关特性。
+外包行业的人力资源工作需要创新，旧有企业的人力资源工作模式不足以支撑外包业务的长久发展。外包企业尤其需要加强人力资源的管理、整合能力，这将决定外包企业</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[想象五年后的你]]></title>
+    <link href="http://xazaj.github.com/blog/2009/09/06/xiang-xiang-wu-nian-hou-de-ni.html"/>
+    <updated>2009-09-06T00:00:00+08:00</updated>
+    <id>http://xazaj.github.com/blog/2009/09/06/xiang-xiang-wu-nian-hou-de-ni</id>
+    <content type="html"><![CDATA[<p>一九七六年的冬天，当时我十九岁，在休斯顿太空总署的大空梭实验室里工作，同时也在总署旁边的休斯顿大学主修电脑。纵然忙于学校、睡眠与工作之间，这几乎占据了我一天二十四小时的全部时间，但只要有多余的一分钟，我总是会把所有的精力放在我的音乐创作上。<br><!--more-->
+我知道写歌词不是我的专长，所以在这段日子里，我处处寻找一位善写歌、词的搭档，与我一起合作创作。我认识了一位朋友，她的名字叫凡內芮（Valerie Johnson）。自从二十多年前离开德州后，就再也没听过她的消息，但是她却在我事业的起步时，给了我最大的鼓励。<br>
+仅十九岁的凡內芮在德州的诗词比赛中，不知得过多少奖牌。她的写作总是让我爱不释手，当时我们的确合写了许多很好的作品，一直到今天，我仍然认为这些作品充满了特色与创意。<br>
+一个星期六的周末，凡內芮又热情地邀请我至她家的牧场烤肉。她的家族是德州有名的石油大亨，拥有庞大的牧场。她的家庭虽然极为富有，但她的穿着、所开的车、与她谦诚待人的态度，更让我加倍地打从心底佩服她。凡內芮知道我对音乐的执着。然而，面对那遥远的音乐界及整个美国陌生的唱片市场，我们一点管道都没有。此时，我们两个人坐在德州的乡下，我们哪知道下一步该如何走。突然间，她冒出了一句话：&#8221; Visualize ，What you are doing in 5 years？ ﹙想像你五年后在做什么？﹚<br>
+我愣了一下。<br>
+她转过身来，手指着我说：&#8221;嘿！告诉我，你心目中&#8217;最希望&#8217;五年后的你在做什么，你那个时候的生活是一个什么样子？&#8221;我还来不及回答，她又抢着 说：&#8221;別急，你先仔细想想，完全想好，确定后再说出来。&#8221;<br>
+我沉思了几分钟，开始告诉她：&#8221;第一，五年后，我希望能有一张唱片在市场上，而这张唱片很受欢迎，可以得到许多人的肯定。第二，我住在一个有很多很多音乐的地方，能天天与一些世界一流的乐师一起工作。&#8221;<br>
+凡內芮说：&#8221;你确定了吗？&#8221;<br>
+我慢慢稳稳地回答，而且拉了一个很长的Yesssssss！<br>
+凡內芮接着说：&#8221;好，既然你确定了，我们就把这个目标倒算回来。如果第五年，你有一张唱片在市场上，那么你的第四一定是要跟一家唱片公司签上合约。&#8221;&#8220;那么你的第三年一定是要有一个完整的作品，可以拿给很多很多的唱片公司听，对不对？&#8221;<br>
+&#8220;那么你的第二年，一定要有很棒的作品开始录音了。&#8221;<br>
+&#8220;那么你的第一年，就一定要把你所有要准备录音的作品全部编曲，排练就位准备好。<br>
+&#8220;那么你的第六个月，就是要把那些没有完成的作品修饰好，然后让你自己可以逐一筛选。<br>
+&#8220;那么你的第一个月就是要把目前这几首曲子完工。&#8221;<br>
+&#8220;那么你的第一个礼拜就是要先列出一整个清单，排出哪些曲子需要修改， 哪些需要完工。<br>
+&#8220;好了，我们现在不就已经知道你下个星期一要做什么了吗？&#8221;凡內芮笑笑地说。<br>
+&#8220;喔，对了。你还说你五年后，要生活在一个有很多音乐的地方，然后与许多一流的乐师一起忙着工作，对吗？&#8221;她急忙地补充说。&#8221;如果，你的第五年已经在与这些人一起工作，那么你 的第四年照道理应该有你自己的一个工作室或录音室。那么你的第三年，可能是先跟这个圈子里的人在一起工作。那么你的第二年，应该不是住在德州，而是已经住在纽约或是洛杉机了。&#8221;<br>
+次年(一九七七年)，我辞掉了令许多人羨慕的太空总署的工作，离开了休斯顿，搬到洛杉机。<br>
+说也奇怪：不敢说是恰好五年，但大约可说是第六年。一九八三年，我的唱片在亚洲开始销起来，我一天二十四小时几乎全都忙着与一些顶尖的音乐高手，日出日落地一起工作。<br>
+每当我在最困惑的时候，我会静下来问我自己：五年后你&#8221;最希望&#8221;看到你自己在做什么？<br>
+如果，你自己都不知道这个答案的话，你又如何要求別人或上帝为你做选择或开路呢？ 別忘了！在生命中，上帝已经把所有&#8221;选择&#8221;的权力交在我们的手上了。<br>
+如果，你对你的生命经常在问&#8221;为什么会这样？&#8221;&#8220;为什么会那样？&#8221;的时候，你不妨试着问一下自己，你是否很&#8221;清清楚楚&#8221;地知道你自己要的是什么？<br>
+如果连你自己要的是什么都不知道的话，那么爱你的主又如何帮你安排呢？不是吗？<br>
+而在你旁边的人，再怎么热心地为你敲锣打鼓，爱你的主也顶多给一些慈悲的安慰。因为连你自己都还没有清楚地告诉他，你要的是什么？那么你又岂能无辜地怪上帝没有为你开路呢？不是吗？</p>
 ]]></content>
   </entry>
   

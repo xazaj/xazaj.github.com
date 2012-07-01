@@ -9,7 +9,7 @@
   <meta name="author" content="xazaJ">
 
   
-  <meta name="description" content="前几天在淘宝QA的博客上看到他们部署Watir自动化测试工具的过程，并对各种工具做了横向比较，如果说LoadRunner和QTP是测试工具之屠龙刀与倚天剑，那Watir便是一把锐利的匕首，虽然它没有录制功能，但是简单的脚本语言Ruby也使得工具非常容易上手， &hellip;">
+  <meta name="description" content="［Ruby on Rails tutorial 中文版］ 第一章 从头开始部署 欢迎阅读Ruby on Rails教程：《通过实践学习Rails》。这本书的目的就是回答这个问题：“如果我想学习Rails Web开发，我应该从哪里开始？”当你读完本书时，你就会拥有开发和部署你自己Web应用的所有知识 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,7 +69,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2008/11/06/watir-zi-dong-hua-ce-shi-gong-ju-yi-zhou-ti-yan-bi-ji.html">Watir自动化测试工具安装全过程</a></h1>
+      <h1 class="entry-title"><a href="/blog/2012/04/16/%EF%BC%BBruby-on-rails-tutorial--zhong-wen-ban-%EF%BC%BD--di-yi-zhang---cong-tou-kai-shi-bu-shu.html">RubyOnRails教程第一章从头开始部署</a></h1>
     
     
       <p class="meta">
@@ -85,22 +85,481 @@
   
 
 
-<time datetime="2008-11-06T00:00:00+08:00" pubdate data-updated="true">2008-11-06 Thu</time>
+<time datetime="2012-04-16T00:00:00+08:00" pubdate data-updated="true">2012-04-16 Mon</time>
         
-         | <a href="/blog/2008/11/06/watir-zi-dong-hua-ce-shi-gong-ju-yi-zhou-ti-yan-bi-ji.html#disqus_thread">Comments</a>
+         | <a href="/blog/2012/04/16/%EF%BC%BBruby-on-rails-tutorial--zhong-wen-ban-%EF%BC%BD--di-yi-zhang---cong-tou-kai-shi-bu-shu.html#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>前几天在淘宝QA的博客上看到他们部署Watir自动化测试工具的过程，并对各种工具做了横向比较，如果说LoadRunner和QTP是测试工具之屠龙刀与倚天剑，那Watir便是一把锐利的匕首，虽然它没有录制功能，但是简单的脚本语言Ruby也使得工具非常容易上手，用Watir部署自动化测试一样集成了Ruby的敏捷开发的特点，不知道现在的项目是否适合，尝试一下先。以下记录安装过程中一些需要注意的东西。</p>
+  <div class="entry-content"><p><strong>［Ruby on Rails tutorial 中文版］ 第一章 从头开始部署</strong></p>
+
+<p>欢迎阅读Ruby on Rails教程：《通过实践学习Rails》。这本书的目的就是回答这个问题：“如果我想学习Rails Web开发，我应该从哪里开始？”当你读完本书时，你就会拥有开发和部署你自己Web应用的所有知识。你也将准备好在繁盛的Rails培训社区中寻找优秀书籍，博客和视频，并从中学习到更多的知识。最后，因为Ruby on Rails教程使用的是Rails3.0，你的知识也将追随最新版本的Rails而更新到最新（译者注：翻译本文时,最新版本为Rails3.1）。</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2008/11/06/watir-zi-dong-hua-ce-shi-gong-ju-yi-zhou-ti-yan-bi-ji.html">继续阅读 &rarr;</a>
+      <a rel="full-article" href="/blog/2012/04/16/%EF%BC%BBruby-on-rails-tutorial--zhong-wen-ban-%EF%BC%BD--di-yi-zhang---cong-tou-kai-shi-bu-shu.html">继续阅读 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/09/12/yong-kun-nan-de-fang-fa-xue-ruby-kun-nan-de-fang-fa-rang-xue-xi-geng-jian-dan.html">用笨办法学Ruby:笨办法让学习更简单</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-12T00:00:00+08:00" pubdate data-updated="true">2011-09-12 Mon</time>
+        
+         | <a href="/blog/2011/09/12/yong-kun-nan-de-fang-fa-xue-ruby-kun-nan-de-fang-fa-rang-xue-xi-geng-jian-dan.html#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>这本简单的书是为了让你学会编程。标题说要用笨办法来学习编程，实际上不是这样 的。人们都是用这种方式来学习一些事情，所有说是“困难”的方法。在这本书的帮助下，你会做所有程序员学习一门新语言改做的事情，它们都是非常简单的：</p>
+
+<pre><code>1、完成每一个练习。
+2、准确的键入每一个例子。
+3、运行它。&lt;!--more--&gt;
+就是这样。开始时这样做时非常困难的，但是要坚持下去。如果你能看完这本书，并且每天用一到两个小时完成每一个练习，你就会获得良好的基础去看更深入的教程。从这本书里你可能没有真正学到“编程”，但是你可以学到开始真正学习这门语言的基础知识。
+这本书将会教你新程序员需要知道的三个最重要的技能：读写、注重细节和关注差异。
+</code></pre>
+
+<p><strong>读写</strong></p>
+
+<pre><code>这看起来似乎很愚蠢，但是，如果你输入都有问题，将来学习写代码肯定也有问题。特别是当你的源代码中要输入相当奇怪的字符时。没有这个简单的技能，你可能无法知道软件是如何工作的这些基本的知识。
+</code></pre>
+
+<p>键入示例代码并运行它们将帮助你学习这些符号名称，键入它们会让你更熟悉并且能让你阅读这门语言。
+<strong>关注细节</strong></p>
+
+<pre><code>区分好坏程序员的一个技能就是关注细节。事实上，这也是任何领域区分好坏的标准。如果你不关注工作中的小细节，你将错过你创造的关键元素。在编程中，它会让你制造出缺陷和难用的系统。
+</code></pre>
+
+<p>通过学习这本书，准确的复制每一段示例代码，你将训练你的大脑去关注你所做的事情的细节。
+<strong>关注差异</strong></p>
+
+<pre><code>随着时间的推移，大多数程序员都拥有一个非常重要的技能，是能够直观的发现事物之间的不同。一个有经验的程序员能用两段略有不同的代码并且能够立即指出它们的不同。程序员已经开发了工具把这个变简单，但是我们将不用这些工具。你首先必须用困难的方法来训练你的大脑，然后你就可以用这些工具了。
+当你做这些练习时，输入每一段代码，你可能会出错。这是不可避免的；甚至经验丰富的程序员同样会犯一些错误。你的工作是要比较你需要键入的和你键入的代码，修改所有的不同。通过这些，你将训练你自己关注错误，缺陷和其它的问题。
+</code></pre>
+
+<p><strong>不要复制粘贴</strong></p>
+
+<pre><code>你必须真正键入练习中的每一段代码。如果你复制粘贴，你可能跟没有做它们一样。这个练习的重点是训练你的手，你的大脑，读，写和看代码思维。如果你复制粘贴，课程的效果会大打折扣。
+</code></pre>
+
+<p><strong>实践和坚持的说明</strong></p>
+
+<pre><code>当你学习编程时，我正在学习吉它。我每天至少练习2小时。我至少练习一小时的音阶和和弦，然后学习音乐理论，耳朵练习和唱歌以及任何我可以做的事情。有时候我一天学习8小时的吉它和音乐，因为我很喜欢。对我来说重复练习是自然的，只是学习事物的一种方法。我知道为了能擅长做任何事都需要你每天去练习，即使那天你非常难受或者非常困难。保持不断的尝试，最终会让学习变得更容易和有趣。
+当你学习这本书，继续编程，记住任何你值得做的事情在开始时都是困难的。也许你是害怕失败的人，所以你会在遇到困难的时候放弃。也许你不能自律所以你不能做任何你觉得无聊的事情。也许你被认为是天才，所以你永远不会尝试任何可能让你看起来愚蠢的事情。也许你是对其他人来说竞争是不公平的就像我一样有着20年的编程经验。
+无论你因为什么原因想要退出，都要继续坚持。强迫自己。如果你碰到一些额外的必须要做的事情，或者碰到一个不能理解的课程，可以跳过它晚点再回来继续学习。坚持下去因为编程中总会出现非常奇怪的事情。
+
+起初，你可能什么都不懂。这将是怪异的，就像学习任何一门人类语言。你将和单词做斗争，不知道符号代表什么意思，并且所有的东西都会很混乱。然后有一天你的大脑忽然就开窍了并且就会觉得已经学会它了。如果你继续练习，并不断的尝试去理解，有就能学会它。你也许不会成为一个编程专家，但是你至少可以理解程序是如何工作的。
+
+如果你放弃，你将永远不会达到这个目标。你将遇到第一个令人困惑的事情（所有的事情都会遇到的），然后就停止。如果你不断的尝试，保持键入，视图理解，阅读它，你最终会学会编程。
+
+但是如果你学完了整本书，但仍然不理解如何写代码，至少你学习过了。你可以说你已经尽了自己最大的努力。你可以为之骄傲。
+</code></pre>
+
+<p><strong>版权</strong></p>
+
+<pre><code>本书版权 Copyright (C) 2011 by Zed A. Shaw。你可以免费将这本书分发给任何人，只要你不收取任何费用，并且它不会被改变。你必须分发整本书或者一点都不分发。这个意思是你可以用这本书来教一个课程，只要你不向学生收取这本书的费用并且要给学生们没有修改过的完整内容。
+</code></pre>
+
+<p><strong>特别感谢</strong></p>
+
+<pre><code>我要感谢所有帮助我编辑这本书的人。首先我要感谢Pretty Girl Editing Services帮助过我的编辑，她是非常可爱的。然后是Greg Newman，他设计了艺术的封面，加上校对这本书，他的作品使这本书看起来更像一本真正的书，并且他毫不介意我在第一版忘记为他署名。我还想感谢Brian Shumate，他做了网站登录页面和其它的网站设计以及我需要的很多帮助。
+
+最后，我要感谢成百上千的读第一版的人们，尤其是那些提交错误报告和改进建议的人。这真是让这个版本更完美，并且没有你们我做不到这些。谢谢你们。
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/09/06/chuang-ye---rang-chuang-ye-zhe-liang-ya-de-19-ge-zhen-xiang.html">[创业] 让创业者惊讶的19个真相</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-06T00:00:00+08:00" pubdate data-updated="true">2011-09-06 Tue</time>
+        
+         | <a href="/blog/2011/09/06/chuang-ye---rang-chuang-ye-zhe-liang-ya-de-19-ge-zhen-xiang.html#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Y Combinator的Paul Graham最近的一篇关于startup的散文很有意思，对创业者很有启发性。我很喜欢Paul的文章。和很多投资人一样，Paul也是企业家出身。他早年的公司Viaweb成功的出售给了Yahoo。从05年开始他和当初的Partner一起尝试在投资领域“
+创业”，用一种全新的模式来做投资。《Founders at Work》里面有详细的关于Paul和YC的介绍。</p>
+
+<p>作为程序员出身的Paul对startup和投资都有着自己独到的，深刻的见解。在这篇名为“What Startups Are Really Like” 的散文中，Paul向YC投资的上百个公司的founder提出了一个很有趣的问题：在开始新公司的过程中，什么让他们最感到意外？</p>
+
+<p>下面是Paul整理的一些Biggest Surprise（Paul的原文很长，里面也包含了很多founder的具体回答，我只提炼一些重要的观点，也补充一些我自己的观点，建议对创业有兴趣或正在创业的朋友读读原文和Paul其他关于创业的文章，一定不会让你失望的:-)）：</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2011/09/06/chuang-ye---rang-chuang-ye-zhe-liang-ya-de-19-ge-zhen-xiang.html">继续阅读 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/08/29/centos-vsftpd-fu-wu-qi-de-jia-she-he-pei-zhi.html">Centos Vsftpd服务器的架设和配置</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-29T00:00:00+08:00" pubdate data-updated="true">2011-08-29 Mon</time>
+        
+         | <a href="/blog/2011/08/29/centos-vsftpd-fu-wu-qi-de-jia-she-he-pei-zhi.html#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>一、安装／配置
+1、yum install vsftpd</p>
+
+<p>2.启动/重启/关闭vsftpd服务器
+[root@localhost ftp]# /sbin/service vsftpd restart
+Shutting down vsftpd: [ OK ]
+Starting vsftpd for vsftpd: [ OK ]
+OK表示重启成功了.
+启动和关闭分别把restart改为start/stop即可.
+如果是源码安装的,到安装文件夹下找到start.sh和shutdown.sh文件,执行它们就可以了.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2011/08/29/centos-vsftpd-fu-wu-qi-de-jia-she-he-pei-zhi.html">继续阅读 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/08/24/amazon-ec2--shang-an-zhuang--rails-passenger.html">Amazon EC2 上安装 Rails Passenger</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-24T00:00:00+08:00" pubdate data-updated="true">2011-08-24 Wed</time>
+        
+         | <a href="/blog/2011/08/24/amazon-ec2--shang-an-zhuang--rails-passenger.html#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>第一步：Amazon Linux默认安装ruby，所以要移除原来的ruby。</p>
+
+<p>sudo yum remove -y ruby
+ </div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2011/08/24/amazon-ec2--shang-an-zhuang--rails-passenger.html">继续阅读 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/06/01/ruby-she-ji-mo-shi---jian-dan-gong-chang-mo-shi.html">Ruby设计模式-简单工厂模式</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-06-01T00:00:00+08:00" pubdate data-updated="true">2011-06-01 Wed</time>
+        
+         | <a href="/blog/2011/06/01/ruby-she-ji-mo-shi---jian-dan-gong-chang-mo-shi.html#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近看了看大话设计模式，书中例子都是用C#写的，用Ruby改写一下，其它不写了，附代码吧：</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2011/06/01/ruby-she-ji-mo-shi---jian-dan-gong-chang-mo-shi.html">继续阅读 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/03/16/yong-js-shi-xian-yong-xin-lang-wei-bo-deng-lu-wang-zhan-gong-neng.html">用js实现‘用新浪微博登陆网站’功能</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-16T00:00:00+08:00" pubdate data-updated="true">2011-03-16 Wed</time>
+        
+         | <a href="/blog/2011/03/16/yong-js-shi-xian-yong-xin-lang-wei-bo-deng-lu-wang-zhan-gong-neng.html#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>用JS实现的登陆第三方网站的功能，暂无后台数据库支持。<br>
+Demo：<a href="http://www.zhuaijun.cn/demo/sina.htm">http://www.zhuaijun.cn/demo/sina.htm</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/01/18/yi-xie-zhi-chang-zuo-shi-de-guan-nian.html">一些职场做事的观念</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-18T00:00:00+08:00" pubdate data-updated="true">2011-01-18 Tue</time>
+        
+         | <a href="/blog/2011/01/18/yi-xie-zhi-chang-zuo-shi-de-guan-nian.html#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>翻译一篇简单实用的做事观念，也算自己蛮深的体悟。
+1、做事要明确对方目的、意图以及有全局观（big picture）：<br></p>
+
+<pre><code>*不要只凭自己想象，或者是在自己想象之内技术可以解决，就直接冲下去做；&lt;br&gt;
+*做的不在roadmap 上，只是浪费公司资源和同事时间。
+</code></pre>
+
+<p>2、事情要按时完成<br></div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2011/01/18/yi-xie-zhi-chang-zuo-shi-de-guan-nian.html">继续阅读 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/01/05/you-qu-de-30-ge-ren-sheng-ding-lv.html">有趣的30个人生定律</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-05T00:00:00+08:00" pubdate data-updated="true">2011-01-05 Wed</time>
+        
+         | <a href="/blog/2011/01/05/you-qu-de-30-ge-ren-sheng-ding-lv.html#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>01：苹果定律</p>
+
+<p>如果一堆苹果，有好有坏，你就应该先吃好的，把坏的扔掉，如果你先吃坏的，好的也会变坏，你将永远吃不到好的，人生亦如此。</p>
+
+<p>02：快乐定律</p>
+
+<p>遇事只要你往好处想你就会快乐，就像你如果掉进沟里，你都可以设想说不定刚好有一条鱼钻进你的口袋。</p>
+
+<p>03：幸福定律</p>
+
+<p>如果你不是总是在想自己是否是幸福的时候，你就幸福了。</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2011/01/05/you-qu-de-30-ge-ren-sheng-ding-lv.html">继续阅读 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/01/01/liang-yan-yi-ju-san-dong-nuan--e-yu-shang-ren-liu-yue-han.html">良言一句三冬暖，恶语伤人六月寒</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-01T00:00:00+08:00" pubdate data-updated="true">2011-01-01 Sat</time>
+        
+         | <a href="/blog/2011/01/01/liang-yan-yi-ju-san-dong-nuan--e-yu-shang-ren-liu-yue-han.html#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>&#8220;天时&#8221;句出自于>,讲的是外界环境和人心因素对战争的作用,前一句是说好的天时比不上好的地理形势,后一句是说好的地理形势又比不上万众齐心的力量。孟子的思想我们要批判性地吸收,因为今天我们说物质决定意识,然而意识又能反作用于物质。实际上他是在从一个侧面告戒君主,只要对人民好一点,就算发生战争,我们也是有恃无恐。</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2011/01/01/liang-yan-yi-ju-san-dong-nuan--e-yu-shang-ren-liu-yue-han.html">继续阅读 &rarr;</a>
     </footer>
   
 
@@ -108,6 +567,8 @@
     </article>
   
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -139,7 +600,23 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2008/11/06/watir-zi-dong-hua-ce-shi-gong-ju-yi-zhou-ti-yan-bi-ji.html">Watir自动化测试工具安装全过程</a>
+        <a href="/blog/2012/04/16/%EF%BC%BBruby-on-rails-tutorial--zhong-wen-ban-%EF%BC%BD--di-yi-zhang---cong-tou-kai-shi-bu-shu.html">RubyOnRails教程第一章从头开始部署</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/09/12/yong-kun-nan-de-fang-fa-xue-ruby-kun-nan-de-fang-fa-rang-xue-xi-geng-jian-dan.html">用笨办法学Ruby:笨办法让学习更简单</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/09/06/chuang-ye---rang-chuang-ye-zhe-liang-ya-de-19-ge-zhen-xiang.html">[创业] 让创业者惊讶的19个真相</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/08/29/centos-vsftpd-fu-wu-qi-de-jia-she-he-pei-zhi.html">centos vsftpd服务器的架设和配置</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/08/24/amazon-ec2--shang-an-zhuang--rails-passenger.html">Amazon EC2 上安装 Rails Passenger</a>
       </li>
     
   </ul>

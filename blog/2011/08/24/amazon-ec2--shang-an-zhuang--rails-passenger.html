@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Tag: watir - xazaJ's blog</title>
+  <title>Amazon EC2 上安装 Rails Passenger - xazaJ's blog</title>
   <meta name="author" content="xazaJ">
 
   
-  <meta name="description" content="Tag: Watir 2008 Watir自动化测试工具安装全过程 2008-11-06 Thu Tags: Ruby, watir, 自动化 var jiathis_config={ data_track_clickback:true, summary:"", hideMore:false &hellip;">
+  <meta name="description" content="第一步：Amazon Linux默认安装ruby，所以要移除原来的ruby。 sudo yum remove -y ruby 第二步：安装编译环境和mysql。 sudo yum install -y gcc make patch zlib-devel openssl-devel c++ gcc &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xazaj.github.comblog/tags/watir/index.html">
+  <link rel="canonical" href="http://xazaj.github.com/blog/2011/08/24/amazon-ec2--shang-an-zhuang--rails-passenger.html">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -62,23 +62,109 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Tag: Watir</h1>
+    
+      <h1 class="entry-title">Amazon EC2 上安装 Rails Passenger</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-24T00:00:00+08:00" pubdate data-updated="true">2011-08-24 Wed</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
+
+
+<div class="entry-content"><p>第一步：Amazon Linux默认安装ruby，所以要移除原来的ruby。</p>
+
+<p>sudo yum remove -y ruby
+ <!--more-->
+第二步：安装编译环境和mysql。</p>
+
+<p>sudo yum install -y gcc make patch zlib-devel  openssl-devel  c++  gcc  gcc-c++   gcc-c++  readline-devel curl-devel mysql mysql-server curl mysql-devel</p>
+
+<p>第三步：下载最新版本REE，并编译安装。</p>
+
+<p>mkdir ~/src
+cd ~/src
+wget http://rubyenterpriseedition.googlecode.com/files/ruby-enterprise-1.8.7-2011.03.tar.gz
+tar xzvf ruby-enterprise-1.8.7-2011.03.tar.gz
+sudo ./ruby-enterprise-1.8.7-2011.03/installer</p>
+
+<p>sudo ln -s /opt/ruby-enterprise-1.8.7-2011.03/bin/ruby /usr/bin/ruby
+sudo ln -s /opt/ruby-enterprise-1.8.7-2011.03/bin/gem /usr/bin/gem
+sudo ln -s /opt/ruby-enterprise-1.8.7-2011.03/bin/rake /usr/bin/rake
+sudo ln -s /opt/ruby-enterprise-1.8.7-2011.03/bin/bundle /usr/bin/bundle</p>
+
+<p>如果你想卸载REE，仅仅是删除安装目录。</p>
+
+<p>rm /opt/ruby-enterprise-1.8.7-2011.03</p>
+
+<p>第四步：启动mysql，并设置root新密码。</p>
+
+<p>sudo service mysqld start
+/usr/bin/mysqladmin -u root password &#8216;new-password&#8217;</p>
+
+<p>第五步：设置mysql自启动</p>
+
+<p>sudo chkconfig mysqld on</p>
+
+<p>（上述命令不会出现任何提示，直接回车即可）</p>
+
+<p>第六步：安装Phusion Passenger (http://www.modrails.com)集成REE。</p>
+
+<p>sudo /opt/ruby-enterprise-1.8.7-2011.03/bin/passenger-install-nginx-module</p>
+
+<p>安装完成后会在/opt/nginx/conf/nginx.conf配置文件中添加以下语句：
+  http {</p>
+
+<pre><code>  ...
+  passenger_root /opt/ruby-enterprise-1.8.7-2011.03/lib/ruby/gems/1.8/gems/passenger-3.0.8;
+  passenger_ruby /opt/ruby-enterprise-1.8.7-2011.03/bin/ruby;
+  ...
+</code></pre>
+
+<p>  }</p>
+
+<p>第七步：配置Ruby on Rails程序，并启动nginx。</p>
+
+<p>sudo ln -s /opt/ruby-enterprise-1.8.7-2011.03/bin/rails /usr/bin/rails</p>
+
+<p>如果你的Rails程序在目录“/somewhere”中，你主机的域名为“www.yourhost.com”，nginx.conf文件就应该大概如下：</p>
+
+<p>   server {</p>
+
+<pre><code>  listen 80;
+  server_name www.yourhost.com;
+  root /somewhere/public;   # 
+</code></pre>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
   
-  <dl class="archives">
-  
-  
-  
-    
-    <dt>2008</dt>
-  
-  <dd><h1 class="entry-title"><a href="/blog/2008/11/06/watir-zi-dong-hua-ce-shi-gong-ju-yi-zhou-ti-yan-bi-ji.html">Watir自动化测试工具安装全过程</a></h1>
-<p class="meta">
-  
+
+<span class="byline author vcard">Posted by <span class="fn">xazaJ</span></span>
+
+      
 
 
 
@@ -90,35 +176,41 @@
   
 
 
-<time datetime="2008-11-06T00:00:00+08:00" pubdate data-updated="true">2008-11-06 Thu</time>
-  
+<time datetime="2011-08-24T00:00:00+08:00" pubdate data-updated="true">2011-08-24 Wed</time>
+      
 
-<span class="tags">
-  Tags:
+<span class="categories">
   
-    <a href='/blog/tags/ruby/'>Ruby</a>, <a href='/blog/tags/watir/'>watir</a>, <a href='/blog/tags/zi-dong-hua/'>自动化</a>
+    基础架构
   
 </span>
 
-</p>
-</dd>
-  
-</dl>
 
-  
-    <footer>
-      
-      
-        <div class="sharing">
+    </p>
+    
+      <div class="sharing">
   
   
   
 </div>
 
+    
+    <p class="meta">
       
-    </footer>
-  
+        <a class="basic-alignment left" href="/blog/2011/06/01/ruby-she-ji-mo-shi---jian-dan-gong-chang-mo-shi.html" title="Previous Post: Ruby设计模式-简单工厂模式">&laquo; Ruby设计模式-简单工厂模式</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/08/29/centos-vsftpd-fu-wu-qi-de-jia-she-he-pei-zhi.html" title="Next Post: centos vsftpd服务器的架设和配置">centos vsftpd服务器的架设和配置 &raquo;</a>
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -197,7 +289,10 @@
       var disqus_shortname = 'xazaj';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://xazaj.github.com/blog/2011/08/24/amazon-ec2--shang-an-zhuang--rails-passenger.html';
+        var disqus_url = 'http://xazaj.github.com/blog/2011/08/24/amazon-ec2--shang-an-zhuang--rails-passenger.html';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

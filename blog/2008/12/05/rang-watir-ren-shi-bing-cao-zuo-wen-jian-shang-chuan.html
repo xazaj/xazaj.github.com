@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Tag: watir - xazaJ's blog</title>
+  <title>让Watir认识并操作文件上传 - xazaJ's blog</title>
   <meta name="author" content="xazaJ">
 
   
-  <meta name="description" content="Tag: Watir 2008 Watir自动化测试工具安装全过程 2008-11-06 Thu Tags: Ruby, watir, 自动化 var jiathis_config={ data_track_clickback:true, summary:"", hideMore:false &hellip;">
+  <meta name="description" content="从中午开始写新建广告组的watir自动化测试代码,结果一开始就遇到头痛的上传问题. 根据http://wiki.seleniumhq.org/display/WTR/File+Uploads ,下载了filefield_test.rb,并在rb文件里加入了如下代码 ie.goto "tinypic &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://xazaj.github.comblog/tags/watir/index.html">
+  <link rel="canonical" href="http://xazaj.github.com/blog/2008/12/05/rang-watir-ren-shi-bing-cao-zuo-wen-jian-shang-chuan.html">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -62,23 +62,72 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Tag: Watir</h1>
+    
+      <h1 class="entry-title">让Watir认识并操作文件上传</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-12-05T00:00:00+08:00" pubdate data-updated="true">2008-12-05 Fri</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
+
+
+<div class="entry-content"><p>从中午开始写新建广告组的watir自动化测试代码,结果一开始就遇到头痛的上传问题.
+ 根据http://wiki.seleniumhq.org/display/WTR/File+Uploads ,下载了filefield_test.rb,并在rb文件里加入了如下代码</p>
+
+<pre><code>     ie.goto "tinypic.com"&lt;br&gt;
+</code></pre>
+
+<p>ie.file_field(:id, &#8220;the_file&#8221;).set(&#8220;C:\image.png&#8221;)
+结果只能打开文件上载的窗口,接下去的操作就做不下去了.
+还是继续google了好久,阿里巴巴QA架构组的51testing空间找到了解决方法,发上来给大家共享下.
+1.  首先修改C:rubylibrubygems1.8gemswatir-1.5.6watirinput_elements.rb文件
+找到FileField类下的set方法,把原来的替换成</p>
+
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fa738fa1c48></p>
+
+<p>这样做是为了支持中文.
+2.  然后,就可以加入程序代码了</p>
+
+<!--more-->
+
+
+<p>Liquid error: undefined method `join&#8217; for #&lt;String:0x007fa738fa1748></p>
+
+<pre><code>     运行一下代码,怎么样?上传成功了吧.
+     顺手贴出阿里巴巴QA架构组的51testing空间地址. &lt;a href="http://www.51testing.com/?170805%20"&gt;http://www.51testing.com/?170805 &lt;/a&gt;
+     OK.继续写代码
+</code></pre>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
   
-  <dl class="archives">
-  
-  
-  
-    
-    <dt>2008</dt>
-  
-  <dd><h1 class="entry-title"><a href="/blog/2008/11/06/watir-zi-dong-hua-ce-shi-gong-ju-yi-zhou-ti-yan-bi-ji.html">Watir自动化测试工具安装全过程</a></h1>
-<p class="meta">
-  
+
+<span class="byline author vcard">Posted by <span class="fn">xazaJ</span></span>
+
+      
 
 
 
@@ -90,35 +139,41 @@
   
 
 
-<time datetime="2008-11-06T00:00:00+08:00" pubdate data-updated="true">2008-11-06 Thu</time>
-  
+<time datetime="2008-12-05T00:00:00+08:00" pubdate data-updated="true">2008-12-05 Fri</time>
+      
 
-<span class="tags">
-  Tags:
+<span class="categories">
   
-    <a href='/blog/tags/ruby/'>Ruby</a>, <a href='/blog/tags/watir/'>watir</a>, <a href='/blog/tags/zi-dong-hua/'>自动化</a>
+    RubyOnRails软件测试
   
 </span>
 
-</p>
-</dd>
-  
-</dl>
 
-  
-    <footer>
-      
-      
-        <div class="sharing">
+    </p>
+    
+      <div class="sharing">
   
   
   
 </div>
 
+    
+    <p class="meta">
       
-    </footer>
-  
+        <a class="basic-alignment left" href="/blog/2008/11/29/worpress-he-xin-cheng-xu-zi-dong-hua-ce-shi-gou-xiang.html" title="Previous Post: worpress核心程序自动化测试构想">&laquo; worpress核心程序自动化测试构想</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2008/12/05/watir-ru-he-lian-jie-oracle-shu-ju-ku.html" title="Next Post: Watir如何连接oracle数据库">Watir如何连接oracle数据库 &raquo;</a>
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -197,7 +252,10 @@
       var disqus_shortname = 'xazaj';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://xazaj.github.com/blog/2008/12/05/rang-watir-ren-shi-bing-cao-zuo-wen-jian-shang-chuan.html';
+        var disqus_url = 'http://xazaj.github.com/blog/2008/12/05/rang-watir-ren-shi-bing-cao-zuo-wen-jian-shang-chuan.html';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

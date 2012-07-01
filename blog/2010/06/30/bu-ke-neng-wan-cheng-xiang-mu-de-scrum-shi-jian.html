@@ -1,0 +1,281 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>不可能完成项目的SCRUM实践 - xazaJ's blog</title>
+  <meta name="author" content="xazaJ">
+
+  
+  <meta name="description" content="一天老板或者销售人员跑过来亲切和蔼地拍拍你说：有个战略性产品需要在一个月之内开发出来，对搞定几个重点大商户至关重要，时间没有商量的余地。党组织从众多的党员同志中选择了你，这是党对你的信任，也是考验你的时候了。在生活的压力和生命的尊严之间，你只好泪流满面地接了下来。 1、不可能完成项目的典型特征 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://xazaj.github.com/blog/2010/06/30/bu-ke-neng-wan-cheng-xiang-mu-de-scrum-shi-jian.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="xazaJ's blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">xazaJ's blog</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:xazaj.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">不可能完成项目的SCRUM实践</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-06-30T00:00:00+08:00" pubdate data-updated="true">2010-06-30 Wed</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>一天老板或者销售人员跑过来亲切和蔼地拍拍你说：有个战略性产品需要在一个月之内开发出来，对搞定几个重点大商户至关重要，时间没有商量的余地。党组织从众多的党员同志中选择了你，这是党对你的信任，也是考验你的时候了。在生活的压力和生命的尊严之间，你只好泪流满面地接了下来。</p>
+
+<!--more-->
+
+
+<p>1、不可能完成项目的典型特征
+对于互联网公司及做传统系统集成的公司的同志们而言，接到这样不可能完成的项目开发任务的情况已经司空见惯了。这些不可能完成项目的典型特征如下：
+老板说：项目对公司具有战略意义，必须搞定<br>
+项目突发：销售跑过来告诉你，一个月内必须搞定这个项目<br>
+需求不明确<br>
+对现有系统架构有较大冲击，改动风险很大<br>
+项目给的时间很短且交付时间固定(time boxing) ，只能够倒推<br>
+销售过度承诺，必须实现狂复杂、狂大的需求<br>
+资源有限<br>
+设计诸多部门协调，很难短期搞定
+2 、失败项目的典型症状
+项目组所有成员及利益相关者对项目愿景及目标没有达成一致<br>
+为了赶进度，压缩需求分析、系统设计时间，需求理解尚未统一就投入开发<br>
+每个人只关心自己负责的一小块业务，对系统整体需求、架构、设计没有达成一致<br>
+为了赶进度，只关注功能的完成而忽视了功能实现的质量，导致大规模的返工<br>
+为了赶进度，不进行统一设计，由各模块负责人自己设计，设计存在较大缺陷<br>
+公用问题没有专人负责，工作重复<br>
+项目组成员沟通不畅，出问题后才沟通，导致无谓的时间浪费<br>
+项目组没有形成团队文化，团队成员只是为了完成项目目标而加班赶工，没有归属感
+3、不可能完成项目的Scrum实践
+对于这样的不可能完成项目的管理使用Scrum这样的Time Boxing迭代开发过程很恰当，关于实践方法有兴趣的可以参考脑图。</p>
+
+<p>[caption id=&#8221;&#8221; align=&#8221;aligncenter&#8221; width=&#8221;1398&#8221; caption=&#8221;脑图&#8221;]<a href="http://www.zhuaijun.cn/images/uploads/2010/06/impossible20project20scrum20practice.png"><img alt="脑图" src="http://www.zhuaijun.cn/images/uploads/2010/06/impossible20project20scrum20practice.png" title="脑图" width="1398" height="2898"></a>[/caption]
+来源：草根网(www.20ju.com) - 互联网界的读者文摘</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">xazaJ</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-06-30T00:00:00+08:00" pubdate data-updated="true">2010-06-30 Wed</time>
+      
+
+<span class="categories">
+  
+    项目管理
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2010/01/04/ji-xian-lin-de-shan-e-lun.html" title="Previous Post: 人之善恶，事之善恶">&laquo; 人之善恶，事之善恶</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2010/06/30/qi-ge-jing-dian-gu-shi-wei-ni-jiang-shu-mu-biao-guan-li-de-zhong-yao-xing.html" title="Next Post: 七个经典故事为你讲述目标管理的重要性">七个经典故事为你讲述目标管理的重要性 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <div class="googleplus odd" style="padding-bottom: 1px;">
+    <!-- JiaThis Button BEGIN -->
+    <div id="ckepop">
+      <a href="http://www.jiathis.com/share?uid=898844" class="jiathis jiathis_txt" target="_blank"><img src="http://v2.jiathis.com/code_mini/images/btn/v1/jiathis5.gif" border="0" /></a>
+      <a class="jiathis_counter_style_margin:3px 0 0 2px"></a>
+    </div>
+    <script type="text/javascript" >
+      var jiathis_config={
+        data_track_clickback:true,
+        summary:"",
+        hideMore:false
+      }
+    </script>
+    <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js?uid=898844" charset="utf-8"></script>
+    <!-- JiaThis Button END -->
+  </div>
+  <div class="clear:both"></div>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/04/16/%EF%BC%BBruby-on-rails-tutorial--zhong-wen-ban-%EF%BC%BD--di-yi-zhang---cong-tou-kai-shi-bu-shu.html">RubyOnRails教程第一章从头开始部署</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/09/12/yong-kun-nan-de-fang-fa-xue-ruby-kun-nan-de-fang-fa-rang-xue-xi-geng-jian-dan.html">用笨办法学Ruby:笨办法让学习更简单</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/09/06/chuang-ye---rang-chuang-ye-zhe-liang-ya-de-19-ge-zhen-xiang.html">[创业] 让创业者惊讶的19个真相</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/08/29/centos-vsftpd-fu-wu-qi-de-jia-she-he-pei-zhi.html">centos vsftpd服务器的架设和配置</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/08/24/amazon-ec2--shang-an-zhuang--rails-passenger.html">Amazon EC2 上安装 Rails Passenger</a>
+      </li>
+    
+  </ul>
+</section>
+<section id="comment_sidebar">
+  <h1>Recent Comments</h1>
+  <div id="recentcomments" class="dsq-widget">
+    <script type="text/javascript" src="http://xazaj.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=32&excerpt_length=200"></script>
+  </div>
+  <a target="_blank" href="http://disqus.com/">Powered by Disqus</a>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - xazaJ -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'xazaj';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://xazaj.github.com/blog/2010/06/30/bu-ke-neng-wan-cheng-xiang-mu-de-scrum-shi-jian.html';
+        var disqus_url = 'http://xazaj.github.com/blog/2010/06/30/bu-ke-neng-wan-cheng-xiang-mu-de-scrum-shi-jian.html';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

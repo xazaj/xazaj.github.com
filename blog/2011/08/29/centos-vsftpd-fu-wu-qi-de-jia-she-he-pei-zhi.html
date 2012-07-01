@@ -1,0 +1,420 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>centos vsftpd服务器的架设和配置 - xazaJ's blog</title>
+  <meta name="author" content="xazaJ">
+
+  
+  <meta name="description" content="一、安装／配置
+1、yum install vsftpd 2.启动/重启/关闭vsftpd服务器
+[root@localhost ftp]# /sbin/service vsftpd restart
+Shutting down vsftpd: [ OK ]
+Starting vsftpd for &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://xazaj.github.com/blog/2011/08/29/centos-vsftpd-fu-wu-qi-de-jia-she-he-pei-zhi.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="xazaJ's blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">xazaJ's blog</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:xazaj.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Centos Vsftpd服务器的架设和配置</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-29T00:00:00+08:00" pubdate data-updated="true">2011-08-29 Mon</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>一、安装／配置
+1、yum install vsftpd</p>
+
+<p>2.启动/重启/关闭vsftpd服务器
+[root@localhost ftp]# /sbin/service vsftpd restart
+Shutting down vsftpd: [ OK ]
+Starting vsftpd for vsftpd: [ OK ]
+OK表示重启成功了.
+启动和关闭分别把restart改为start/stop即可.
+如果是源码安装的,到安装文件夹下找到start.sh和shutdown.sh文件,执行它们就可以了.</p>
+
+<!--more-->
+
+
+<p>3.与vsftpd服务器有关的文件和文件夹
+vsftpd服务器的配置文件的是: /etc/vsftpd/vsftpd.conf</p>
+
+<p>vsftpd服务器的根目录,即FTP服务器的主目录:
+在/var/ftp处pub处
+如果你想修改服务器目录的路径,那么你只要修改/var/ftp到别处就行了</p>
+
+<p>4.添加FTP本地用户
+有的FTP服务器需要用户名和密码才能登录,就是因为设置了FTP用户和权限.
+FTP用户一般是不能登录系统的,只能进入FTP服务器自己的目录中,这是为了安全.这样的用户就叫做虚拟用户了.实际上并不是真正的虚拟用户,只是不能登录SHELL了而已,没能力登录系统.</p>
+
+<p>/usr/sbin/adduser -d /opt/test_ftp -g ftp -s /sbin/nologin test
+这个命令的意思是:
+使用命令(adduser)添加test用户,不能登录系统(-s /sbin/nologin),自己的文件夹在(-d /opt/test_ftp)),属于组ftp(-g ftp)
+然后你需要为它设置密码 passwd test
+这样就添加了一个FTP用户了.下面的示例可以帮助你进入FTP服务器了.</p>
+
+<p>[root@localhost ftp]# ftp
+ftp> open 192.168.0.33
+Connected to 192.168.0.33 (192.168.0.33).
+220 (vsFTPd 2.0.5)
+Name (192.168.0.33:gxl): test
+331 Please specify the password.
+Password:
+230 Login successful.
+Remote system type is UNIX.
+Using binary mode to transfer files.
+ftp> quit
+221 Goodbye.</p>
+
+<p>在windows中,只要在浏览器中输入 ftp://192.168.0.33 进入FTP服务器,然后 右键 登录,输入用户名和密码就可以登录自己的目录了.
+当然你要保证自己能读写自己的目录,就要在配置文件vsftpd.conf里设置一下就可以读写了.
+local_enable=yes
+write_enable=yes
+local_umask=022</p>
+
+<p>5.匿名上传下载
+修改配置文件即可vsftpd.conf,确定有以下几行,没有自己添加进去就可以了.
+anonymous_enable=yes
+anon_upload_enable=yes
+anon_mkdir_write_enable=yes
+anon_umask=022</p>
+
+<p>然后你可以新建一个文件夹,修改它的权限为完全开放,任何用户就可以登录这个文件夹,并上传下载文件:
+mkdir /var/ftp/guest
+chmod 777 /var/ftp/guest</p>
+
+<p>6.定制进入FTP服务器的欢迎信息
+在vsftpd.conf文件中设置:
+dirmessage_enable=yes
+然后进入用户目录建立一个.message文件,输入欢迎信息即可(我这里写入的是Welcome to gxlinux&#8217;s FTP!):
+[root@localhost test_ftp]# ftp 192.168.0.33
+Connected to 192.168.0.33 (192.168.0.33).
+220 (vsFTPd 2.0.5)
+Name (192.168.0.33:gxl): test
+331 Please specify the password.
+Password:
+230-Welcome to gxlinux&#8217;s FTP!
+230 Login successful.
+Remote system type is UNIX.
+Using binary mode to transfer files.</p>
+
+<p>7.实现虚拟路径
+将某个目录挂载到FTP服务器下供用户使用,这就叫做虚拟路径.
+比如将gxl用户的目录挂载到FTP服务器中,供FTP服务器的用户使用,使用如下命令即可:
+[root@localhost opt]# mount &#8211;bind /home/gxl /var/ftp/pub #使用挂载命令
+[root@localhost opt]# ls /var/ftp/pub
+LumaQQ Screenshot.png 桌面</p>
+
+<p>8.打开vsFTPd的日志功能
+添加下面一行到vsftpd.conf文件中,一般情况下该文件中有这一行,只要把前面的注释符号#去掉即可,没有的话就添加,或者修改:
+xferlog_file=/var/log/vsftpd.log</p>
+
+<p>9.限制链接数,以及每个IP最大的链接数
+修改配置文件中,例如vsftp最大支持链接数100个,每个IP能支持5个链接:
+max_client=100
+max_per=5</p>
+
+<p>10.限制传输速度
+修改配置文件中,例如让匿名用户和vsftd上的用户(即虚拟用户)都以80KB=1024*80=81920的速度下载
+anon_max_rate=81920
+local_max_rate=81920</p>
+
+<p>11.将用户(一般指虚拟用户)限制在自家目录
+修改配置文件中,这样用户就只能访问自己家的目录了:
+chroot_local_user=yes
+如果只想某些用户仅能访问自己的目录,其它用户不做这个限制,那么就需要在chroot_list文件(此文件一般是在/etc/vsftpd/中)中添加此用户.
+编辑此文件,比如将test用户添加到此文件中,那么将其写入即可.一般的话,一个用户占一行.
+[root@localhost vsftpd]# cat chroot_list
+test</p>
+
+<p>12.绑定某个IP到vsFTPd
+有时候要限制某些IP访问服务器,只允许某些IP访问,例如只允许192.168.0.33访问这个FTP,同样修改配置文件:
+listen_address=192.168.0.33</p>
+
+<p>配置vsftpd.conf</p>
+
+<pre><code>               anonymous_enable=NO            #禁止匿名
+               local_enable=YES                       #允许本地登录
+               write_enable=YES                       #允许写，如需上传，则必须
+               local_umask=027                        #将上传文件的权限设置为：777-local_umask
+               anon_upload_enable=YES          #允许虚拟用户和匿名用户上传
+               anon_other_write_enable=YES #允许虚拟用户和匿名用户修改文件名和删除文件
+               dirmessage_enable=YES           
+               xferlog_enable=YES                      #打开日志记录
+               connect_from_port_20=YES
+               xferlog_file=/var/log/vsftpd.log     #日志存放位置
+               xferlog_std_format=YES              #标准日志格式
+               idle_session_timeout=600        #空闲连接超时
+               data_connection_timeout=120
+               ftpd_banner=Welcome to ChinaRise FTP service       #欢迎信息
+               guest_enable=yes                       #允许虚拟用户
+               guest_username=vsftpdguest #虚拟用户使用的系统账号
+               virtual_use_local_privs=YES     #虚拟用户拥有本地系统权限
+
+               chroot_local_user=NO              
+               chroot_list_enable=YES
+                 #以上两行将虚拟用户限制在其目录下，不能访问其他目录，或者直接用                            
+               chroot_local_user=YES                               
+
+               listen=yes                #监听/被动模式
+               listen_port=21        #监听端口
+
+               chroot_list_file=/etc/vsftpd/vsftpd.chroot_list       #虚拟用户名单保存在文件/etc/vsftpd/vsftpd.chroot_list 中
+               user_config_dir=/etc/vsftpd/vsftpd_user_conf   #每个虚拟用户名的更加详细的培植保存在/etc/vsftpd/vsftpd_user_conf 中
+</code></pre>
+
+<p>虚拟用户其他设置</p>
+
+<pre><code>  在/etc/vsftpd/vsftpd.chroot_list 文件中写入允许登陆的虚拟用户名称，每行一个
+  在/etc/vsftpd/vsftpd_user_conf 文件夹中创建一个以虚拟用户用户名命名的文件，
+  写入：local_root = /var/FTP/子目录名
+  然后在/var/FTP下创建一个对应的目录即可
+</code></pre>
+
+<p>原文：http://blog.csdn.net/kofterry/article/details/4277267</p>
+
+<p>二、配置目录：
+首先确保vsftpd已经默认安装service vsftpd start可以正常且ftp://ip可以看到pub目录
+现在要实现更改默认访问的目录为其他目录例如/home/ftp我直接在/home目录下mkdir ftp
+注意改完配置后都service vsftpd restart
+测试步骤如下
+vi /etc/vsftpd/vsftpd.conf
+直接在配置文件中添加如下：
+anon_root=/home/ftp
+anon_upload_enable=NO
+服务重启
+通过ftp://ip访问到/home/ftp这个目录(证明已经将默认目录更改)。但是不运行上传文件，即使我将
+anon_upload_enable=设置为YES那么同样的ftp://ip仍然无法访问上传文件
+摘自原文：http://blog.sina.com.cn/s/blog_498719980100092k.html</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">xazaJ</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-29T00:00:00+08:00" pubdate data-updated="true">2011-08-29 Mon</time>
+      
+
+<span class="categories">
+  
+    基础架构
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/08/24/amazon-ec2--shang-an-zhuang--rails-passenger.html" title="Previous Post: Amazon EC2 上安装 Rails Passenger">&laquo; Amazon EC2 上安装 Rails Passenger</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/09/06/chuang-ye---rang-chuang-ye-zhe-liang-ya-de-19-ge-zhen-xiang.html" title="Next Post: [创业] 让创业者惊讶的19个真相">[创业] 让创业者惊讶的19个真相 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <div class="googleplus odd" style="padding-bottom: 1px;">
+    <!-- JiaThis Button BEGIN -->
+    <div id="ckepop">
+      <a href="http://www.jiathis.com/share?uid=898844" class="jiathis jiathis_txt" target="_blank"><img src="http://v2.jiathis.com/code_mini/images/btn/v1/jiathis5.gif" border="0" /></a>
+      <a class="jiathis_counter_style_margin:3px 0 0 2px"></a>
+    </div>
+    <script type="text/javascript" >
+      var jiathis_config={
+        data_track_clickback:true,
+        summary:"",
+        hideMore:false
+      }
+    </script>
+    <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js?uid=898844" charset="utf-8"></script>
+    <!-- JiaThis Button END -->
+  </div>
+  <div class="clear:both"></div>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/04/16/%EF%BC%BBruby-on-rails-tutorial--zhong-wen-ban-%EF%BC%BD--di-yi-zhang---cong-tou-kai-shi-bu-shu.html">RubyOnRails教程第一章从头开始部署</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/09/12/yong-kun-nan-de-fang-fa-xue-ruby-kun-nan-de-fang-fa-rang-xue-xi-geng-jian-dan.html">用笨办法学Ruby:笨办法让学习更简单</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/09/06/chuang-ye---rang-chuang-ye-zhe-liang-ya-de-19-ge-zhen-xiang.html">[创业] 让创业者惊讶的19个真相</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/08/29/centos-vsftpd-fu-wu-qi-de-jia-she-he-pei-zhi.html">centos vsftpd服务器的架设和配置</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/08/24/amazon-ec2--shang-an-zhuang--rails-passenger.html">Amazon EC2 上安装 Rails Passenger</a>
+      </li>
+    
+  </ul>
+</section>
+<section id="comment_sidebar">
+  <h1>Recent Comments</h1>
+  <div id="recentcomments" class="dsq-widget">
+    <script type="text/javascript" src="http://xazaj.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=32&excerpt_length=200"></script>
+  </div>
+  <a target="_blank" href="http://disqus.com/">Powered by Disqus</a>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - xazaJ -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'xazaj';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://xazaj.github.com/blog/2011/08/29/centos-vsftpd-fu-wu-qi-de-jia-she-he-pei-zhi.html';
+        var disqus_url = 'http://xazaj.github.com/blog/2011/08/29/centos-vsftpd-fu-wu-qi-de-jia-she-he-pei-zhi.html';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
